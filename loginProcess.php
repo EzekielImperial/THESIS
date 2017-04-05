@@ -47,4 +47,23 @@
 			echo mysqli_error($dbconn);
 		}
 	}
+
+	else if ($userType == "admin") {
+		$stmt = $dbconn->prepare('SELECT * FROM users WHERE email = ? AND password = ? AND userType = ?');
+		$stmt->bind_param('sss', $userName, $password, $userType);
+		$stmt->execute();
+		$result = $stmt->get_result();
+
+		if($rows = $result->fetch_assoc()){
+			$_SESSION['email']=$rows['email'];
+			$_SESSION['password']=$rows['password'];
+			$_SESSION['userType']=$rows['userType'];
+			echo"<script>window.alert('Welcome Administrator :)');</script>";
+			echo"<script>location.href='index.php';</script>";
+		}else{
+			echo"<script>window.alert('Email Address/Password/Usertype Incorrect');</script>";
+			echo"<script>location.href='index.php';</script>";
+			echo mysqli_error($dbconn);
+		}
+	}
 ?>
