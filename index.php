@@ -62,7 +62,7 @@
                                         <li class="profile-li"><a class="profile-links" href="accountSetting.php">Account Setting</a></li>
                                         <li class="profile-li"><a class="profile-links" href="#">Change Password </a></li>
                                         <li class="profile-li"><a class="profile-links" href="logout.php">logout</a></li>
-                                        
+
                                         <?php }elseif(isset($_SESSION['email'])&& $_SESSION['userType'] == 'admin'){ ?>
                                         <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                                         <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
