@@ -52,7 +52,7 @@
 				<button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
 			</form>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#" target="_blank">Visit Site</a></li>
+				<li><a href="../index.php">Back to main</a></li>
 				<li class="dropdown ">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 						Account

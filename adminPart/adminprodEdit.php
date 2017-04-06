@@ -52,7 +52,7 @@
 				<button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
 			</form>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#" target="_blank">Visit Site</a></li>
+				<li><a href="../index.php">Back to main</a></li>
 				<li class="dropdown ">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 						Account
@@ -127,21 +127,7 @@
             <li><a href="adminprodEdit.php">Edit product</a></li>
             <li><a href="adminprodDel.php">Delete product</a></li>
 
-            <!-- Dropdown level 2 -->
-            <li class="panel panel-default" id="dropdown">
-              <a data-toggle="collapse" href="#dropdown-lvl3">
-                <span class="glyphicon glyphicon-off"></span> Product Settings <span class="caret"></span>
-              </a>
-              <div id="dropdown-lvl3" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <ul class="nav navbar-nav">
-                    <li><a href="#">Add product</a></li>
-                    <li><a href="#">Edit product</a></li>
-                    <li><a href="#">Delete product</a></li>
-                  </ul>
-                </div>
-              </div>
-            </li>
+
           </ul>
         </div>
       </div>
