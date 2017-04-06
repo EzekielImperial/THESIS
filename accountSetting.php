@@ -227,7 +227,7 @@
             <div class="control-group form-group col-lg-6">
               <div class="controls">
                 <label>Birthdate</label>
-                <input type="date" class="form-control" name="birthdate" id="birthdate" required>
+                <input type="date" class="form-control" name="birthDate" id="birthDate" required>
               </div>
             </div>
           <input type="submit" value="Update" class="btn btn-primary"> &nbsp;&nbsp;&nbsp;
@@ -242,7 +242,7 @@
           if($query->num_rows > 0){
             while($row = $query->fetch_assoc()) {
         ?>
-      <form name="address" method="post">
+      <form name="address" method="post" action="updateAddress.php">
         <fieldset><br/><br/>
           <h4>Shipping Info</h4><hr/>
             <div class="control-group form-group">
@@ -290,7 +290,8 @@
               <div class="controls">
                 <label>Province</label>
                   <select class="form-control col-sm-2" name="province" id="province" required>
-                      <option selected="selected" value="Metro Manila">Metro Manila</option>
+                      <option value="">--Select Province--</option>
+                      <option value="Metro Manila">Metro Manila</option>
                       <option value="Abra">Abra</option>
                       <option value="Agusan del Norte">Agusan del Norte</option>
                       <option value="Agusan del Su">Agusan del Sur</option>
@@ -390,7 +391,7 @@
             }
           }
         ?>
-      <form name="changePw" method="post"><br/><br/>
+      <form name="changePw" method="post" action="updatePassword.php"><br/><br/>
         <h4>Change Password</h4><hr/>
         <div class="control-group form-group">
           <div class="controls">
