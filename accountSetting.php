@@ -238,6 +238,27 @@
           }
         ?>
 
+        <form name="changePw" method="post" action="updatePassword.php"><br/><br/>
+          <h4>Change Password</h4><hr/>
+          <div class="control-group form-group">
+            <div class="controls">
+              <input type="password" class="form-control" name="oldPassword" id="oldPassword" required placeholder="Old Password">
+            </div>
+          </div>
+          <div class="control-group form-group">
+            <div class="controls">
+              <input type="password" class="form-control" name="newPassword" id="newPassword" required placeholder="New Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+            </div>
+          </div>
+          <div class="control-group form-group">
+            <div class="controls">
+              <input type="password" class="form-control" name="confirmpw" id="confirmpw" required placeholder="Confirm Password">
+            </div>
+          </div>
+          <input type="submit" value="Update" class="btn btn-primary"> &nbsp;&nbsp;&nbsp;
+          <input type="reset" value="Clear" class="btn">
+        </form>
+
         <fieldset><br/><br/>
           <h4>Shipping Info</h4><hr/>
           <?php $query = $dbconn->query("SELECT * FROM address WHERE email='$email'");
@@ -245,60 +266,48 @@
             while($row = $query->fetch_assoc()) {
           ?>
           <p>House No./Unit and Floor No.: <?php echo $row['houseNum']; ?></p>
+          <p>Street: <?php echo $row['street']; ?></p>
+          <p>Building: <?php echo $row['building']; ?></p>
+          <p>Subd./Apartment/Village: <?php echo $row['subd']; ?></p>
+          <p>Barangay: <?php echo $row['brgy']; ?></p>
+          <p>City: <?php echo $row['city']; ?></p>
+          <p>Province: <?php echo $row['province']; ?></p>
+          <p>Zip Code: <?php echo $row['zipCode']; ?></p>
+          <button id="address-btn" class="btn btn-info">Edit Address</button>
         </fieldset>
           <?php
             }
-          }  ?>
-      <form name="address" method="post" action="updateAddress.php">
-        <fieldset><br/><br/>
-          <h4>Shipping Info</h4><hr/>
+          } else {
+            echo "<p>No listed Address.</p>";
+            echo "<button id='address-btn' class='btn btn-info'>Add Address</button>";
+          }
+           ?>
+      <div id="address-form">
+      <form method="post" action="updateAddress.php">
+        <fieldset><br/>
             <div class="control-group form-group">
               <div class="controls">
                 <label>House No./Unit and Floor No.</label><small> eg. #72 or 1635 16/F</small>
-                <input type="text" class="form-control" name="houseNum" id="houseNum"
-                value=<?php $query = $dbconn->query("SELECT * FROM address WHERE email='$email'");
-                if($query->num_rows > 0){
-                  while($row = $query->fetch_assoc()) {
-                    echo $row['houseNum'];
-                  }
-                }  ?>>
+                <input type="text" class="form-control" name="houseNum" id="houseNum" required>
               </div>
             </div>
             <div class="control-group form-group">
               <div class="controls">
                 <label>Street</label>
-                <input type="text" class="form-control" name="street" id="street"
-                value=<?php $query = $dbconn->query("SELECT * FROM address WHERE email='$email'");
-                if($query->num_rows > 0){
-                  while($row = $query->fetch_assoc()) {
-                    echo $row['street'];
-                  }
-                } ?>>
+                <input type="text" class="form-control" name="street" id="street" required>
               </div>
             </div>
             <div class="row">
               <div class="control-group form-group col-lg-6">
                 <div class="controls">
                   <label>Building</label>
-                  <input type="text" class="form-control" name="building" id="building"
-                  value=<?php $query = $dbconn->query("SELECT * FROM address WHERE email='$email'");
-                  if($query->num_rows > 0){
-                    while($row = $query->fetch_assoc()) {
-                      echo $row['building'];
-                    }
-                  } ?>>
+                  <input type="text" class="form-control" name="building" id="building">
                 </div>
               </div>
               <div class="control-group form-group col-lg-6">
                 <div class="controls">
                   <label>Subd./Apartment/Village</label>
-                  <input type="text" class="form-control" name="subd" id="subd"
-                  value=<?php $query = $dbconn->query("SELECT * FROM address WHERE email='$email'");
-                  if($query->num_rows > 0){
-                    while($row = $query->fetch_assoc()) {
-                      echo $row['subd'];
-                    }
-                  } ?>>
+                  <input type="text" class="form-control" name="subd" id="subd">
                 </div>
               </div>
             </div>
@@ -306,25 +315,13 @@
               <div class="control-group form-group col-lg-6">
                 <div class="controls">
                   <label>Barangay</label>
-                  <input type="text" class="form-control" name="brgy" id="brgy"
-                  value=<?php $query = $dbconn->query("SELECT * FROM address WHERE email='$email'");
-                  if($query->num_rows > 0){
-                    while($row = $query->fetch_assoc()) {
-                      echo $row['brgy'];
-                    }
-                  } ?>>
+                  <input type="text" class="form-control" name="brgy" id="brgy">
                 </div>
               </div>
               <div class="control-group form-group col-lg-6">
                 <div class="controls">
                   <label>City</label>
-                  <input type="text" class="form-control" name="city" id="city"
-                  value=<?php $query = $dbconn->query("SELECT * FROM address WHERE email='$email'");
-                  if($query->num_rows > 0){
-                    while($row = $query->fetch_assoc()) {
-                      echo $row['city'];
-                    }
-                  } ?>>
+                  <input type="text" class="form-control" name="city" id="city" required>
                 </div>
               </div>
             </div>
@@ -422,13 +419,7 @@
               <div class="control-group form-group col-lg-6">
                 <div class="controls">
                   <label>Zip Code</label>
-                  <input type="number" class="form-control" name="zipCode" id="zipCode"
-                  value=<?php $query = $dbconn->query("SELECT * FROM address WHERE email='$email'");
-                  if($query->num_rows > 0){
-                    while($row = $query->fetch_assoc()) {
-                      echo $row['zipCode'];
-                    }
-                  } ?>>
+                  <input type="number" class="form-control" name="zipCode" id="zipCode" required>
                 </div>
               </div>
             </div>
@@ -436,30 +427,8 @@
             <input type="reset" value="Clear" class="btn">
         </fieldset>
         </form>
-      <form name="changePw" method="post" action="updatePassword.php"><br/><br/>
-        <h4>Change Password</h4><hr/>
-        <div class="control-group form-group">
-          <div class="controls">
-            <input type="password" class="form-control" name="oldPassword" id="oldPassword" required placeholder="Old Password">
-          </div>
-        </div>
-        <div class="control-group form-group">
-          <div class="controls">
-            <input type="password" class="form-control" name="newPassword" id="newPassword" required placeholder="New Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
-          </div>
-        </div>
-        <div class="control-group form-group">
-          <div class="controls">
-            <input type="password" class="form-control" name="confirmpw" id="confirmpw" required placeholder="Confirm Password">
-          </div>
-        </div>
-        <input type="submit" value="Update" class="btn btn-primary"> &nbsp;&nbsp;&nbsp;
-        <input type="reset" value="Clear" class="btn">
-      </form><br/><br/>
-      <form class="deactivate">
-        <input type="submit" value="Deactivate Account" class="btn btn-danger">
-      </form>
-
+      </div>
+      <a href="#" class="btn btn-danger deactivate">Deactivate Account</a>
     </div>
   </div>
 </div>
@@ -581,6 +550,30 @@
         </div>
     </div>
 
+    <script type="text/javascript">
+      var button = document.getElementById("address-btn");
+      var myDiv = document.getElementById("address-form");
+
+      function show() {
+        myDiv.style.visibility = "visible";
+      }
+
+      function hide() {
+        myDiv.style.visibility = "hidden";
+      }
+
+      function toggle() {
+        if (myDiv.style.visibility === "hidden") {
+            show();
+        } else {
+            hide();
+        }
+      }
+
+      hide();
+
+      button.addEventListener("click", toggle, false);
+    </script>
 
 </body>
 </html>
