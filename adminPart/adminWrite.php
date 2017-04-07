@@ -226,7 +226,7 @@ if(isset($bnum)) {
 
 
   	</div>
-    <!--Footer-->
+    <!--Footers-->
     <footer class="footer1">
         <div class="container">
 
