@@ -3,10 +3,10 @@
   padding: 0;
   margin: 0;
   display: block;
-  width: 20%;
   flex-basis: 20%;
   flex-shrink: 0;
   background-color: #f8f8f8;
+  position: relative;
 }
 
 ul, menu, dir {
@@ -37,7 +37,8 @@ div {
 
 .user-side-menu_name {
   text-overflow: ellipsis;
-  overflow: hidden;white-space: nowrap;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .user-side-menu_link {
@@ -58,6 +59,23 @@ div {
   text-decoration: none;
 }
 
+.user-side-menu_link-selected {
+    text-decoration: none;
+    color: #2874f0;
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border-left: .5rem solid #2874f0;
+    background-color: white;
+}
+
+.user-side-menu_link-selected:hover {
+  text-decoration: none;
+  color: #2874f0;
+}
+
 a {
   background-color: transparent;
   color: black;
@@ -70,7 +88,6 @@ a:active, a:hover {
 }
 
 .page-wrapper {
-  width:70%;
   padding-left: 2rem;
   background-color: #fbfbfb;
   display: flex;
@@ -78,4 +95,8 @@ a:active, a:hover {
   justify-content: center;
   padding: 2rem;
   overflow: hidden;
+}
+
+.deactivate {
+  align-self: center;
 }
