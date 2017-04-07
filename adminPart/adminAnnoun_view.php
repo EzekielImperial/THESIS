@@ -145,168 +145,42 @@
 
 
 
-<!--2ndMain starts (table for user) - Jung-->
-<!--<div class="form-group">
-    <select class="form-control" name="usercat" required>
-       <option value="" selected disabled>Choose</option>
-       <option value="admin">Admin</option>
-       <option value="employee">Employee</option>
-       <option value="student">Student</option>
-    </select>
-</div>-->
 
-<div class="container">
-     <table>
-       <h1>ADMIN</h1>
-     <thead>
-       <tr>
-         <th>Email_Address</th>
-         <th>firstname</th>
-         <th>lastname</th>
-         <th>Contact_Number</th>
-         <th>Birthdate</th>
-         <th>Usertype</th>
-       </tr>
-     </thead>
-     <tbody>
-       <?php
+<!--Code Starts Here-->
 
-               // Check connection
-               if ($dbconn->connect_error) {
-                 die("Connection failed: " . $conn->connect_error);
-               }
+<?php
 
-             $sql = "SELECT * FROM users WHERE userType='admin'";
-             $result = $dbconn->query($sql);
+$boardNum = $_GET['boardNum'];
+$sql = 'select boardTitle, boardContent, boardUser, boardDate, boardHit from announcement where boardNum = ' . $boardNum;
+$result = $dbconn->query($sql);
+$row = $result->fetch_assoc();
+?>
 
-             if ($result->num_rows > 0) {
-                 // output data of each row
-                 while($row = $result->fetch_assoc()) {
-                   echo
-                   "<tr>
-                     <td>{$row['email']}</td>
-                     <td>{$row['firstName']}</td>
-                     <td>{$row['lastName']}</td>
-                     <td>{$row['contactNum']}</td>
-                     <td>{$row['birthDate']}</td>
-                     <td>{$row['userType']}</td>
-                   </tr>\n";
-                 }
-
-             } else {
-                 echo "0 results";
-             }
-
-
-
-
-
-       ?>
-     </tbody>
-   </table>
-
-   <table>
-     <h1>Employee</h1>
-   <thead>
-     <tr>
-       <th>Email_Address</th>
-       <th>firstname</th>
-       <th>lastname</th>
-       <th>Contact_Number</th>
-       <th>Birthdate</th>
-       <th>Usertype</th>
-     </tr>
-   </thead>
-   <tbody>
-     <?php
-
-             // Check connection
-             if ($dbconn->connect_error) {
-               die("Connection failed: " . $conn->connect_error);
-             }
-
-           $sql = "SELECT * FROM users WHERE userType='employee'";
-           $result = $dbconn->query($sql);
-
-           if ($result->num_rows > 0) {
-               // output data of each row
-               while($row = $result->fetch_assoc()) {
-                 echo
-                 "<tr>
-                   <td>{$row['email']}</td>
-                   <td>{$row['firstName']}</td>
-                   <td>{$row['lastName']}</td>
-                   <td>{$row['contactNum']}</td>
-                   <td>{$row['birthDate']}</td>
-                   <td>{$row['userType']}</td>
-                 </tr>\n";
-               }
-
-           } else {
-               echo "0 results";
-           }
-
-
-
-
-
-     ?>
-   </tbody>
- </table>
-
- <table>
-   <h1>Student</h1>
- <thead>
-   <tr>
-     <th>Email_Address</th>
-     <th>firstname</th>
-     <th>lastname</th>
-     <th>Contact_Number</th>
-     <th>Birthdate</th>
-     <th>Usertype</th>
-   </tr>
- </thead>
- <tbody>
-
-   <?php
-
-           // Check connection
-           if ($dbconn->connect_error) {
-             die("Connection failed: " . $conn->connect_error);
-           }
-
-         $sql = "SELECT * FROM users WHERE userType='student'";
-         $result = $dbconn->query($sql);
-
-         if ($result->num_rows > 0) {
-             // output data of each row
-             while($row = $result->fetch_assoc()) {
-               echo
-               "<tr>
-                 <td>{$row['email']}</td>
-                 <td>{$row['firstName']}</td>
-                 <td>{$row['lastName']}</td>
-                 <td>{$row['contactNum']}</td>
-                 <td>{$row['birthDate']}</td>
-                 <td>{$row['userType']}</td>
-               </tr>\n";
-             }
-
-         } else {
-             echo "0 results";
-         }
-
-
-
-
-
-   ?>
- </tbody>
-</table>
+<article class="boardArticle">
+<h3>Announcement Board</h3>
+<div id="boardView">
+<h3 id="boardTitle"><?php echo $row['boardTitle']?></h3>
+<div id="boardInfo">
+<span id="boardUser">Author: <?php echo $row['boardUser']?></span>
+<span id="boardDate">Date: <?php echo $row['boardDate']?></span>
+<span id="boardHit">Hit: <?php echo $row['boardHit']?></span>
 </div>
+<div id="boardContent"><?php echo $row['boardContent']?></div>
+<div class="btnSet">
+				<a href="./adminWrite.php?boardNum=<?php echo $boardNum?>">Write</a>
+				<a href="./delete.php">Delete</a>
+				<a href="./adminAnnoun.php">List</a>
+			</div
+</div>
+</article>
+
+
+
+
+
+
 
   	</div>
-
     <!--Footer-->
     <footer class="footer1">
         <div class="container">
