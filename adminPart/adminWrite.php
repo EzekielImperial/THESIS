@@ -16,6 +16,11 @@
     <link rel="stylesheet" href="../css/adminOnly.css">
     <!--Javascript-->
     <script src="../jsforAdmin/jsAdmin.js"></script>
+    <script>
+    function goBack() {
+      window.history.back();
+    }
+    </script>
 
 </head>
 
@@ -150,8 +155,8 @@
 
 <?php
 //$_GET['boardNum'] setting - Jung
-if(isset($_GET['boardNo'])) {
-  $bnum = $_GET['boardNo'];
+if(isset($_GET['boardNum'])) {
+  $bnum = $_GET['boardNum'];
 }
 
 if(isset($bnum)) {
