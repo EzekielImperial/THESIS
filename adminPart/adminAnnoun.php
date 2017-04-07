@@ -167,24 +167,24 @@
 
 
        <?php
-            $sql = 'select * from announcement order by boardNum desc';
+            $sql = 'select * from announcement order by board_no desc';
             $result = $dbconn->query($sql);
             while($row = $result->fetch_assoc())
             {
-              $datetime = explode(' ', $row['boardDate']);
+              $datetime = explode(' ', $row['board_date']);
               $date = $datetime[0];
               $time = $datetime[1];
               if($date == Date('Y-m-d'))
-              $row['boardDate'] = $time;
+              $row['board_date'] = $time;
               else
-              $row['boardDate'] = $date;
+              $row['board_date'] = $date;
               ?>
               <tr>
-                <td><?php echo $row['boardNum']?></td>
-                <td><a href="./adminAnnoun_view.php?boardNum=<?php echo $row['boardNum']?>"><?php echo $row['boardTitle']?></a></td>
-                <td><?php echo $row['boardUser']?></td>
-                <td><?php echo $row['boardDate']?></td>
-                <td><?php echo $row['boardHit']?></td>
+                <td><?php echo $row['board_no']?></td>
+                <td><a href="./adminAnnoun_view.php?bno=<?php echo $row['board_no']?>"><?php echo $row['board_title']?></a></td>
+                <td><?php echo $row['board_admin']?></td>
+                <td><?php echo $row['board_date']?></td>
+                <td><?php echo $row['board_hit']?></td>
               </tr>
               <?php
             }

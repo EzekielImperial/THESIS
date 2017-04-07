@@ -155,17 +155,16 @@
 
 <?php
 //$_GET['boardNum'] setting - Jung
-if(isset($_GET['boardNum'])) {
-  $bnum = $_GET['boardNum'];
+if(isset($_GET['bno'])) {
+  $bNo = $_GET['bno'];
 }
 
-if(isset($bnum)) {
-  $sql = 'select boardTitle, boardContent, boardUser from announcement where boardNum = ' . $bnum;
+if(isset($bNo)) {
+  $sql = 'select board_title, board_content, board_admin from announcement where board_no = ' . $bNo;
   $result = $dbconn->query($sql);
   $row = $result->fetch_assoc();
 }
-
- ?>
+?>
 
 <div class="container">
 	<div class="row">
@@ -177,26 +176,27 @@ if(isset($bnum)) {
     		<form action="adminwrite_update.php" method="POST">
 
           <?php
-				      if(isset($bnum)) {
-					           echo '<input type="hidden" name="boardno" value="' . $bnum . '">';
+				      if(isset($bNo)) {
+					           echo '<input type="hidden" name="bno" value="' . $bNo . '">';
 				               }
-				                   ?>
-          <input type="hidden" class="form-control" name="boardUser" value="admin">
+				?>
+        <label for="bID"></label>
+          <input type="hidden" class="form-control" name="bID" value="admin">
 
 
     		    <div class="form-group">
-    		        <label for="title">Title <span class="require">*</span></label>
-    		        <input type="text" class="form-control" name="boardTitle"  />
+    		        <label for="bTitle">Title <span class="require">*</span></label>
+    		        <input type="text" class="form-control" name="bTitle" id="bTitle"  value="<?php echo isset($row['board_title'])?$row['board_title']:null?>" />
     		    </div>
 
             <div class="form-group">
-    		        <label for="boardpw">Password <span class="require">*</span></label>
-    		        <input type="password" class="form-control" name="boardPassword"  />
+    		        <label for="bPassword">Password <span class="require">*</span></label>
+    		        <input type="password" class="form-control" name="bPassword" id="bPassword"  />
     		    </div>
 
     		    <div class="form-group">
-    		        <label for="description">Description</label>
-    		        <textarea rows="5" class="form-control" name="boardContent" ></textarea>
+    		        <label for="boardContent">Description</label>
+    		        <textarea rows="5" class="form-control" name="bContent" id="bContent" ><?php echo isset($row['board_content'])?$row['board_content']:null?></textarea>
     		    </div>
 
     		    <div class="form-group">

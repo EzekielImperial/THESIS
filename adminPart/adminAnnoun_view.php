@@ -150,8 +150,8 @@
 
 <?php
 
-$boardNum = $_GET['boardNum'];
-$sql = 'select boardTitle, boardContent, boardUser, boardDate, boardHit from announcement where boardNum = ' . $boardNum;
+$bno = $_GET['bno'];
+$sql = 'select board_title, board_content, board_date, board_hit, board_admin from announcement where board_no = ' . $bno;
 $result = $dbconn->query($sql);
 $row = $result->fetch_assoc();
 ?>
@@ -159,15 +159,15 @@ $row = $result->fetch_assoc();
 <article class="boardArticle">
 <h3>Announcement Board</h3>
 <div id="boardView">
-<h3 id="boardTitle"><?php echo $row['boardTitle']?></h3>
+<h3 id="boardTitle"><?php echo $row['board_title']?></h3>
 <div id="boardInfo">
-<span id="boardUser">Author: <?php echo $row['boardUser']?></span>
-<span id="boardDate">Date: <?php echo $row['boardDate']?></span>
-<span id="boardHit">Hit: <?php echo $row['boardHit']?></span>
+<span id="boardUser">Author: <?php echo $row['board_admin']?></span>
+<span id="boardDate">Date: <?php echo $row['board_date']?></span>
+<span id="boardHit">Hit: <?php echo $row['board_hit']?></span>
 </div>
-<div id="boardContent"><?php echo $row['boardContent']?></div>
+<div id="boardContent"><?php echo $row['board_content']?></div>
 <div class="btnSet">
-				<a href="./adminWrite.php?boardNum=<?php echo $boardNum?>">Write</a>
+				<a href="./adminWrite.php?bno=<?php echo $bno?>">Write</a>
 				<a href="./delete.php">Delete</a>
 				<a href="./adminAnnoun.php">List</a>
 			</div
