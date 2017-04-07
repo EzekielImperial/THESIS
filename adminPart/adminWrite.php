@@ -145,168 +145,82 @@
 
 
 
-<!--2ndMain starts (table for user) - Jung-->
-<!--<div class="form-group">
-    <select class="form-control" name="usercat" required>
-       <option value="" selected disabled>Choose</option>
-       <option value="admin">Admin</option>
-       <option value="employee">Employee</option>
-       <option value="student">Student</option>
-    </select>
-</div>-->
+
+<!--Code Starts Here-->
+
+<?php
+//$_GET['boardNum'] setting - Jung
+if(isset($_GET['boardNo'])) {
+  $bnum = $_GET['boardNo'];
+}
+
+if(isset($bnum)) {
+  $sql = 'select boardTitle, boardContent, boardUser from announcement where boardNum = ' . $bnum;
+  $result = $dbconn->query($sql);
+  $row = $result->fetch_assoc();
+}
+
+ ?>
 
 <div class="container">
-     <table>
-       <h1>ADMIN</h1>
-     <thead>
-       <tr>
-         <th>Email_Address</th>
-         <th>firstname</th>
-         <th>lastname</th>
-         <th>Contact_Number</th>
-         <th>Birthdate</th>
-         <th>Usertype</th>
-       </tr>
-     </thead>
-     <tbody>
-       <?php
+	<div class="row">
 
-               // Check connection
-               if ($dbconn->connect_error) {
-                 die("Connection failed: " . $conn->connect_error);
-               }
+	    <div class="col-md-8 col-md-offset-2">
 
-             $sql = "SELECT * FROM users WHERE userType='admin'";
-             $result = $dbconn->query($sql);
+    		<h1>Create post</h1>
 
-             if ($result->num_rows > 0) {
-                 // output data of each row
-                 while($row = $result->fetch_assoc()) {
-                   echo
-                   "<tr>
-                     <td>{$row['email']}</td>
-                     <td>{$row['firstName']}</td>
-                     <td>{$row['lastName']}</td>
-                     <td>{$row['contactNum']}</td>
-                     <td>{$row['birthDate']}</td>
-                     <td>{$row['userType']}</td>
-                   </tr>\n";
-                 }
+    		<form action="adminwrite_update.php" method="POST">
 
-             } else {
-                 echo "0 results";
-             }
+          <?php
+				      if(isset($bnum)) {
+					           echo '<input type="hidden" name="boardno" value="' . $bnum . '">';
+				               }
+				                   ?>
+          <input type="hidden" class="form-control" name="boardUser" value="admin">
 
 
+    		    <div class="form-group">
+    		        <label for="title">Title <span class="require">*</span></label>
+    		        <input type="text" class="form-control" name="boardTitle"  />
+    		    </div>
 
+            <div class="form-group">
+    		        <label for="boardpw">Password <span class="require">*</span></label>
+    		        <input type="password" class="form-control" name="boardPassword"  />
+    		    </div>
 
+    		    <div class="form-group">
+    		        <label for="description">Description</label>
+    		        <textarea rows="5" class="form-control" name="boardContent" ></textarea>
+    		    </div>
 
-       ?>
-     </tbody>
-   </table>
+    		    <div class="form-group">
+    		        <p><span class="require">*</span> - required fields</p>
+    		    </div>
 
-   <table>
-     <h1>Employee</h1>
-   <thead>
-     <tr>
-       <th>Email_Address</th>
-       <th>firstname</th>
-       <th>lastname</th>
-       <th>Contact_Number</th>
-       <th>Birthdate</th>
-       <th>Usertype</th>
-     </tr>
-   </thead>
-   <tbody>
-     <?php
+    		    <div class="form-group">
+    		        <button type="submit" class="btn btn-primary">
+    		            <?php echo isset($bnum)?'Rewrite':'Write'?>
+    		        </button>
+    		        <button class="btn btn-default" onclick="goBack()">
+    		            <a href="adminAnnoun.php">Cancel</a>
+    		        </button>
+    		    </div>
 
-             // Check connection
-             if ($dbconn->connect_error) {
-               die("Connection failed: " . $conn->connect_error);
-             }
+    		</form>
+		</div>
 
-           $sql = "SELECT * FROM users WHERE userType='employee'";
-           $result = $dbconn->query($sql);
-
-           if ($result->num_rows > 0) {
-               // output data of each row
-               while($row = $result->fetch_assoc()) {
-                 echo
-                 "<tr>
-                   <td>{$row['email']}</td>
-                   <td>{$row['firstName']}</td>
-                   <td>{$row['lastName']}</td>
-                   <td>{$row['contactNum']}</td>
-                   <td>{$row['birthDate']}</td>
-                   <td>{$row['userType']}</td>
-                 </tr>\n";
-               }
-
-           } else {
-               echo "0 results";
-           }
-
-
-
-
-
-     ?>
-   </tbody>
- </table>
-
- <table>
-   <h1>Student</h1>
- <thead>
-   <tr>
-     <th>Email_Address</th>
-     <th>firstname</th>
-     <th>lastname</th>
-     <th>Contact_Number</th>
-     <th>Birthdate</th>
-     <th>Usertype</th>
-   </tr>
- </thead>
- <tbody>
-
-   <?php
-
-           // Check connection
-           if ($dbconn->connect_error) {
-             die("Connection failed: " . $conn->connect_error);
-           }
-
-         $sql = "SELECT * FROM users WHERE userType='student'";
-         $result = $dbconn->query($sql);
-
-         if ($result->num_rows > 0) {
-             // output data of each row
-             while($row = $result->fetch_assoc()) {
-               echo
-               "<tr>
-                 <td>{$row['email']}</td>
-                 <td>{$row['firstName']}</td>
-                 <td>{$row['lastName']}</td>
-                 <td>{$row['contactNum']}</td>
-                 <td>{$row['birthDate']}</td>
-                 <td>{$row['userType']}</td>
-               </tr>\n";
-             }
-
-         } else {
-             echo "0 results";
-         }
-
-
-
-
-
-   ?>
- </tbody>
-</table>
+	</div>
 </div>
 
-  	</div>
 
+
+
+
+
+
+
+  	</div>
     <!--Footer-->
     <footer class="footer1">
         <div class="container">

@@ -132,7 +132,7 @@
         </div>
       </div>
     </li><!--End of Dropdown for product-->
-    <li><a href="#"><span class="glyphicon glyphicon-plane"></span> Announcement</a></li>
+    <li><a href="adminAnnoun.php"><span class="glyphicon glyphicon-plane"></span> Announcement</a></li>
          <li><a href="#"><span class="glyphicon glyphicon-cloud"></span> Notification</a></li>
     <li><a href="#"><span class="glyphicon glyphicon-signal"></span> Link</a></li>
 
