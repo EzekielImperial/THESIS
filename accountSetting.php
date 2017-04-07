@@ -155,8 +155,6 @@
   ?>
   <div class="container">
     <h2>My profile</h2><br/>
-  <div class="row">
-      <div>
         <ul class="user-side-menu">
           <div class="user-side-menu_bg">
             <div class="user-side-menu_name">
@@ -194,9 +192,6 @@
             </a>
           </li>
         </ul>
-      </div>
-    </div>
-    <div>
     <div class="page-wrapper">
       <form name="personalInfo" method="post" action="updateInfo.php">
         <fieldset>
@@ -237,37 +232,58 @@
         <?php
             }
           }
-
-          $query = $dbconn->query("SELECT * FROM address WHERE email='$email'");
-          if($query->num_rows > 0){
-            while($row = $query->fetch_assoc()) {
         ?>
+
       <form name="address" method="post" action="updateAddress.php">
         <fieldset><br/><br/>
           <h4>Shipping Info</h4><hr/>
             <div class="control-group form-group">
               <div class="controls">
                 <label>House No./Unit and Floor No.</label><small> eg. #72 or 1635 16/F</small>
-                <input type="text" class="form-control" name="houseNum" id="houseNum" value=<?php echo $row['houseNum'] ?>>
+                <input type="text" class="form-control" name="houseNum" id="houseNum"
+                value=<?php $query = $dbconn->query("SELECT * FROM address WHERE email='$email'");
+                if($query->num_rows > 0){
+                  while($row = $query->fetch_assoc()) {
+                    echo $row['houseNum'];
+                  }
+                }  ?>>
               </div>
             </div>
             <div class="control-group form-group">
               <div class="controls">
                 <label>Street</label>
-                <input type="text" class="form-control" name="street" id="street" value=<?php echo $row['street'] ?>>
+                <input type="text" class="form-control" name="street" id="street"
+                value=<?php $query = $dbconn->query("SELECT * FROM address WHERE email='$email'");
+                if($query->num_rows > 0){
+                  while($row = $query->fetch_assoc()) {
+                    echo $row['street'];
+                  }
+                } ?>>
               </div>
             </div>
             <div class="row">
               <div class="control-group form-group col-lg-6">
                 <div class="controls">
                   <label>Building</label>
-                  <input type="text" class="form-control" name="building" id="building" value=<?php echo $row['building'] ?>>
+                  <input type="text" class="form-control" name="building" id="building"
+                  value=<?php $query = $dbconn->query("SELECT * FROM address WHERE email='$email'");
+                  if($query->num_rows > 0){
+                    while($row = $query->fetch_assoc()) {
+                      echo $row['building'];
+                    }
+                  } ?>>
                 </div>
               </div>
               <div class="control-group form-group col-lg-6">
                 <div class="controls">
                   <label>Subd./Apartment/Village</label>
-                  <input type="text" class="form-control" name="subd" id="subd" value=<?php echo $row['subd'] ?>>
+                  <input type="text" class="form-control" name="subd" id="subd"
+                  value=<?php $query = $dbconn->query("SELECT * FROM address WHERE email='$email'");
+                  if($query->num_rows > 0){
+                    while($row = $query->fetch_assoc()) {
+                      echo $row['subd'];
+                    }
+                  } ?>>
                 </div>
               </div>
             </div>
@@ -275,13 +291,25 @@
               <div class="control-group form-group col-lg-6">
                 <div class="controls">
                   <label>Barangay</label>
-                  <input type="text" class="form-control" name="brgy" id="brgy" value=<?php echo $row['brgy'] ?>>
+                  <input type="text" class="form-control" name="brgy" id="brgy"
+                  value=<?php $query = $dbconn->query("SELECT * FROM address WHERE email='$email'");
+                  if($query->num_rows > 0){
+                    while($row = $query->fetch_assoc()) {
+                      echo $row['brgy'];
+                    }
+                  } ?>>
                 </div>
               </div>
               <div class="control-group form-group col-lg-6">
                 <div class="controls">
                   <label>City</label>
-                  <input type="text" class="form-control" name="city" id="city" value=<?php echo $row['city'] ?>>
+                  <input type="text" class="form-control" name="city" id="city"
+                  value=<?php $query = $dbconn->query("SELECT * FROM address WHERE email='$email'");
+                  if($query->num_rows > 0){
+                    while($row = $query->fetch_assoc()) {
+                      echo $row['city'];
+                    }
+                  } ?>>
                 </div>
               </div>
             </div>
@@ -379,7 +407,13 @@
               <div class="control-group form-group col-lg-6">
                 <div class="controls">
                   <label>Zip Code</label>
-                  <input type="number" class="form-control" name="zipCode" id="zipCode" value=<?php echo $row['zipCode'] ?>>
+                  <input type="number" class="form-control" name="zipCode" id="zipCode"
+                  value=<?php $query = $dbconn->query("SELECT * FROM address WHERE email='$email'");
+                  if($query->num_rows > 0){
+                    while($row = $query->fetch_assoc()) {
+                      echo $row['zipCode'];
+                    }
+                  } ?>>
                 </div>
               </div>
             </div>
@@ -387,10 +421,6 @@
             <input type="reset" value="Clear" class="btn">
         </fieldset>
         </form>
-        <?php
-            }
-          }
-        ?>
       <form name="changePw" method="post" action="updatePassword.php"><br/><br/>
         <h4>Change Password</h4><hr/>
         <div class="control-group form-group">
@@ -413,9 +443,7 @@
       </form>
     </div>
   </div>
-  <br/><hr/><br/>
-  </div>
-</div>
+  <br/><hr style="width:80%;"><br/>
 
 <!--Footer-->
     <footer class="footer1">
