@@ -238,6 +238,17 @@
           }
         ?>
 
+        <fieldset><br/><br/>
+          <h4>Shipping Info</h4><hr/>
+          <?php $query = $dbconn->query("SELECT * FROM address WHERE email='$email'");
+          if($query->num_rows > 0){
+            while($row = $query->fetch_assoc()) {
+          ?>
+          <p>House No./Unit and Floor No.: <?php echo $row['houseNum']; ?></p>
+        </fieldset>
+          <?php
+            }
+          }  ?>
       <form name="address" method="post" action="updateAddress.php">
         <fieldset><br/><br/>
           <h4>Shipping Info</h4><hr/>
