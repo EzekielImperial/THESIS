@@ -26,7 +26,7 @@
 			echo mysqli_error($dbconn);
 		}else{
 			echo"<script>window.alert('Email Address/Password/Usertype Incorrect');</script>";
-			echo"<script>location.href='index.php';</script>";
+			echo"<script>location.href='login.php';</script>";
 		}
 	}
 
