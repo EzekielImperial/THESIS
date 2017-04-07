@@ -428,7 +428,7 @@
         </fieldset>
         </form>
       </div>
-      <a href="#" class="btn btn-danger deactivate">Deactivate Account</a>
+      <a href="deactivatePage.php" class="btn btn-danger deactivate">Deactivate Account</a>
     </div>
   </div>
 </div>
