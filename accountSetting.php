@@ -155,6 +155,8 @@
   ?>
   <div class="container">
     <h2>My profile</h2><br/>
+    <div class="row">
+      <div class="col-md-3">
         <ul class="user-side-menu">
           <div class="user-side-menu_bg">
             <div class="user-side-menu_name">
@@ -162,7 +164,7 @@
             </div>
           </div>
           <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
-            <a class="user-side-menu_link" href="accountSetting.php">
+            <a class="user-side-menu_link-selected" href="accountSetting.php">
               <div class="user-side-menu_link-text">Account Settings</div>
             </a>
           </li>
@@ -192,6 +194,8 @@
             </a>
           </li>
         </ul>
+      </div>
+    <div class="col-md-9">
     <div class="page-wrapper">
       <form name="personalInfo" method="post" action="updateInfo.php">
         <fieldset>
@@ -440,9 +444,15 @@
         </div>
         <input type="submit" value="Update" class="btn btn-primary"> &nbsp;&nbsp;&nbsp;
         <input type="reset" value="Clear" class="btn">
+      </form><br/><br/>
+      <form class="deactivate">
+        <input type="submit" value="Deactivate Account" class="btn btn-danger">
       </form>
+
     </div>
   </div>
+</div>
+</div>
   <br/><hr style="width:80%;"><br/>
 
 <!--Footer-->
