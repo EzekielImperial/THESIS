@@ -14,6 +14,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!--CSS-->
     <link rel="stylesheet" href="css/design.css" />
+    <link rel="stylesheet" href="css/profile.css" />
 
 </head>
 
@@ -30,10 +31,10 @@
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			</button>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      </button>
                 </div>
                 <div class="collapse navbar-collapse row" id="myNavbar">
                     <ul class="pull-right">
@@ -71,7 +72,7 @@
 
                                         <li class="upper-links dropdown"><a class="links">My Account</a>
                                             <ul class="dropdown-menu">
-                                                <li class="profile-li"><a class="profile-links" href="adminPart/adminDashboard.php">Admin Dashboard</a></li>
+                                                <li class="profile-li"><a class="profile-links" href="#">My Order</a></li>
                                                 <li class="profile-li"><a class="profile-links" href="accountSetting.php">Account Setting</a></li>
                                                 <li class="profile-li"><a class="profile-links" href="#">Change Password </a></li>
                                                 <li class="profile-li"><a class="profile-links" href="logout.php">logout</a></li>
@@ -147,151 +148,138 @@
         </nav>
 
         <!--First-->
-
-        <div class="jumbotron text-center">
-            <h1>Slider here in this part</h1>
-            <p>with Sell Buy button</p>
-            <br><br><br>
-        </div>
-        <div class="col-md-12 text-center">
-            <br><br> Product list first line
-            <br><br><br><br><br><br><br>
-        </div>
-        <div class="col-md-12 text-center">
-            Product list second line
-            <br><br><br><br><br><br><br>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6 text-center">
-                <h3>Column 1</h3> Best prod or man prod
-                <br><br><br><br><br><br><br>
-
+    <div class="container-fluid">
+      <div class="deac-form">
+        <h2>Deactivate Account</h2><br/>
+        <p>If you're sure that you want to deactivate your account, please enter your email address and password below, and then press Continue.</p>
+        <p>Your account will be deactivated, which means you can no longer use this account with this email.</p>
+        <form method="post" action="deactiveProcess.php">
+          <div class="control-group form-group">
+            <div class="controls">
+              <input type="email" class="form-control" name="email" id="email" required placeholder="Enter Email Address">
             </div>
-            <div class="col-md-6 text-center">
-                <h3>Column 2</h3> woman prod
-                <br><br><br><br><br><br><br>
-
+          </div>
+          <div class="control-group form-group">
+            <div class="controls">
+              <input type="password" class="form-control" name="password" id="password" required placeholder="Enter Password">
             </div>
+          </div>
+          <input type="submit" value="Continue" class="btn btn-primary">
+        </form>
+      </div>
+      <br/><hr style="width:80%;"><br/>
+    </div>
+    <!--div container -->
+    <footer class="footer1">
+        <div class="container">
 
-        </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <ul class="list-unstyled clear-margins">
+                        <li class="widget-container widget_nav_menu">
+
+                            <h1 class="title-widget">About iMARKET</h1>
+
+                            <ul>
+                                <li><a href="aboutus.php"><i class="fa fa-angle-double-right"></i> About Us</a></li>
+                                <li><a href="contact.php"><i class="fa fa-angle-double-right"></i> Contact Us</a></li>
+                                <li><a href="faq.php"><i class="fa fa-angle-double-right"></i> FAQ</a></li>
+
+                            </ul>
+
+                        </li>
+
+                    </ul>
 
 
-        </div>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <ul class="list-unstyled clear-margins">
+                        <li class="widget-container widget_nav_menu">
+                            <h1 class="title-widget">CATEGORIES</h1>
+                            <ul>
+                                <li><a href="#"><i class="fa fa-angle-double-right"></i>  WOMAN</a></li>
+                                <li><a href="#"><i class="fa fa-angle-double-right"></i>  MAN</a></li>
+                                <li><a href="#"><i class="fa fa-angle-double-right"></i>  MERCHANDISE</a></li>
+                                <li><a href="#"><i class="fa fa-angle-double-right"></i>  CUSTOMIZE</a></li>
+                                <li><a href="#"><i class="fa fa-angle-double-right"></i>  SHOES</a></li>
+                                <li><a href="#"><i class="fa fa-angle-double-right"></i>  BEST</a></li>
+                                <li><a href="#"><i class="fa fa-angle-double-right"></i>  LATEST</a></li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <ul class="list-unstyled clear-margins">
+                        <li class="widget-container widget_nav_menu">
+                            <h1 class="title-widget">Others</h1>
+                            <ul>
+                                <li><a href="announcement.php"><i class="fa fa-angle-double-right"></i> Announcement</a></li>
+                                <li><a href="termsnpolicy.php"><i class="fa fa-angle-double-right"></i> Terms & Policy</a></li>
+                                <li><a href="#"><i class="fa fa-angle-double-right"></i> Developers</a></li>
+                                <li><a href="#"><i class="fa fa-angle-double-right"></i> Advertisement</a></li>
+                                <li><a href="#"><i class="fa fa-angle-double-right"></i> Smart Book</a></li>
+                                <li><a href="#"><i class="fa fa-angle-double-right"></i> Test Centres</a></li>
+                                <li><a href="#"><i class="fa fa-angle-double-right"></i>  Admission Form</a></li>
+                                <li><a href="#"><i class="fa fa-angle-double-right"></i>  Computer Live Test</a></li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
 
 
+                <div class="col-lg-3 col-md-3">
+                    <ul class="list-unstyled clear-margins">
+                        <li class="widget-container widget_recent_news">
+                            <h1 class="title-widget">Company Info </h1>
+                            <div class="footerp">
+                                <h2 class="title-median">iMARKET.Co</h2>
+                                <p><b>Email :</b> <a href="201501240@iacademy.edu.ph">201501240@iacademy.edu.ph</a></p>
+                                <p><b>Contact Number</b>
+                                    <b style="color:#ffc106;"> (8AM to 10PM):</b> +63 9167737988 </p>
 
-        <!--Footer-->
-        <footer class="footer1">
-            <div class="container">
+                                <p><b>Corp Office : </b></p>
+                                <p>324 iACADEMY Plaza Sen. Gil Puyat Avenue, Bel Air, Makati City 1234</p>
+                            </div>
 
-                <div class="row">
-                    <div class="col-lg-3 col-md-3">
-                        <ul class="list-unstyled clear-margins">
-                            <li class="widget-container widget_nav_menu">
+                            <div class="social-icons">
 
-                                <h1 class="title-widget">About iMARKET</h1>
+                                <ul class="nomargin">
 
-                                <ul>
-                                    <li><a href="aboutus.php"><i class="fa fa-angle-double-right"></i> About Us</a></li>
-                                    <li><a href="contact.php"><i class="fa fa-angle-double-right"></i> Contact Us</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> FAQ</a></li>
+                                    <a href="https://www.facebook.com/bootsnipp"><i class="fa fa-facebook-square fa-3x social-fb" id="social"></i></a>
+                                    <a href="https://twitter.com/bootsnipp"><i class="fa fa-twitter-square fa-3x social-tw" id="social"></i></a>
+                                    <a href="https://plus.google.com/+Bootsnipp-page"><i class="fa fa-google-plus-square fa-3x social-gp" id="social"></i></a>
+                                    <a href="201501240@iacademy.com.ph"><i class="fa fa-envelope-square fa-3x social-em" id="social"></i></a>
 
                                 </ul>
-
-                            </li>
-
-                        </ul>
-
-
-                    </div>
-                    <div class="col-lg-3 col-md-3">
-                        <ul class="list-unstyled clear-margins">
-                            <li class="widget-container widget_nav_menu">
-                                <h1 class="title-widget">CATEGORIES</h1>
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i>  WOMEN</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i>  MEN</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i>  MERCHANDISE</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i>  CUSTOMIZE</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i>  LATEST</a></li>
-
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 col-md-3">
-                        <ul class="list-unstyled clear-margins">
-                            <li class="widget-container widget_nav_menu">
-                                <h1 class="title-widget">Customer Care</h1>
-                                <ul>
-                                    <li><a href="announcement.php"><i class="fa fa-angle-double-right"></i> Announcement</a></li>
-                                    <li><a href="termsnpolicy.php"><i class="fa fa-angle-double-right"></i> Terms & Policy</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Developers</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Advertisement</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Smart Book</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Test Centres</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i>  Computer Live</a></li>
-
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-
-
-                    <div class="col-lg-3 col-md-3">
-                        <ul class="list-unstyled clear-margins">
-                            <li class="widget-container widget_recent_news">
-                                <h1 class="title-widget">Company Info </h1>
-                                <div class="footerp">
-                                    <h2 class="title-median">iMARKET.Co</h2>
-                                    <p><b>Email :</b> <a href="201501240@iacademy.edu.ph">201501240@iacademy.edu.ph</a></p>
-                                    <p><b>Contact Number</b>
-                                        <b style="color:#ffc106;"> (8AM to 10PM):</b> +63 9167737988 </p>
-
-                                    <p><b>Corp Office : </b></p>
-                                    <p>324 iACADEMY Plaza Sen. Gil Puyat Avenue, Bel Air, Makati City 1234</p>
-                                </div>
-
-                                <div class="social-icons">
-
-                                    <ul class="nomargin">
-
-                                        <a href="https://www.facebook.com/bootsnipp"><i class="fa fa-facebook-square fa-3x social-fb" id="social"></i></a>
-                                        <a href="https://twitter.com/bootsnipp"><i class="fa fa-twitter-square fa-3x social-tw" id="social"></i></a>
-                                        <a href="https://plus.google.com/+Bootsnipp-page"><i class="fa fa-google-plus-square fa-3x social-gp" id="social"></i></a>
-                                        <a href="201501240@iacademy.com.ph"><i class="fa fa-envelope-square fa-3x social-em" id="social"></i></a>
-
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </footer>
+        </div>
+    </footer>
+    <!--header-->
 
-
-        <!--header-->
-
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                        <div class="copyright">
-                            © 2017, iMARKET, All rights reserved
-                        </div>
-
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="copyright">
+                        © 2017, iMARKET, All rights reserved
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                        <div class="design">
-                            <a href="#">iMARKET </a> | <a target="_blank" href="#">Web Design & Development by iACADAMIT</a>
-                            <br>
-                        </div>
+
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="design">
+                        <a href="#">iMARKET </a> | <a target="_blank" href="#">Web Design & Development by iACADAMIT</a>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
 
 </body>
