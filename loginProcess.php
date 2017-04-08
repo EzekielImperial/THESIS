@@ -23,6 +23,7 @@
 					$_SESSION['password']=$rows['password'];
 					$_SESSION['userType']=$rows['userType'];
 					$userStatus=$rows['userStatus'];
+					echo"<script>window.alert('Welcome');</script>";
 					echo"<script>location.href='index.php';</script>";
 					echo mysqli_error($dbconn);
 				}else{
@@ -42,6 +43,7 @@
 					$_SESSION['password']=$rows['password'];
 					$_SESSION['userType']=$rows['userType'];
 					$userStatus=$rows['userStatus'];
+					echo"<script>window.alert('Welcome');</script>";
 					echo"<script>location.href='index.php';</script>";
 				}else{
 					echo"<script>window.alert('Email Address/Password/Usertype Incorrect');</script>";
