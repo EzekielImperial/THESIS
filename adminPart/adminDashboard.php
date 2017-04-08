@@ -46,9 +46,9 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-			<form class="navbar-form navbar-left" action="adminResults.php" method="GET" role="search">
+			<form class="navbar-form navbar-left" action="adminResults.php" method="POST" role="search">
 				<div class="form-group">
-					<input type="text" name="query" class="form-control" placeholder="Search">
+					<input type="text" name="search" class="form-control" placeholder="Search">
 				</div>
 				<button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
 			</form>
