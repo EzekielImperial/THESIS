@@ -40,8 +40,8 @@
                 <?php if(isset($_SESSION['email'])&& $_SESSION['userType'] == 'employee'){ ?>
                 <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                 <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
-                <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
+                <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                 <li class="upper-links dropdown"><a class="links">My Account</a>
                     <ul class="dropdown-menu">
@@ -53,8 +53,8 @@
                         <?php }elseif(isset($_SESSION['email'])&& $_SESSION['userType'] == 'student'){ ?>
                         <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                         <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
-                        <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                        <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                        <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
+                        <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                         <li class="upper-links dropdown"><a class="links">My Account</a>
                             <ul class="dropdown-menu">
@@ -66,8 +66,8 @@
                                 <?php }elseif(isset($_SESSION['email'])&& $_SESSION['userType'] == 'admin'){ ?>
                                 <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                                 <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
-                                <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                                <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                                <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
+                                <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                                 <li class="upper-links dropdown"><a class="links">My Account</a>
                                     <ul class="dropdown-menu">
@@ -268,8 +268,8 @@
           <p>House No./Unit and Floor No.: <?php echo $row['houseNum']; ?></p>
           <p>Street: <?php echo $row['street']; ?></p>
           <p>Building: <?php echo $row['building']; ?></p>
-          <p>Subd./Apartment/Village: <?php echo $row['subd']; ?></p>
-          <p>Barangay: <?php echo $row['brgy']; ?></p>
+          <p>Subd./Apartment/Village: <?php echo $row['subdivision']; ?></p>
+          <p>Barangay: <?php echo $row['barangay']; ?></p>
           <p>City: <?php echo $row['city']; ?></p>
           <p>Province: <?php echo $row['province']; ?></p>
           <p>Zip Code: <?php echo $row['zipCode']; ?></p>

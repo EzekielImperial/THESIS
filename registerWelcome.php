@@ -42,8 +42,8 @@
                         <?php if(isset($_SESSION['email'])&& $_SESSION['userType'] == 'employee'){ ?>
                         <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                         <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
-                        <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                        <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                        <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
+                        <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                         <li class="upper-links dropdown"><a class="links">My Account</a>
                             <ul class="dropdown-menu">
@@ -55,8 +55,8 @@
                                 <?php }elseif(isset($_SESSION['email'])&& $_SESSION['userType'] == 'student'){ ?>
                                 <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                                 <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
-                                <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                                <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                                <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
+                                <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                                 <li class="upper-links dropdown"><a class="links">My Account</a>
                                     <ul class="dropdown-menu">
@@ -68,8 +68,8 @@
                                         <?php }elseif(isset($_SESSION['email'])&& $_SESSION['userType'] == 'admin'){ ?>
                                         <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                                         <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
-                                        <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                                        <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                                        <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
+                                        <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                                         <li class="upper-links dropdown"><a class="links">My Account</a>
                                             <ul class="dropdown-menu">
@@ -149,68 +149,20 @@
             </div>
         </nav>
 
-        <div class="container-fluid">
-            <br><br><br><br>
 
-            <div class="title" id="title1">
-                <h2>Welcome to iACADAMIT</h2>
-            </div>
-            <div class="row">
-                <div class="col-md-6 ">
-                <div class="form11"> 
-                    <h2> Your account has been created! whohoo </h2>
-                    <h3> Login so you can: </h3> <br>
-                    <p> Manage your iACADAMIT account </p>
-                    <p> Sell your shit / Buy your shit </p>
-                    <p> Add products to your whishlist </p>
-                    <h2> This div part is </h2>
-                    <h2> Temporary will be replace with shit </h2>
-                    </br>
+        <div class="container">
+	         <div class="row text-center">
+             <div class="col-sm-6 col-sm-offset-3">
+               <br><br> <h2 style="color:#0fad00">Success</h2>
+               <img src="image/reg_true.jpg">
+               <h3>Dear, Sir/Maam</h3>
+                <p style="font-size:20px;color:#5C5C5C;">Thank you for registered in iMARKET Buy&Sell. Please login to your account to enjoy to buy & sell now !</p>
+                            <a href="login.php" class="btn btn-success">     Log-in      </a>
+                            <br><br>
+                          </div>
 
-                </div>
-                </div>
-                <div class="col-md-6">
-                <div class="form22">
-                    <form class="form" id="" method="post" action="loginProcess.php">
-                        <br>
-
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control input-lg" placeholder="example: user@gmail.com" name="email">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Input Password</label>
-                            <input type="password" class="form-control input-lg" placeholder="Password" name="password">
-                        </div>
-
-                        <div class="radio">
-                          <label><input type="radio" name="userType" value="student" required>Student</label>
-                        </div>
-                        <div class="radio">
-                          <label><input type="radio" name="userType" value="employee" required>Employee</label>
-                        </div>
-                        <div class="radio">
-                          <label><input type="radio" name="userType" value="admin">Admin</label>
-                        </div>
-
-                        <div class="form-group">
-                            <div>
-                                <button class="btn btn-primary" name="submit" type="submit">
-             Log In!
-            </button>
-                                <button type="reset" class="btn btn-default">Clear</button> <br/><br/>
-                                <span><a href="forgotPassword.php">Forgot password?</a></span>
-
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                   
-                </div>
-                <br/>
-            </div>
-        </div>
-
+	                       </div>
+</div>
 
 
         <!--Footer-->

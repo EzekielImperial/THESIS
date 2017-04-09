@@ -43,8 +43,8 @@
                         <?php if(isset($_SESSION['email'])&& $_SESSION['userType'] == 'employee'){ ?>
                         <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                         <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
-                        <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                        <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                        <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
+                        <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                         <li class="upper-links dropdown"><a class="links">My Account</a>
                             <ul class="dropdown-menu">
@@ -56,8 +56,8 @@
                                 <?php }elseif(isset($_SESSION['email'])&& $_SESSION['userType'] == 'student'){ ?>
                                 <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                                 <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
-                                <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                                <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                                <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
+                                <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                                 <li class="upper-links dropdown"><a class="links">My Account</a>
                                     <ul class="dropdown-menu">
@@ -69,8 +69,8 @@
                                         <?php }elseif(isset($_SESSION['email'])&& $_SESSION['userType'] == 'admin'){ ?>
                                         <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                                         <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
-                                        <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                                        <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                                        <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
+                                        <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                                         <li class="upper-links dropdown"><a class="links">My Account</a>
                                             <ul class="dropdown-menu">
@@ -194,14 +194,14 @@
 
                         <div class="form-group">
                             <label for="bday">Date of Birth </label> <br>
-                            <input type="date" name="birthDay" required>
+                            <input type="date" name="birthDate" required>
                             <small id="ageHelp" class="form-text text-muted">You should be in the legal age to use this service  </small>
                         </div>
 
 
                         <h4>Oh! One more thing </h4>
                         <small id="Help" class="form-text text-muted">Are you a:</small> <br>
-                          
+
 
                         <div class="radio">
                           <label><input type="radio" name="userType" value="student" required>Student</label>
@@ -210,9 +210,9 @@
                           <label><input type="radio" name="userType" value="employee" required>Employee</label>
                         </div>
                         <br>
-                         
+
                         <input type="hidden" name="Status" value=1>
-    
+
                         <div class="form-group">
                             <div>
                                 <button class="btn btn-success btn-md" name="submit" type="submit">
