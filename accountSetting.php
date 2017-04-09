@@ -268,8 +268,8 @@
           <p>House No./Unit and Floor No.: <?php echo $row['houseNum']; ?></p>
           <p>Street: <?php echo $row['street']; ?></p>
           <p>Building: <?php echo $row['building']; ?></p>
-          <p>Subd./Apartment/Village: <?php echo $row['subd']; ?></p>
-          <p>Barangay: <?php echo $row['brgy']; ?></p>
+          <p>Subd./Apartment/Village: <?php echo $row['subdivision']; ?></p>
+          <p>Barangay: <?php echo $row['barangay']; ?></p>
           <p>City: <?php echo $row['city']; ?></p>
           <p>Province: <?php echo $row['province']; ?></p>
           <p>Zip Code: <?php echo $row['zipCode']; ?></p>
