@@ -194,14 +194,14 @@
 
                         <div class="form-group">
                             <label for="bday">Date of Birth </label> <br>
-                            <input type="date" name="birthDay" required>
+                            <input type="date" name="birthDate" required>
                             <small id="ageHelp" class="form-text text-muted">You should be in the legal age to use this service  </small>
                         </div>
 
 
                         <h4>Oh! One more thing </h4>
                         <small id="Help" class="form-text text-muted">Are you a:</small> <br>
-                          
+
 
                         <div class="radio">
                           <label><input type="radio" name="userType" value="student" required>Student</label>
@@ -210,9 +210,9 @@
                           <label><input type="radio" name="userType" value="employee" required>Employee</label>
                         </div>
                         <br>
-                         
+
                         <input type="hidden" name="Status" value=1>
-    
+
                         <div class="form-group">
                             <div>
                                 <button class="btn btn-success btn-md" name="submit" type="submit">

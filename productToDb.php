@@ -1,20 +1,7 @@
 <?php
 
-//putek gumana ka rin naiiyak na ako huhuhu rak na ituh
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "imarketdb";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
+session_start();
+require_once('connector.php');
 
 
   // prepare and bind time fck
@@ -61,7 +48,7 @@ if ($conn->connect_error) {
 	} else {
 		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 
-      $stmt = $conn->prepare("INSERT INTO products (productName, owner_email, price, shortDes, productCategory, productImage, QTY, date_created, productStatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+      $stmt = $dbconn->prepare("INSERT INTO products (productName, email, price, shortDes, productCategory, productImage, QTY, date_created, productStatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
       $stmt->bind_param("ssdsssisi", $ptitle, $powner, $pprice, $pdes, $pcategory, $photo, $pqty, $createdate, $pstats);
 

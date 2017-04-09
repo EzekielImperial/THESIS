@@ -1,13 +1,7 @@
 <?php
 
 session_start();
-DEFINE ('DB_USER', 'root');
-DEFINE ('DB_PASSWORD', '');
-DEFINE ('DB_HOST', 'localhost');
-DEFINE ('DB_NAME', 'imarketdb');
-
-$dbconn = @mysqli_connect(DB_HOST,DB_USER, DB_PASSWORD, DB_NAME)
-OR die('could not connect to MariaDB'.mysqli_connect_error());
+require_once('connector.php');
 
 if(!$_SESSION['email']){
  header("Location: login.php", 404);
@@ -176,10 +170,10 @@ if(!$_SESSION['email']){
 
                         <?php
 
-                             $con=mysqli_connect('localhost','root','','imarketdb');
+                             $con=mysqli_connect('localhost','root','','imarketdatabase');
 
 
-                             $results = mysqli_query ($con,'SELECT * FROM products WHERE productStatus LIKE 1 AND owner_email LIKE "' . $glasstype . '" LIMIT 5');
+                             $results = mysqli_query ($con,'SELECT * FROM products WHERE productStatus LIKE 1 AND email LIKE "' . $glasstype . '" LIMIT 5');
 
                              while($row = mysqli_fetch_array($results)){
 

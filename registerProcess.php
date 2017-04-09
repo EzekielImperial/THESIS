@@ -2,12 +2,12 @@
 	SESSION_start();
 	require_once('connector.php');
 
-	$marketEmail=$_POST['newemail'];
-	$marketFirstName=$_POST['firstName'];
-	$marketLastName=$_POST['lastName'];
-	$marketPassword=$_POST['newpassword'];
-	$userType=$_POST['userType'];
-	$marketBirthDate=$_POST['birthDay'];
+		$marketEmail=$_POST['newemail'];
+		$marketFirstName=$_POST['firstName'];
+		$marketLastName=$_POST['lastName'];
+		$marketPassword=$_POST['newpassword'];
+		$userType=$_POST['userType'];
+		$marketBirthDate=$_POST['birthDate'];
     $marketContactNum=$_POST['contactNum'];
     $marketStats=$_POST['Status'];
 
@@ -28,7 +28,7 @@
    		exit;
     }
 
-	$stmt = $dbconn->prepare('SELECT * FROM address WHERE email = ?');
+	$stmt = $dbconn->prepare('SELECT * FROM users WHERE email = ?');
 	$stmt->bind_param('s', $marketEmail);
 	$stmt->execute();
 	$result = $stmt->get_result();

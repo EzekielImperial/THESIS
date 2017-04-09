@@ -169,7 +169,7 @@
                             <input type="password" class="form-control input-lg" placeholder="Password" name="password">
                         </div>
 
-
+					<!--NEED TO BE REMOVED-->
                         <div class="radio">
                           <label><input type="radio" name="userType" value="student" required>Student</label>
                         </div>
@@ -179,7 +179,7 @@
                         <div class="radio">
                           <label><input type="radio" name="userType" value="admin">Admin</label>
                         </div>
-                      
+
                         <div class="form-group">
                             <div>
                                 <button class="btn btn-primary" name="submit" type="submit">

@@ -1,13 +1,9 @@
 <?php
 
 session_start();
-DEFINE ('DB_USER', 'root');
-DEFINE ('DB_PASSWORD', '');
-DEFINE ('DB_HOST', 'localhost');
-DEFINE ('DB_NAME', 'imarketdb');
+require_once('connector.php');
 
-$dbconn = @mysqli_connect(DB_HOST,DB_USER, DB_PASSWORD, DB_NAME)
-OR die('could not connect to MariaDB'.mysqli_connect_error());
+
 
 if(!$_SESSION['email']){
  header("need to be login", 404);
@@ -175,7 +171,7 @@ if(!$_SESSION['email']){
 
                         <?php
 
-                             $con=mysqli_connect('localhost','root','','imarketdb');
+                             $con=mysqli_connect('localhost','root','','imarketdatabase');
 
 
                              $results = mysqli_query ($con,'SELECT * FROM products WHERE productCategory LIKE "Services" LIMIT 5');
