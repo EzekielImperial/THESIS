@@ -169,10 +169,17 @@
                             <input type="password" class="form-control input-lg" placeholder="Password" name="password">
                         </div>
 
-                        <label class="radio"><input type="radio" name="userType" value="student">Student</label>
-                        <label class="radio"><input type="radio" name="userType" value="employee">Employee</label>
-                        <label class="radio"><input type="radio" name="userType" value="admin">Admin</label>
 
+                        <div class="radio">
+                          <label><input type="radio" name="userType" value="student" required>Student</label>
+                        </div>
+                        <div class="radio">
+                          <label><input type="radio" name="userType" value="employee" required>Employee</label>
+                        </div>
+                        <div class="radio">
+                          <label><input type="radio" name="userType" value="admin">Admin</label>
+                        </div>
+                      
                         <div class="form-group">
                             <div>
                                 <button class="btn btn-primary" name="submit" type="submit">
