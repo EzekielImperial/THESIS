@@ -17,10 +17,12 @@
     $stmt2->execute();
 
     echo "<script>alert('product deleted.');</script>";
-    
+    echo"<script>location.href='productView.php';</script>";
+
   }else{
 
-    echo "<script>alert('Update Failed');</script>";
+    echo "<script>alert('Update Failed.');</script>";
+    echo"<script>location.href='productView.php';</script>";
 
   }
 ?>

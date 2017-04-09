@@ -161,16 +161,8 @@
                 <div class="col-md-5 col-xs-0">
 
                     <pre>
-           Welcome to the own iACADEMY MARKET SHIT
-
-           Exclusive for iacadamit fam only k.
-
-           Why sign up?
-
-           Sell as many items for free! Absolutely no fees.
-           Chat with sellers to buy stuff you love!
-           Get social! Interact with the community and a whole lot more!
-        </pre>
+                        this is only temporary this pre shit will be remove
+                    </pre>
 
                 </div>
                 <div class="col-md-5 col-xs-12">
@@ -191,18 +183,18 @@
                         </div>
                         <div class="form-group">
                             <input type="password" class="form-control" name="newpassword" placeholder="New Password" required>
-                            <small id="passHelp" class="form-text text-muted">Double check your password please.</small>
+                            <small id="passHelp" class="form-text text-muted">One Capital One Special Character and 8 characters</small>
                         </div>
 
                         <div class="form-group">
                             <label for="bday">Contact Number </label> <br>
-                            <input type="text" name="contactNum" placeholder="Contact Number" required>
-                            <small id="contactHelp" class="form-text text-muted">You should be in the legal age to use this service  </small>
+                            <input type="tel" name="contactNum" placeholder="Contact Number" required>
+                            <small id="contactHelp" class="form-text text-muted"> Please begin with +63</small>
                         </div>
 
                         <div class="form-group">
                             <label for="bday">Date of Birth </label> <br>
-                            <input type="date" name="birthDay" required>
+                            <input type="date" name="birthDate" required>
                             <small id="ageHelp" class="form-text text-muted">You should be in the legal age to use this service  </small>
                         </div>
 
@@ -210,16 +202,23 @@
                         <h4>Oh! One more thing </h4>
                         <small id="Help" class="form-text text-muted">Are you a:</small> <br>
 
-                        <label class="radio"><input type="radio" name="userType" id="userType" value="student">Student</label>
-                        <label class="radio"><input type="radio" name="userType" id="userType" value="employee">Employee</label>
-                        <br><br>
+
+                        <div class="radio">
+                          <label><input type="radio" name="userType" value="student" required>Student</label>
+                        </div>
+                        <div class="radio">
+                          <label><input type="radio" name="userType" value="employee" required>Employee</label>
+                        </div>
+                        <br>
+
+                        <input type="hidden" name="Status" value=1>
 
                         <div class="form-group">
                             <div>
-                                <button class="btn btn-success btn-lg" name="submit" type="submit">
-      Sign Up!
-     </button>
-                                <button type="reset" class="btn btn-default btn-lg">Clear</button>
+                                <button class="btn btn-success btn-md" name="submit" type="submit">
+                                  Sign Up!
+                                </button>
+                                <button type="reset" class="btn btn-default btn-md">Clear</button>
                             </div>
                         </div>
 
@@ -244,19 +243,10 @@
                             <li class="widget-container widget_nav_menu">
 
                                 <h1 class="title-widget">About iMARKET</h1>
-
-<<<<<<< HEAD
                                 <ul>
-                                    <li><a href="aboutus.php"><i class="fa fa-angle-double-right"></i> About Us</a></li>
-                                    <li><a href="contact.php"><i class="fa fa-angle-double-right"></i> Contact Us</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> FAQ</a></li>
-=======
-                            <ul>
                                 <li><a href="aboutus.php"><i class="fa fa-angle-double-right"></i> About Us</a></li>
                                 <li><a href="contact.php"><i class="fa fa-angle-double-right"></i> Contact Us</a></li>
                                 <li><a href="faq.php"><i class="fa fa-angle-double-right"></i> FAQ</a></li>
->>>>>>> refs/remotes/origin/master
-
                                 </ul>
 
                             </li>

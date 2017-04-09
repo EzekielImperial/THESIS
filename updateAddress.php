@@ -22,14 +22,14 @@
     $stmt->execute();
     $result = $stmt->get_result();
     if($rows = $result->fetch_assoc()) {
-      $querr = $dbconn->prepare('UPDATE address SET houseNum=?, street=?, building=?, subd=?, brgy=?, city=?, province=?, zipCode=? WHERE email=?');
+      $querr = $dbconn->prepare('UPDATE address SET houseNum=?, street=?, building=?, subdivision=?, barangay=?, city=?, province=?, zipCode=? WHERE email=?');
       $querr->bind_param('sssssssis', $houseNum, $street, $bldg, $subd, $brgy, $city, $province, $zipCode, $email);
       $querr->execute();
 
       echo "<script>window.alert('Account updated.');</script>";
       echo "<script>location.href='accountSetting.php';</script>";
     } else {
-      $querr2 = $dbconn->prepare('INSERT INTO address (email, houseNum, street, building, subd, brgy, city, province, zipCode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
+      $querr2 = $dbconn->prepare('INSERT INTO address (email, houseNum, street, building, subdivision, barangay, city, province, zipCode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
       $querr2->bind_param('sssssssis', $email, $houseNum, $street, $bldg, $subd, $brgy, $city, $province, $zipCode);
       $querr2->execute();
 
