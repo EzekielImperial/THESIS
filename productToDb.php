@@ -18,7 +18,7 @@ require_once('connector.php');
   //$pcategory = $_POST['category'];
 
   $pcategory = $_POST['category'];
-
+  $pgender=$_POST['gender'];
   //pricepart dont touch
   $pprice = $_POST['price'];
   setlocale(LC_MONETARY,"en_US");            //money shit dont touch
@@ -48,9 +48,9 @@ require_once('connector.php');
 	} else {
 		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 
-      $stmt = $dbconn->prepare("INSERT INTO products (productName, email, price, shortDes, productCategory, productImage, QTY, date_created, productStatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+      $stmt = $dbconn->prepare("INSERT INTO products (productName, email, genderCategory, price, shortDes, productCategory, productImage, QTY, date_created, productStatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-      $stmt->bind_param("ssdsssisi", $ptitle, $powner, $pprice, $pdes, $pcategory, $photo, $pqty, $createdate, $pstats);
+      $stmt->bind_param("sssdsssisi", $ptitle, $powner, $pgender, $pprice, $pdes, $pcategory, $photo, $pqty, $createdate, $pstats);
 
       $stmt->execute();
       $stmt->close();
