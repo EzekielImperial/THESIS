@@ -171,7 +171,7 @@ if (!$link) {
                     <!-- search body results - khelly -->
                     <?php
 
-    $query = $_POST['search']; 
+    $query = $_POST['search'];
 
     $min_length = 5;
 
@@ -207,7 +207,7 @@ if (!$link) {
                 </div>
             </div>
 
-    <?php include 'footer.php';?>
+    <?php include 'adminfooter.php';?>
 
     </body>
 

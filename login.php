@@ -135,9 +135,9 @@
                 <!--Size-->
                 <div class="collapse navbar-collapse row" id="mySecondbar">
                     <ul class="nav navbar-nav fontnav">
-                        <li><a href="#">BEST</a></li>
-                        <li><a href="#">MAN</a></li>
-                        <li><a href="#">WOMAN</a></li>
+                        <li><a href="productlocation/productview_latest.php">LATEST</a></li>
+                        <li><a href="productlocation/productview_men.php">MEN</a></li>
+                        <li><a href="productlocation/productview_women.php">WOMEN</a></li>
                         <li><a href="#">iACADEMY MERCHANDISE</a></li>
                         <li><a href="#">SHOES</a></li>
                         <li><a href="#">ETC</a></li>

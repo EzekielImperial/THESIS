@@ -147,7 +147,7 @@
 
   	</div>
 <!--Code Starts Here-->
-    <?php include 'footer.php';?>
+    <?php include 'adminfooter.php';?>
 
 
     </body>

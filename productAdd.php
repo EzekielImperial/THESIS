@@ -147,9 +147,9 @@ if(!$_SESSION['email']){
               <!--Size-->
               <div class="collapse navbar-collapse row" id="mySecondbar">
                   <ul class="nav navbar-nav fontnav">
-                      <li><a href="#">LATEST</a></li>
-                      <li><a href="#">MEN</a></li>
-                      <li><a href="#">WOMEN</a></li>
+                      <li><a href="productlocation/productview_latest.php">LATEST</a></li>
+                      <li><a href="productlocation/productview_men.php">MEN</a></li>
+                      <li><a href="productlocation/productview_women.php">WOMEN</a></li>
                       <li><a href="#">iACADEMY MERCHANDISE</a></li>
                       <li><a href="#">CUSTOMIZE</a></li>
                   </ul>
@@ -238,7 +238,7 @@ if(!$_SESSION['email']){
                 </div>
             </div>
         </div>
-    
+
     <?php include 'footer.php';?>
 
     </body>
