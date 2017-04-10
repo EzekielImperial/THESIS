@@ -70,10 +70,10 @@
               <li class="profile-li"><a class="profile-links" href="../logout.php">logout</a></li>
 							<li class="divider"></li>
 
-              <?php }else { ?>
-                      <li class="profile-li"><a class="profile-links" href="../login.php">LOGIN</a></li>
-                      <li class="profile-li"><a class="profile-links" href="../signUp.php">REGISTER</a></li>
-                      <?php } ?>
+              <?php }else {
+                  header("Location: ../index.php", 404);
+                  exit;
+               } ?>
 
 
 

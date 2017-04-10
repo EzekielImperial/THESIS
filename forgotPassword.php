@@ -24,6 +24,10 @@
     <?php
         session_start();
         require_once('connector.php');
+
+        if(isset($_SESSION['email'])){
+          header("Location: index.php", 404);
+                  }
     ?>
 
 
