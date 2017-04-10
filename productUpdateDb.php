@@ -13,6 +13,7 @@
 
   $ptitle = $_POST['title'];
   $pcategory = $_POST['category'];
+  $pgender=$_POST['genderCategory'];
 
   $pprice = $_POST['price'];
   setlocale(LC_MONETARY,"en_US");            //money shit dont touch
@@ -47,8 +48,13 @@
   $result = $stmt->get_result();
 
   if($rows = $result->fetch_assoc()){
+<<<<<<< HEAD
     $stmt2 = $dbconn->prepare('UPDATE products SET productName = ?, productCategory = ?, price = ?, shortDes = ?, productImage = ?, QTY = ?, date_update = ? WHERE productName = ?');
     $stmt2->bind_param('ssdssiss', $ptitle, $pcategory, $pprice, $pdes, $photo, $pqty, $createdate, $porginal);
+=======
+    $stmt2 = $dbconn->prepare('UPDATE products SET productName = ?, productCategory = ?, genderCategory = ?, price = ?, shortDes = ?, productImage = ?, QTY = ?, date_update = ? WHERE productName = ?');
+    $stmt2->bind_param('sssdsisss', $ptitle, $pcategory, $pgender, $pprice, $pdes, $photo, $pqty, $createdate, $porginal);
+>>>>>>> refs/remotes/origin/master
     $stmt2->execute();
 
     echo"<script>window.alert('Product Updated Successfully !');</script>";

@@ -30,6 +30,7 @@ if(!$_SESSION['email']){
         <link rel="stylesheet" href="css/login.css" />
         <link rel="stylesheet" href="css/design.css" />
         <link rel="stylesheet" href="css/productsPages.css" />
+        <script src="jsmain/jsmain.js"></script>
 
     </head>
 
@@ -175,7 +176,7 @@ if(!$_SESSION['email']){
 
                             <div class="form-group">
                                 <label for="sel1">Change the Product Category:</label>
-                                <select class="form-control" name="category" required>
+                                <select class="form-control" name="category" id="category" onChange="onSelectChange()" required>
                                    <option value="" selected disabled>Choose of the following</option>
                                    <option value="Mobile Phones Accessories">Mobile Phones Accessories</option>
                                    <option value="Clothing and Accessories">Clothing and Accessories</option>
@@ -186,6 +187,12 @@ if(!$_SESSION['email']){
                                    <option value="Hobbies, Sports">Hobbies, Sports</option>
                                    <option value="Toys Stuffs">Toys Stuffs</option>
                                 </select>
+
+                                <select class="form-control" id="gender" name="gender">
+                                  <option value="man">Man</option>
+                                  <option value="woman">Woman</option>
+                                </select>
+
                             </div>
 
                     </div>

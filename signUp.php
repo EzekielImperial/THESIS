@@ -188,14 +188,13 @@
 
                         <div class="form-group">
                             <label for="bday">Contact Number </label> <br>
-                            <input type="tel" name="contactNum" placeholder="Contact Number" required>
+                            <input type="tel" name="contactNum" class="form-control" placeholder="Contact Number" required>
                             <small id="contactHelp" class="form-text text-muted"> Please begin with +63</small>
                         </div>
 
                         <div class="form-group">
                             <label for="bday">Date of Birth </label> <br>
-                            <input type="date" name="birthDate" required>
-                            <small id="ageHelp" class="form-text text-muted">You should be in the legal age to use this service  </small>
+                            <input type="date" name="birthDate" class="form-control" required>
                         </div>
 
 
@@ -203,13 +202,71 @@
                         <small id="Help" class="form-text text-muted">Are you a:</small> <br>
 
 
-                        <div class="radio">
+                        <div class="radio" id="userType">
                           <label><input type="radio" name="userType" value="student" required>Student</label>
                         </div>
                         <div class="radio">
                           <label><input type="radio" name="userType" value="employee" required>Employee</label>
                         </div>
                         <br>
+
+                        <div id="student">
+                        <div class="control-group form-group">
+                            <label for="yearLvl">Year Level</label> <br>
+                            <select class="form-control col-sm-2" name="yearLvl" id="yearLvl" required>
+                              <option value="SHS">Senior High School</option>
+                              <option value="1st Year">1st Year College</option>
+                              <option value="2nd Year">2nd Year College</option>
+                              <option value="3rd Year">3rd Year College</option>
+                              <option value="4th Year">4th Year College</option>
+                              <option value="Irregular">Irregular</option>
+                            </select>
+                        </div>
+
+                        <div class="row">
+                          <div class="control-group form-group col-lg-6">
+                            <div class="controls">
+                              <label>Strand</label>
+                                <select class="form-control col-sm-2" name="strand" id="strand">
+                                  <option value="Humanities ans Social Sciences">Humanities ans Social Sciences</option>
+                                  <option value="Accountancy and Business Management">Accountancy, Business And Management</option>
+                                  <option value="Computer Programming">Computer Programming</option>
+                                  <option value="Animation">Animation</option>
+                                  <option value="Fashion Design">Fashion Design</option>
+                                  <option value="MMA">Media and Visual Arts with Specialization in Multimedia Arts</option>
+                                </select>
+                            </div>
+                          </div>
+                          <div class="control-group form-group col-lg-6">
+                            <div class="controls">
+                              <label>Course</label>
+                                <select class="form-control col-sm-2" name="course" id="course">
+                                  <option value="SE">Software Engineering</option>
+                                  <option value="GD">Game Development</option>
+                                  <option value="MMA">Multimedia Arts and Design</option>
+                                  <option value="Animation">Animation</option>
+                                  <option value="Marketing">Marketing Management</option>
+                                  <option value="Real Estate">Real Estate Management</option>
+                                  <option value="FD">Fashion Design</option>
+                                  <option value="DA">Digital Arts</option>
+                                  <option value="Financial">Financial Management</option>
+                                </select>
+                            </div>
+                          </div>
+                        </div>
+                        </div>
+
+                        <div id="employee">
+                        <div class="form-group">
+                            <label for="yearLvl">Department</label> <br>
+                            <select class="form-control col-sm-2" name="dept" id="dept" required>
+                              <option value="General">General Education</option>
+                              <option value="Computing">School of Computing</option>
+                              <option value="Design">School of Design</option>
+                              <option value="Business">School of Business</option>
+                            </select>
+                        </div>
+                        </div>
 
                         <input type="hidden" name="Status" value=1>
 
@@ -342,6 +399,33 @@
                 </div>
             </div>
         </div>
+
+        <script type="text/javascript">
+          var button = document.getElementById("userType");
+          var myDiv = document.getElementById("student");
+
+          if(button == )
+
+          function show() {
+            myDiv.style.visibility = "visible";
+          }
+
+          function hide() {
+            myDiv.style.visibility = "hidden";
+          }
+
+          function toggle() {
+            if (myDiv.style.visibility === "hidden") {
+                show();
+            } else {
+                hide();
+            }
+          }
+
+          hide();
+
+          button.addEventListener("click", toggle, false);
+        </script>
 
 </body>
 
