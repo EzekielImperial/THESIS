@@ -27,13 +27,28 @@
 
 
 
+  if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
+      echo "<script>alert('Sorry, only JPG, JPEG, PNG & GIF files are allowed.');</script>";
+      echo"<script>location.href='productAdd.php';</script>";
+      $uploadOk = 0;
+  }
+  
+    if ($uploadOk == 0) {
+    echo "Sorry, you forgot to upload the image !";
+    echo"<script>location.href='productAdd.php';</script>";
+  // if everything is ok, try to upload file
+  } else {
+      if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+
+
   $stmt = $dbconn->prepare('SELECT * FROM products WHERE productName = ?');
   $stmt->bind_param('s', $porginal);
   $stmt->execute();
   $result = $stmt->get_result();
+
   if($rows = $result->fetch_assoc()){
     $stmt2 = $dbconn->prepare('UPDATE products SET productName = ?, productCategory = ?, price = ?, shortDes = ?, productImage = ?, QTY = ?, date_update = ? WHERE productName = ?');
-    $stmt2->bind_param('ssdsisss', $ptitle, $pcategory, $pprice, $pdes, $photo, $pqty, $createdate, $porginal);
+    $stmt2->bind_param('ssdssiss', $ptitle, $pcategory, $pprice, $pdes, $photo, $pqty, $createdate, $porginal);
     $stmt2->execute();
 
     echo"<script>window.alert('Product Updated Successfully !');</script>";
@@ -44,4 +59,9 @@
     echo "<script>alert('Update Failed Please, try again !');</script>";
     echo"<script>location.href='productView.php';</script>";
   }
+ }
+ }
+
+$dbconn->close();
+ 
 ?>
