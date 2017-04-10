@@ -40,8 +40,8 @@
                     <?php if(isset($_SESSION['email'])&& $_SESSION['userType'] == 'employee'){ ?>
                     <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                     <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
-                    <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                    <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                    <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
+                    <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                     <li class="upper-links dropdown"><a class="links">My Account</a>
                         <ul class="dropdown-menu">
@@ -53,8 +53,8 @@
                             <?php }elseif(isset($_SESSION['email'])&& $_SESSION['userType'] == 'student'){ ?>
                             <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                             <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
-                            <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                            <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                            <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
+                            <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                             <li class="upper-links dropdown"><a class="links">My Account</a>
                                 <ul class="dropdown-menu">
@@ -66,8 +66,8 @@
                                     <?php }elseif(isset($_SESSION['email'])&& $_SESSION['userType'] == 'admin'){ ?>
                                     <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                                     <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
-                                    <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                                    <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                                    <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
+                                    <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                                     <li class="upper-links dropdown"><a class="links">My Account</a>
                                         <ul class="dropdown-menu">
@@ -145,6 +145,52 @@
             </div>
         </div>
     </nav>
+
+
+    <!--Code Start-->
+
+
+    <div class="container">
+         <table>
+           <h1>Announcement</h1>
+         <thead>
+           <tr>
+             <th>Number</th>
+             <th>Title</th>
+             <th>Author</th>
+             <th>Date</th>
+             <th>Hit</th>
+           </tr>
+         </thead>
+         <tbody>
+
+
+           <?php
+                $sql = 'select * from announcement order by board_no desc';
+                $result = $dbconn->query($sql);
+                while($row = $result->fetch_assoc())
+                {
+                  $datetime = explode(' ', $row['board_date']);
+                  $date = $datetime[0];
+                  $time = $datetime[1];
+                  if($date == Date('Y-m-d'))
+                  $row['board_date'] = $time;
+                  else
+                  $row['board_date'] = $date;
+                  ?>
+                  <tr>
+                    <td><?php echo $row['board_no']?></td>
+                    <td><a href="./adminAnnoun_view.php?bno=<?php echo $row['board_no']?>"><?php echo $row['board_title']?></a></td>
+                    <td><?php echo $row['board_admin']?></td>
+                    <td><?php echo $row['board_date']?></td>
+                    <td><?php echo $row['board_hit']?></td>
+                  </tr>
+                  <?php
+                }
+                ?>
+         </tbody>
+       </table>
+     </div>
 
 
 

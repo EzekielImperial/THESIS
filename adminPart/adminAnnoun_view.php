@@ -168,7 +168,7 @@ $row = $result->fetch_assoc();
 <div id="boardContent"><?php echo $row['board_content']?></div>
 <div class="btnSet">
 				<a href="./adminWrite.php?bno=<?php echo $bno?>">Write</a>
-				<a href="./delete.php">Delete</a>
+				<a href="./adminDelete.php?bno=<?php echo $bno?>">Delete</a>
 				<a href="./adminAnnoun.php">List</a>
 			</div
 </div>

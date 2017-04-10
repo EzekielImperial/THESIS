@@ -1,59 +1,47 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
 
-session_start();
-require_once('connector.php');
+<head>
+    <title>:::iMARKET:::</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--CSS-->
+    <link rel="stylesheet" href="css/design.css" />
 
+</head>
 
-if(!$_SESSION['email']){
- header("need to be login", 404);
-          exit;}
-?>
+<body>
 
+    <?php
+        session_start();
+        require_once('connector.php');
+    ?>
 
-
-
-    <!DOCTYPE html>
-    <html lang="en">
-
-    <head>
-        <title>Product List</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-        <link rel="stylesheet" href="css/login.css" />
-        <link rel="stylesheet" href="css/design.css" />
-        <link rel="stylesheet" href="css/productsPages.css" />
-
-    </head>
-
-    <body>
 
         <nav id="navbar-main">
           <!--Login System Embedded by Jung Start-->
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      </button>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			</button>
                 </div>
                 <div class="collapse navbar-collapse row" id="myNavbar">
                     <ul class="pull-right">
                         <?php if(isset($_SESSION['email'])&& $_SESSION['userType'] == 'employee'){ ?>
                         <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                         <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
-                        <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                        <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                        <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
+                        <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                         <li class="upper-links dropdown"><a class="links">My Account</a>
                             <ul class="dropdown-menu">
@@ -78,12 +66,12 @@ if(!$_SESSION['email']){
                                         <?php }elseif(isset($_SESSION['email'])&& $_SESSION['userType'] == 'admin'){ ?>
                                         <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                                         <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
-                                        <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                                        <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                                        <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
+                                        <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                                         <li class="upper-links dropdown"><a class="links">My Account</a>
                                             <ul class="dropdown-menu">
-                                                <li class="profile-li"><a class="profile-links" href="#">My Order</a></li>
+                                                <li class="profile-li"><a class="profile-links" href="adminPart/adminDashboard.php">Admin Dashboard</a></li>
                                                 <li class="profile-li"><a class="profile-links" href="accountSetting.php">Account Setting</a></li>
                                                 <li class="profile-li"><a class="profile-links" href="#">Change Password </a></li>
                                                 <li class="profile-li"><a class="profile-links" href="logout.php">logout</a></li>
@@ -119,10 +107,10 @@ if(!$_SESSION['email']){
                     <div class="row">
                         <input class="navbar-input col-xs-11" type="" placeholder="Search for Products, Brands and more" name="">
                         <button class="navbar-button col-xs-1">
-                          <svg width="15px" height="15px">
-                              <path d="M11.618 9.897l4.224 4.212c.092.09.1.23.02.312l-1.464 1.46c-.08.08-.222.072-.314-.02L9.868 11.66M6.486 10.9c-2.42 0-4.38-1.955-4.38-4.367 0-2.413 1.96-4.37 4.38-4.37s4.38 1.957 4.38 4.37c0 2.412-1.96 4.368-4.38 4.368m0-10.834C2.904.066 0 2.96 0 6.533 0 10.105 2.904 13 6.486 13s6.487-2.895 6.487-6.467c0-3.572-2.905-6.467-6.487-6.467 "></path>
-                          </svg>
-                      </button>
+                        <svg width="15px" height="15px">
+                            <path d="M11.618 9.897l4.224 4.212c.092.09.1.23.02.312l-1.464 1.46c-.08.08-.222.072-.314-.02L9.868 11.66M6.486 10.9c-2.42 0-4.38-1.955-4.38-4.367 0-2.413 1.96-4.37 4.38-4.37s4.38 1.957 4.38 4.37c0 2.412-1.96 4.368-4.38 4.368m0-10.834C2.904.066 0 2.96 0 6.533 0 10.105 2.904 13 6.486 13s6.487-2.895 6.487-6.467c0-3.572-2.905-6.467-6.487-6.467 "></path>
+                        </svg>
+                    </button>
                     </div>
                 </div>
 
@@ -132,10 +120,10 @@ if(!$_SESSION['email']){
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mySecondbar">
-  			<span class="icon-bar"></span>
-  			<span class="icon-bar"></span>
-  			<span class="icon-bar"></span>
-  			</button>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			</button>
                 </div>
                 <!--Size-->
                 <div class="col-sm-2">
@@ -145,12 +133,11 @@ if(!$_SESSION['email']){
                 <!--Size-->
                 <div class="collapse navbar-collapse row" id="mySecondbar">
                     <ul class="nav navbar-nav fontnav">
-                        <li><a href="#">BEST</a></li>
-                        <li><a href="#">MAN</a></li>
-                        <li><a href="#">WOMAN</a></li>
+                        <li><a href="#">LATEST</a></li>
+                        <li><a href="#">MEN</a></li>
+                        <li><a href="#">WOMEN</a></li>
                         <li><a href="#">iACADEMY MERCHANDISE</a></li>
-                        <li><a href="#">SHOES</a></li>
-                        <li><a href="#">ETC</a></li>
+                        <li><a href="#">CUSTOMIZE</a></li>
                     </ul>
                     </li>
                     </ul>
@@ -159,61 +146,66 @@ if(!$_SESSION['email']){
             </div>
         </nav>
 
-        <div class="container-fuild">
-            <div class="row">
-                <div class="col-md-12 col-centered formProduct1">
-                    <div class="row">
-                        <h2> <?php echo "(".$_SESSION['email'].")"; ?> Here are your product </h2>
-                        <!-- just testing will going to recode -->
-                        <hr>
-                    </div>
-                    <div class="row">
+        <!--Code Starts Here(main)-->
+        <div class="container">
 
-                        <?php
-
-                             $con=mysqli_connect('localhost','root','','imarketdatabase');
-
-
-                             $results = mysqli_query ($con,'SELECT * FROM products WHERE productCategory LIKE "Services" LIMIT 5');
-
-                             while($row = mysqli_fetch_array($results)){
-
-                                 echo '
-                                 <div class ="proBox1">
-
-                                 <img src="productImages/' .$row['productImage']. '" width="60%" height="60%"/>
-                                 <br>
-                                    '.$row['productName'].' <br />
-                                    '.$row['shortDes'].' <br />
-                                  ₱ '.$row['price'].'
-                                 <br>
+  <h1>Shopping Cart</h1>
+  <table class="table table-hover">
+  <thead>
+      <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+      </tr>
+  </thead>
+  <tbody>
 
 
-                                 <form class="buttons1" method="POST" action="product1.php">
-                                 <input type="hidden" name="idtest" value="'.$row['productName'].'" />
-                                 <input class="btn btn-success" type="submit" value="Edit">
-                                 </form>
-                                 <form class="buttons1" method="POST" action="product1.php">
-                                 <input type="hidden" name="idtest" value="'.$row['productName'].'" />
-                                 <input class="btn btn-danger" type="submit" value="Delete">
-                                 </form>
+      <?php
+
+      include 'Cart.php';
+      $cart = new Cart;
 
 
-                                 </div>
-                                 ';
+      if($cart->total_items() > 0){
+          //get cart items from session
+          $cartItems = $cart->contents();
+          foreach($cartItems as $item){
+      ?>
+      <tr>
+          <td><?php echo $item["name"]; ?></td>
+          <td><?php echo '₱'.$item["price"]; ?></td>
+          <td><input type="number" class="form-control text-center" value="<?php echo $item["qty"]; ?>" onchange="updateCartItem(this, '<?php echo $item["rowid"]; ?>')"></td>
+          <td><?php echo '₱'.$item["subtotal"]; ?></td>
+          <td>
+              <a href="cartAction.php?action=removeCartItem&id=<?php echo $item["rowid"]; ?>" class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="glyphicon glyphicon-trash"></i></a>
+          </td>
+      </tr>
+      <?php } }else{ ?>
+      <tr><td colspan="5"><p>Your cart is empty.</p></td><br/></tr>
+      <a href="productView.php" class="btn btn-warning">Go Shopping <i class="glyphicon glyphicon-menu-right"></i></a>
+      <?php } ?>
+  </tbody>
+  <tfoot>
+      <tr>
+          <?php if($cart->total_items() > 0){ ?>
+          <td><button onclick="goBack()" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Continue Shopping</button></td>
+          <td colspan="2"></td>
+          <td class="text-center"><strong>Total <?php echo '₱'.$cart->total(); ?></strong></td>
+          <td><a href="checkOut.php" class="btn btn-success btn-block">Checkout <i class="glyphicon glyphicon-menu-right"></i></a></td>
+          <?php } ?>
 
 
-                             }
-                             mysqli_close($con);
+      </tr>
+  </tfoot>
+  </table>
+</div>
 
 
-                         ?>
 
 
-                    </div>
-                        <hr>
-            </div>
-        </div>
+
         <!--Footer-->
         <footer class="footer1">
             <div class="container">
@@ -228,7 +220,7 @@ if(!$_SESSION['email']){
                                 <ul>
                                     <li><a href="aboutus.php"><i class="fa fa-angle-double-right"></i> About Us</a></li>
                                     <li><a href="contact.php"><i class="fa fa-angle-double-right"></i> Contact Us</a></li>
-                                    <li><a href="faq.php"><i class="fa fa-angle-double-right"></i> FAQ</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> FAQ</a></li>
 
                                 </ul>
 
@@ -243,12 +235,10 @@ if(!$_SESSION['email']){
                             <li class="widget-container widget_nav_menu">
                                 <h1 class="title-widget">CATEGORIES</h1>
                                 <ul>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i>  WOMAN</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i>  MAN</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i>  WOMEN</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i>  MEN</a></li>
                                     <li><a href="#"><i class="fa fa-angle-double-right"></i>  MERCHANDISE</a></li>
                                     <li><a href="#"><i class="fa fa-angle-double-right"></i>  CUSTOMIZE</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i>  SHOES</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i>  BEST</a></li>
                                     <li><a href="#"><i class="fa fa-angle-double-right"></i>  LATEST</a></li>
 
                                 </ul>
@@ -266,8 +256,7 @@ if(!$_SESSION['email']){
                                     <li><a href="#"><i class="fa fa-angle-double-right"></i> Advertisement</a></li>
                                     <li><a href="#"><i class="fa fa-angle-double-right"></i> Smart Book</a></li>
                                     <li><a href="#"><i class="fa fa-angle-double-right"></i> Test Centres</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Announcement</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Computer Live</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i>  Computer Live</a></li>
 
                                 </ul>
                             </li>
@@ -330,7 +319,6 @@ if(!$_SESSION['email']){
         </div>
 
 
+</body>
 
-    </body>
-
-    </html>
+</html>
