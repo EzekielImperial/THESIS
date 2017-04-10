@@ -155,20 +155,84 @@
     </select>
 </div>-->
 
+
+  <?php
+    $orderBy = "user_ID";
+    $order = "asc";
+
+    if(!empty($_GET["orderby"])){
+      $orderBy = $_GET["orderby"];
+    }
+    if(!empty($_GET["order"])){
+      $order = $_GET["order"];
+    }
+
+    $userIDorder = "asc";
+    $emailorder = "asc";
+    $firstorder = "asc";
+    $lastorder = "asc";
+    $contactorder = "asc";
+    $birthdateorder = "asc";
+    $usertypeorder = "asc";
+    $courseorder = "asc";
+    $strandorder = "asc";
+    $departmentorder = "asc";
+
+    if($orderBy == "user_ID" and $order == "asc") {
+		    $userIDorder = "desc";
+	       }
+	      if($orderBy == "email" and $order == "asc") {
+		       $emailorder = "desc";
+	         }
+	      if($orderBy == "firstName" and $order == "asc") {
+		        $firstorder = "desc";
+	         }
+       if($orderBy == "lastName" and $order == "asc") {
+   		    $lastorder = "desc";
+   	     }
+         if($orderBy == "contactNum" and $order == "asc") {
+     		    $contactorder = "desc";
+     	     }
+           if($orderBy == "birthDate" and $order == "asc") {
+       		    $birthdateorder = "desc";
+       	     }
+             if($orderBy == "userType" and $order == "asc") {
+         		    $usertypeorder = "desc";
+         	     }
+               if($orderBy == "course" and $order == "asc") {
+           		    $courseorder = "desc";
+           	     }
+                 if($orderBy == "strand" and $order == "asc") {
+             		    $strandorder = "desc";
+             	     }
+                   if($orderBy == "department" and $order == "asc") {
+               		    $departmentorder = "desc";
+               	      }
+
+
+
+  ?>
+
+
 <div class="container">
      <table>
-       <h1>ADMIN</h1>
+       <h1>Administrator User View</h1>
      <thead>
        <tr>
-         <th>Email_Address</th>
-         <th>firstname</th>
-         <th>lastname</th>
-         <th>Contact_Number</th>
-         <th>Birthdate</th>
-         <th>Usertype</th>
+         <th><a href="?orderby=user_ID&order=<?php echo $userIDorder ?>">USER_ID</a></th>
+         <th><a href="?orderby=email&order=<?php echo $emailorder ?>">Email_Address</a></th>
+         <th><a href="?orderby=firstName&order=<?php echo $firstorder ?>">firstname</a></th>
+         <th><a href="?orderby=lastName&order=<?php echo $lastorder ?>">lastname</a></th>
+         <th><a href="?orderby=contactNum&order=<?php echo $contactorder ?>">Contact_Number</a></th>
+         <th><a href="?orderby=birthDate&order=<?php echo $birthdateorder ?>">Birthdate</a></th>
+         <th><a href="?orderby=userType&order=<?php echo $usertypeorder ?>">User Type</a></th>
+         <th><a href="?orderby=course&order=<?php echo $courseorder ?>">Course</a></th>
+         <th><a href="?orderby=strand&order=<?php echo $strandorder ?>">Strand</a></th>
+         <th><a href="?orderby=department&order=<?php echo $departmentorder ?>">Department</a></th>
        </tr>
      </thead>
      <tbody>
+
        <?php
 
                // Check connection
@@ -176,7 +240,7 @@
                  die("Connection failed: " . $conn->connect_error);
                }
 
-             $sql = "SELECT * FROM users WHERE userType='admin'";
+             $sql = "SELECT * FROM users ORDER BY " . $orderBy ." " . $order;
              $result = $dbconn->query($sql);
 
              if ($result->num_rows > 0) {
@@ -184,12 +248,16 @@
                  while($row = $result->fetch_assoc()) {
                    echo
                    "<tr>
+                    <td>{$row['user_ID']}</td>
                      <td>{$row['email']}</td>
                      <td>{$row['firstName']}</td>
                      <td>{$row['lastName']}</td>
                      <td>{$row['contactNum']}</td>
                      <td>{$row['birthDate']}</td>
                      <td>{$row['userType']}</td>
+                     <td>{$row['course']}</td>
+                     <td>{$row['strand']}</td>
+                     <td>{$row['department']}</td>
                    </tr>\n";
                  }
 
@@ -205,104 +273,7 @@
      </tbody>
    </table>
 
-   <table>
-     <h1>Employee</h1>
-   <thead>
-     <tr>
-       <th>Email_Address</th>
-       <th>firstname</th>
-       <th>lastname</th>
-       <th>Contact_Number</th>
-       <th>Birthdate</th>
-       <th>Usertype</th>
-     </tr>
-   </thead>
-   <tbody>
-     <?php
 
-             // Check connection
-             if ($dbconn->connect_error) {
-               die("Connection failed: " . $conn->connect_error);
-             }
-
-           $sql = "SELECT * FROM users WHERE userType='employee'";
-           $result = $dbconn->query($sql);
-
-           if ($result->num_rows > 0) {
-               // output data of each row
-               while($row = $result->fetch_assoc()) {
-                 echo
-                 "<tr>
-                   <td>{$row['email']}</td>
-                   <td>{$row['firstName']}</td>
-                   <td>{$row['lastName']}</td>
-                   <td>{$row['contactNum']}</td>
-                   <td>{$row['birthDate']}</td>
-                   <td>{$row['userType']}</td>
-                 </tr>\n";
-               }
-
-           } else {
-               echo "<tr><td>0 results</td></tr>";
-           }
-
-
-
-
-
-     ?>
-   </tbody>
- </table>
-
- <table>
-   <h1>Student</h1>
- <thead>
-   <tr>
-     <th>Email_Address</th>
-     <th>firstname</th>
-     <th>lastname</th>
-     <th>Contact_Number</th>
-     <th>Birthdate</th>
-     <th>Usertype</th>
-   </tr>
- </thead>
- <tbody>
-
-   <?php
-
-           // Check connection
-           if ($dbconn->connect_error) {
-             die("Connection failed: " . $conn->connect_error);
-           }
-
-         $sql = "SELECT * FROM users WHERE userType='student'";
-         $result = $dbconn->query($sql);
-
-         if ($result->num_rows > 0) {
-             // output data of each row
-             while($row = $result->fetch_assoc()) {
-               echo
-               "<tr>
-                 <td>{$row['email']}</td>
-                 <td>{$row['firstName']}</td>
-                 <td>{$row['lastName']}</td>
-                 <td>{$row['contactNum']}</td>
-                 <td>{$row['birthDate']}</td>
-                 <td>{$row['userType']}</td>
-               </tr>\n";
-             }
-
-         } else {
-             echo "<tr><td>0 results</td></tr>";
-         }
-
-
-
-
-
-   ?>
- </tbody>
-</table>
 </div>
 
   	</div>
