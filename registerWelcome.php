@@ -1,41 +1,31 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
 
-session_start();
-require_once('connector.php');
+<head>
+    <title>Log In</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-if(!$_SESSION['email']){
- header("need to be login", 404);
-          exit;}
-?>
+    <link rel="stylesheet" href="css/login.css" />
+    <link rel="stylesheet" href="css/design.css" />
 
+</head>
 
+<body>
 
+    <?php
+        session_start();
+        require_once('connector.php');
+    ?>
 
-    <!DOCTYPE html>
-    <html lang="en">
-
-    <head>
-        <title>Product List</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-        <link rel="stylesheet" href="css/login.css" />
-        <link rel="stylesheet" href="css/design.css" />
-        <link rel="stylesheet" href="css/productsPages.css" />
-
-    </head>
-
-    <body>
 
         <nav id="navbar-main">
           <!--Login System Embedded by Jung Start-->
@@ -107,18 +97,18 @@ if(!$_SESSION['email']){
 
 
 
-            <div class="row">
-                <!--Size-->
-                <div class="col-sm-1">
-                </div>
-                <!--Size-->
-                <div class="col-sm-1">
-                    <a href="index.php"><img src="image/logo.png" width="70px" height="70px"></a>
-                </div>
-                <div class="smallsearch col-sm-8 col-xs-11">
-                    <div class="row">
-                        <input class="navbar-input col-xs-11" type="" placeholder="Search for Products, Brands and more" name="">
-                        <button class="navbar-button col-xs-1">
+  <div class="row">
+      <!--Size-->
+      <div class="col-sm-1">
+      </div>
+      <!--Size-->
+      <div class="col-sm-1">
+          <a href="index.php"><img src="image/logo.png" width="70px" height="70px"></a>
+      </div>
+      <div class="smallsearch col-sm-8 col-xs-11">
+          <div class="row">
+              <input class="navbar-input col-xs-11" type="" placeholder="Search for Products, Brands and more" name="">
+              <button class="navbar-button col-xs-1">
                           <svg width="15px" height="15px">
                               <path d="M11.618 9.897l4.224 4.212c.092.09.1.23.02.312l-1.464 1.46c-.08.08-.222.072-.314-.02L9.868 11.66M6.486 10.9c-2.42 0-4.38-1.955-4.38-4.367 0-2.413 1.96-4.37 4.38-4.37s4.38 1.957 4.38 4.37c0 2.412-1.96 4.368-4.38 4.368m0-10.834C2.904.066 0 2.96 0 6.533 0 10.105 2.904 13 6.486 13s6.487-2.895 6.487-6.467c0-3.572-2.905-6.467-6.487-6.467 "></path>
                           </svg>
@@ -132,10 +122,10 @@ if(!$_SESSION['email']){
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mySecondbar">
-  			<span class="icon-bar"></span>
-  			<span class="icon-bar"></span>
-  			<span class="icon-bar"></span>
-  			</button>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
                 </div>
                 <!--Size-->
                 <div class="col-sm-2">
@@ -159,61 +149,22 @@ if(!$_SESSION['email']){
             </div>
         </nav>
 
-        <div class="container-fuild">
-            <div class="row">
-                <div class="col-md-12 col-centered formProduct1">
-                    <div class="row">
-                        <h2> <?php echo "(".$_SESSION['email'].")"; ?> Here are your product </h2>
-                        <!-- just testing will going to recode -->
-                        <hr>
-                    </div>
-                    <div class="row">
 
-                        <?php
+        <div class="container">
+	         <div class="row text-center">
+             <div class="col-sm-6 col-sm-offset-3">
+               <br><br> <h2 style="color:#0fad00">Success</h2>
+               <img src="image/reg_true.jpg">
+               <h3>Dear, Sir/Maam</h3>
+                <p style="font-size:20px;color:#5C5C5C;">Thank you for registered in iMARKET Buy&Sell. Please login to your account to enjoy to buy & sell now !</p>
+                            <a href="login.php" class="btn btn-success">     Log-in      </a>
+                            <br><br>
+                          </div>
 
-                             $con=mysqli_connect('localhost','root','','imarketdatabase');
-
-
-                             $results = mysqli_query ($con,'SELECT * FROM products WHERE productCategory LIKE "Services" LIMIT 5');
-
-                             while($row = mysqli_fetch_array($results)){
-
-                                 echo '
-                                 <div class ="proBox1">
-
-                                 <img src="productImages/' .$row['productImage']. '" width="60%" height="60%"/>
-                                 <br>
-                                    '.$row['productName'].' <br />
-                                    '.$row['shortDes'].' <br />
-                                  ₱ '.$row['price'].'
-                                 <br>
+	                       </div>
+</div>
 
 
-                                 <form class="buttons1" method="POST" action="product1.php">
-                                 <input type="hidden" name="idtest" value="'.$row['productName'].'" />
-                                 <input class="btn btn-success" type="submit" value="Edit">
-                                 </form>
-                                 <form class="buttons1" method="POST" action="product1.php">
-                                 <input type="hidden" name="idtest" value="'.$row['productName'].'" />
-                                 <input class="btn btn-danger" type="submit" value="Delete">
-                                 </form>
-
-
-                                 </div>
-                                 ';
-
-
-                             }
-                             mysqli_close($con);
-
-
-                         ?>
-
-
-                    </div>
-                        <hr>
-            </div>
-        </div>
         <!--Footer-->
         <footer class="footer1">
             <div class="container">
@@ -266,8 +217,8 @@ if(!$_SESSION['email']){
                                     <li><a href="#"><i class="fa fa-angle-double-right"></i> Advertisement</a></li>
                                     <li><a href="#"><i class="fa fa-angle-double-right"></i> Smart Book</a></li>
                                     <li><a href="#"><i class="fa fa-angle-double-right"></i> Test Centres</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Announcement</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Computer Live</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i>  Announcement</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-double-right"></i>  Computer Live</a></li>
 
                                 </ul>
                             </li>
@@ -331,6 +282,6 @@ if(!$_SESSION['email']){
 
 
 
-    </body>
+</body>
 
-    </html>
+</html>

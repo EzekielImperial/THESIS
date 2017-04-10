@@ -171,35 +171,35 @@ if (!$link) {
                     <!-- search body results - khelly -->
                     <?php
 
-    $query = $_GET['query']; 
-     
+    $query = $_POST['search']; 
+
     $min_length = 5;
-     
-    if(strlen($query) >= $min_length){ 
-         
-        $query = htmlspecialchars($query); 
- 
+
+    if(strlen($query) >= $min_length){
+
+        $query = htmlspecialchars($query);
+
         $query = mysqli_real_escape_string($link, $query);
         // for SQL injection
 
         $query1 = mysqli_query($link, "SELECT * FROM users
             WHERE (`email` LIKE '%".$query."%') OR (`userType` LIKE '%".$query."%')");
-         
-         
-        if(mysqli_num_rows($query1) > 0){ 
-             
+
+
+        if(mysqli_num_rows($query1) > 0){
+
             while($results = mysqli_fetch_array($query1 )){
-   
+
                 echo "<p><h3>".$results['email']."</h3>".$results['firstName']."</p>";
             }
-             
+
         }
-        else{ 
+        else{
             echo "No results";
         }
-         
+
     }
-    else{ 
+    else{
         echo "Minimum length is ".$min_length. "Please search for another word";
     }
 ?>

@@ -100,3 +100,10 @@ a:active, a:hover {
 .deactivate {
   align-self: center;
 }
+
+.deac-form {
+  text-align: center;
+  margin: auto;
+  width: 70%;
+  padding: 10px;
+}

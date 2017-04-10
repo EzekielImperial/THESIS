@@ -17,6 +17,7 @@
     <!--Javascript-->
     <script src="../jsforAdmin/jsAdmin.js"></script>
 
+
 </head>
 
 <body>
@@ -24,6 +25,11 @@
     <?php
         session_start();
         require_once('../connector.php');
+
+        //$_GET['boardNum'] setting - Jung
+        if(isset($_GET['bno'])) {
+          $bNo = $_GET['bno'];
+        }
     ?>
     <nav class="navbar navbar-default navbar-static-top">
     <div class="container-fluid">
@@ -148,53 +154,74 @@
 
 <!--Code Starts Here-->
 
+<?php
 
 
+if(isset($bNo)) {
+				$sql = 'select count(board_no) as cnt from announcement where board_no = ' . $bNo;
+				$result = $dbconn->query($sql);
+				$row = $result->fetch_assoc();
+				if(empty($row['cnt'])) {
+		?>
+    <script>
+			alert('The Post is not exist.');
+			history.back();
+		</script>
+		<?php
+			exit;
+				}
+
+				$sql = 'select board_title from announcement where board_no = ' . $bNo;
+				$result = $dbconn->query($sql);
+				$row = $result->fetch_assoc();
+		?>
 
 <div class="container">
-     <table>
-       <h1>Announcement</h1>
-     <thead>
-       <tr>
-         <th>Number</th>
-         <th>Title</th>
-         <th>Author</th>
-         <th>Date</th>
-         <th>Hit</th>
-       </tr>
-     </thead>
-     <tbody>
+	<div class="row">
 
+	    <div class="col-md-8 col-md-offset-2">
 
-       <?php
-            $sql = 'select * from announcement order by board_no desc';
-            $result = $dbconn->query($sql);
-            while($row = $result->fetch_assoc())
-            {
-              $datetime = explode(' ', $row['board_date']);
-              $date = $datetime[0];
-              $time = $datetime[1];
-              if($date == Date('Y-m-d'))
-              $row['board_date'] = $time;
-              else
-              $row['board_date'] = $date;
-              ?>
-              <tr>
-                <td><?php echo $row['board_no']?></td>
-                <td><a href="./adminAnnoun_view.php?bno=<?php echo $row['board_no']?>"><?php echo $row['board_title']?></a></td>
-                <td><?php echo $row['board_admin']?></td>
-                <td><?php echo $row['board_date']?></td>
-                <td><?php echo $row['board_hit']?></td>
-              </tr>
-              <?php
-            }
-            ?>
-     </tbody>
-   </table>
-   <div class="form-group">
-       <a href="adminWrite.php" class="btn btn-info pull-right" role="button" >Write</a>
-   </div>
- </div>
+    		<h1>DELETE POST</h1>
+
+        <form action="admindelete_update.php" method="POST">
+				<input type="hidden" name="bno" value="<?php echo $bNo?>">
+				<table>
+					<caption class="readHide">ANNOUNCEMENT POST DELETE</caption>
+
+					<tbody>
+						<tr>
+							<th scope="row">POST TITLE</th>
+							<td><?php echo $row['board_title']?></td>
+						</tr>
+						<tr>
+							<th scope="row"><label for="bPassword">PASSWORD : </label></th>
+							<td><input type="password" name="bPassword" id="bPassword"></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<div class="btnSet">
+					<button type="submit" class="btn btn-warning">DELETE</button>
+					<a href="adminAnnoun.php" class="btn btn-info" role="button">LIST</a>
+				</div>
+			</form>
+
+      <?php
+		//$bno is not available = error
+		} else {
+	?>
+		<script>
+			alert('This post is not available');
+			history.back();
+		</script>
+	<?php
+			exit;
+		}
+	?>
+		</div>
+
+	</div>
+</div>
 
 
 
@@ -204,7 +231,7 @@
 
 
   	</div>
-    <!--Footer-->
+    <!--Footers-->
     <footer class="footer1">
         <div class="container">
 
