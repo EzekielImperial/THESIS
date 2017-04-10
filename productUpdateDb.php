@@ -33,7 +33,7 @@
       echo"<script>location.href='productAdd.php';</script>";
       $uploadOk = 0;
   }
-  
+
     if ($uploadOk == 0) {
     echo "Sorry, you forgot to upload the image !";
     echo"<script>location.href='productAdd.php';</script>";
@@ -48,13 +48,8 @@
   $result = $stmt->get_result();
 
   if($rows = $result->fetch_assoc()){
-<<<<<<< HEAD
-    $stmt2 = $dbconn->prepare('UPDATE products SET productName = ?, productCategory = ?, price = ?, shortDes = ?, productImage = ?, QTY = ?, date_update = ? WHERE productName = ?');
-    $stmt2->bind_param('ssdssiss', $ptitle, $pcategory, $pprice, $pdes, $photo, $pqty, $createdate, $porginal);
-=======
     $stmt2 = $dbconn->prepare('UPDATE products SET productName = ?, productCategory = ?, genderCategory = ?, price = ?, shortDes = ?, productImage = ?, QTY = ?, date_update = ? WHERE productName = ?');
-    $stmt2->bind_param('sssdsisss', $ptitle, $pcategory, $pgender, $pprice, $pdes, $photo, $pqty, $createdate, $porginal);
->>>>>>> refs/remotes/origin/master
+    $stmt2->bind_param('sssdssiss', $ptitle, $pcategory, $pgender, $pprice, $pdes, $photo, $pqty, $createdate, $porginal);
     $stmt2->execute();
 
     echo"<script>window.alert('Product Updated Successfully !');</script>";
@@ -69,5 +64,5 @@
  }
 
 $dbconn->close();
- 
+
 ?>
