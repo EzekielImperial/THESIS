@@ -164,7 +164,7 @@
 
       <?php
 
-      include 'Cart.php';
+      include 'cart.php';
       $cart = new Cart;
 
 

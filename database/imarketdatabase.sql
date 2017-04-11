@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.6.5.2
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- 생성 시간: 17-04-09 15:18
--- 서버 버전: 10.1.10-MariaDB
--- PHP 버전: 7.0.2
+-- Generation Time: Apr 11, 2017 at 12:39 PM
+-- Server version: 10.1.21-MariaDB
+-- PHP Version: 7.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- 데이터베이스: `imarketdatabase`
+-- Database: `imarketdatabase`
 --
 
 -- --------------------------------------------------------
 
 --
--- 테이블 구조 `address`
+-- Table structure for table `address`
 --
 
 CREATE TABLE `address` (
@@ -40,7 +40,7 @@ CREATE TABLE `address` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- 테이블의 덤프 데이터 `address`
+-- Dumping data for table `address`
 --
 
 INSERT INTO `address` (`user_ID`, `email`, `houseNum`, `street`, `building`, `subdivision`, `barangay`, `city`, `province`, `zipCode`) VALUES
@@ -49,7 +49,7 @@ INSERT INTO `address` (`user_ID`, `email`, `houseNum`, `street`, `building`, `su
 -- --------------------------------------------------------
 
 --
--- 테이블 구조 `announcement`
+-- Table structure for table `announcement`
 --
 
 CREATE TABLE `announcement` (
@@ -65,7 +65,7 @@ CREATE TABLE `announcement` (
 -- --------------------------------------------------------
 
 --
--- 테이블 구조 `products`
+-- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
@@ -86,16 +86,19 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- 테이블의 덤프 데이터 `products`
+-- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`product_ID`, `email`, `user_ID`, `productName`, `price`, `shortDes`, `longDes`, `productCategory`, `productImage`, `QTY`, `date_created`, `date_update`, `productStatus`, `genderCategory`) VALUES
-(1, 'student@test.com', 0, 'Heee', '1111.00', 'HeHE', '', 'Mobile Phones Accessories', '17200469_287360701683217_1601528553_o.jpg', 2, 'April 9, 2017 7:10:pm  ', '', 0, '');
+(1, 'student@test.com', 0, 'Heee', '1111.00', 'HeHE', '', 'Mobile Phones Accessories', '17200469_287360701683217_1601528553_o.jpg', 2, 'April 9, 2017 7:10:pm  ', '', 1, ''),
+(2, 'student@test.com', 0, 'jamie 3rd test', '333.00', '333', '', 'Clothing and Accessories', 'JamieOner.png', 333, 'April 10, 2017 6:16:pm  ', 'April 10, 2017 6:23:pm  ', 1, ''),
+(4, 'student@test.com', 0, 'Jung', '555555.00', 'sex slaves', '', 'Services', 'photo_2017-04-04_20-39-13.jpg', 6, 'April 11, 2017 5:38:pm  ', '', 1, 'man'),
+(5, 'student@test.com', 0, 'Joanne Daroya', '69.00', 'Sex Slaves 2', '', 'Bags and Accessories', '12308816_10204803564602352_5695523333994529172_n.jpg', 69, 'April 11, 2017 5:41:pm  ', '', 1, 'woman');
 
 -- --------------------------------------------------------
 
 --
--- 테이블 구조 `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -116,7 +119,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- 테이블의 덤프 데이터 `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`user_ID`, `email`, `password`, `userType`, `firstName`, `lastName`, `contactNum`, `birthDate`, `year_level`, `course`, `strand`, `department`, `userStatus`, `check_User`) VALUES
@@ -126,49 +129,49 @@ INSERT INTO `users` (`user_ID`, `email`, `password`, `userType`, `firstName`, `l
 (4, 'asdf@test.com', 'Asdf1234', 'employee', 'last', 'regi', '31231235', '1995-05-29', '', '', '', '', 0, 0);
 
 --
--- 덤프된 테이블의 인덱스
+-- Indexes for dumped tables
 --
 
 --
--- 테이블의 인덱스 `address`
+-- Indexes for table `address`
 --
 ALTER TABLE `address`
   ADD PRIMARY KEY (`user_ID`);
 
 --
--- 테이블의 인덱스 `announcement`
+-- Indexes for table `announcement`
 --
 ALTER TABLE `announcement`
   ADD PRIMARY KEY (`board_no`);
 
 --
--- 테이블의 인덱스 `products`
+-- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`product_ID`);
 
 --
--- 테이블의 인덱스 `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_ID`);
 
 --
--- 덤프된 테이블의 AUTO_INCREMENT
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- 테이블의 AUTO_INCREMENT `announcement`
+-- AUTO_INCREMENT for table `announcement`
 --
 ALTER TABLE `announcement`
   MODIFY `board_no` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- 테이블의 AUTO_INCREMENT `products`
+-- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `product_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
--- 테이블의 AUTO_INCREMENT `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `user_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
