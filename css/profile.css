@@ -89,7 +89,6 @@ a:active, a:hover {
 
 .page-wrapper {
   padding-left: 2rem;
-  background-color: #fbfbfb;
   display: flex;
   flex-direction: column;
   justify-content: center;
