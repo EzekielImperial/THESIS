@@ -155,20 +155,84 @@
     </select>
 </div>-->
 
+
+  <?php
+    $orderBy = "user_ID";
+    $order = "asc";
+
+    if(!empty($_GET["orderby"])){
+      $orderBy = $_GET["orderby"];
+    }
+    if(!empty($_GET["order"])){
+      $order = $_GET["order"];
+    }
+
+    $userIDorder = "asc";
+    $emailorder = "asc";
+    $firstorder = "asc";
+    $lastorder = "asc";
+    $contactorder = "asc";
+    $birthdateorder = "asc";
+    $usertypeorder = "asc";
+    $courseorder = "asc";
+    $strandorder = "asc";
+    $departmentorder = "asc";
+
+    if($orderBy == "user_ID" and $order == "asc") {
+		    $userIDorder = "desc";
+	       }
+	      if($orderBy == "email" and $order == "asc") {
+		       $emailorder = "desc";
+	         }
+	      if($orderBy == "firstName" and $order == "asc") {
+		        $firstorder = "desc";
+	         }
+       if($orderBy == "lastName" and $order == "asc") {
+   		    $lastorder = "desc";
+   	     }
+         if($orderBy == "contactNum" and $order == "asc") {
+     		    $contactorder = "desc";
+     	     }
+           if($orderBy == "birthDate" and $order == "asc") {
+       		    $birthdateorder = "desc";
+       	     }
+             if($orderBy == "userType" and $order == "asc") {
+         		    $usertypeorder = "desc";
+         	     }
+               if($orderBy == "course" and $order == "asc") {
+           		    $courseorder = "desc";
+           	     }
+                 if($orderBy == "strand" and $order == "asc") {
+             		    $strandorder = "desc";
+             	     }
+                   if($orderBy == "department" and $order == "asc") {
+               		    $departmentorder = "desc";
+               	      }
+
+
+
+  ?>
+
+
 <div class="container">
      <table>
-       <h1>ADMIN</h1>
+       <h1>Administrator User View</h1>
      <thead>
        <tr>
-         <th>Email_Address</th>
-         <th>firstname</th>
-         <th>lastname</th>
-         <th>Contact_Number</th>
-         <th>Birthdate</th>
-         <th>Usertype</th>
+         <th><a href="?orderby=user_ID&order=<?php echo $userIDorder ?>">USER_ID</a></th>
+         <th><a href="?orderby=email&order=<?php echo $emailorder ?>">Email_Address</a></th>
+         <th><a href="?orderby=firstName&order=<?php echo $firstorder ?>">firstname</a></th>
+         <th><a href="?orderby=lastName&order=<?php echo $lastorder ?>">lastname</a></th>
+         <th><a href="?orderby=contactNum&order=<?php echo $contactorder ?>">Contact_Number</a></th>
+         <th><a href="?orderby=birthDate&order=<?php echo $birthdateorder ?>">Birthdate</a></th>
+         <th><a href="?orderby=userType&order=<?php echo $usertypeorder ?>">User Type</a></th>
+         <th><a href="?orderby=course&order=<?php echo $courseorder ?>">Course</a></th>
+         <th><a href="?orderby=strand&order=<?php echo $strandorder ?>">Strand</a></th>
+         <th><a href="?orderby=department&order=<?php echo $departmentorder ?>">Department</a></th>
        </tr>
      </thead>
      <tbody>
+
        <?php
 
                // Check connection
@@ -176,7 +240,7 @@
                  die("Connection failed: " . $conn->connect_error);
                }
 
-             $sql = "SELECT * FROM users WHERE userType='admin'";
+             $sql = "SELECT * FROM users ORDER BY " . $orderBy ." " . $order;
              $result = $dbconn->query($sql);
 
              if ($result->num_rows > 0) {
@@ -184,12 +248,16 @@
                  while($row = $result->fetch_assoc()) {
                    echo
                    "<tr>
+                    <td>{$row['user_ID']}</td>
                      <td>{$row['email']}</td>
                      <td>{$row['firstName']}</td>
                      <td>{$row['lastName']}</td>
                      <td>{$row['contactNum']}</td>
                      <td>{$row['birthDate']}</td>
                      <td>{$row['userType']}</td>
+                     <td>{$row['course']}</td>
+                     <td>{$row['strand']}</td>
+                     <td>{$row['department']}</td>
                    </tr>\n";
                  }
 
@@ -205,109 +273,123 @@
      </tbody>
    </table>
 
-   <table>
-     <h1>Employee</h1>
-   <thead>
-     <tr>
-       <th>Email_Address</th>
-       <th>firstname</th>
-       <th>lastname</th>
-       <th>Contact_Number</th>
-       <th>Birthdate</th>
-       <th>Usertype</th>
-     </tr>
-   </thead>
-   <tbody>
-     <?php
 
-             // Check connection
-             if ($dbconn->connect_error) {
-               die("Connection failed: " . $conn->connect_error);
-             }
-
-           $sql = "SELECT * FROM users WHERE userType='employee'";
-           $result = $dbconn->query($sql);
-
-           if ($result->num_rows > 0) {
-               // output data of each row
-               while($row = $result->fetch_assoc()) {
-                 echo
-                 "<tr>
-                   <td>{$row['email']}</td>
-                   <td>{$row['firstName']}</td>
-                   <td>{$row['lastName']}</td>
-                   <td>{$row['contactNum']}</td>
-                   <td>{$row['birthDate']}</td>
-                   <td>{$row['userType']}</td>
-                 </tr>\n";
-               }
-
-           } else {
-               echo "<tr><td>0 results</td></tr>";
-           }
-
-
-
-
-
-     ?>
-   </tbody>
- </table>
-
- <table>
-   <h1>Student</h1>
- <thead>
-   <tr>
-     <th>Email_Address</th>
-     <th>firstname</th>
-     <th>lastname</th>
-     <th>Contact_Number</th>
-     <th>Birthdate</th>
-     <th>Usertype</th>
-   </tr>
- </thead>
- <tbody>
-
-   <?php
-
-           // Check connection
-           if ($dbconn->connect_error) {
-             die("Connection failed: " . $conn->connect_error);
-           }
-
-         $sql = "SELECT * FROM users WHERE userType='student'";
-         $result = $dbconn->query($sql);
-
-         if ($result->num_rows > 0) {
-             // output data of each row
-             while($row = $result->fetch_assoc()) {
-               echo
-               "<tr>
-                 <td>{$row['email']}</td>
-                 <td>{$row['firstName']}</td>
-                 <td>{$row['lastName']}</td>
-                 <td>{$row['contactNum']}</td>
-                 <td>{$row['birthDate']}</td>
-                 <td>{$row['userType']}</td>
-               </tr>\n";
-             }
-
-         } else {
-             echo "<tr><td>0 results</td></tr>";
-         }
-
-
-
-
-
-   ?>
- </tbody>
-</table>
 </div>
 
   	</div>
 
-    <?php include 'footer.php';?>
+    <!--Footer-->
+    <footer class="footer1">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <ul class="list-unstyled clear-margins">
+                        <li class="widget-container widget_nav_menu">
+
+                            <h1 class="title-widget">About iMARKET</h1>
+
+                            <ul>
+                                <li><a href="../aboutus.php"><i class="fa fa-angle-double-right"></i> About Us</a></li>
+                                <li><a href="../contact.php"><i class="fa fa-angle-double-right"></i> Contact Us</a></li>
+                                <li><a href="#"><i class="fa fa-angle-double-right"></i> FAQ</a></li>
+
+                            </ul>
+
+                        </li>
+
+                    </ul>
+
+
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <ul class="list-unstyled clear-margins">
+                        <li class="widget-container widget_nav_menu">
+                            <h1 class="title-widget">CATEGORIES</h1>
+                            <ul>
+                                <li><a href="#"><i class="fa fa-angle-double-right"></i>  WOMEN</a></li>
+                                <li><a href="#"><i class="fa fa-angle-double-right"></i>  MEN</a></li>
+                                <li><a href="#"><i class="fa fa-angle-double-right"></i>  MERCHANDISE</a></li>
+                                <li><a href="#"><i class="fa fa-angle-double-right"></i>  CUSTOMIZE</a></li>
+                                <li><a href="#"><i class="fa fa-angle-double-right"></i>  LATEST</a></li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <ul class="list-unstyled clear-margins">
+                        <li class="widget-container widget_nav_menu">
+                            <h1 class="title-widget">Customer Care</h1>
+                            <ul>
+                                <li><a href="announcement.php"><i class="fa fa-angle-double-right"></i> Announcement</a></li>
+                                <li><a href="termsnpolicy.php"><i class="fa fa-angle-double-right"></i> Terms & Policy</a></li>
+                                <li><a href="#"><i class="fa fa-angle-double-right"></i> Developers</a></li>
+                                <li><a href="#"><i class="fa fa-angle-double-right"></i> Advertisement</a></li>
+                                <li><a href="#"><i class="fa fa-angle-double-right"></i> Smart Book</a></li>
+                                <li><a href="#"><i class="fa fa-angle-double-right"></i> Test Centres</a></li>
+                                <li><a href="#"><i class="fa fa-angle-double-right"></i>  Computer Live</a></li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="col-lg-3 col-md-3">
+                    <ul class="list-unstyled clear-margins">
+                        <li class="widget-container widget_recent_news">
+                            <h1 class="title-widget">Company Info </h1>
+                            <div class="footerp">
+                                <h2 class="title-median">iMARKET.Co</h2>
+                                <p><b>Email :</b> <a href="201501240@iacademy.edu.ph">201501240@iacademy.edu.ph</a></p>
+                                <p><b>Contact Number</b>
+                                    <b style="color:#ffc106;"> (8AM to 10PM):</b> +63 9167737988 </p>
+
+                                <p><b>Corp Office : </b></p>
+                                <p>324 iACADEMY Plaza Sen. Gil Puyat Avenue, Bel Air, Makati City 1234</p>
+                            </div>
+
+                            <div class="social-icons">
+
+                                <ul class="nomargin">
+
+                                    <a href="https://www.facebook.com/bootsnipp"><i class="fa fa-facebook-square fa-3x social-fb" id="social"></i></a>
+                                    <a href="https://twitter.com/bootsnipp"><i class="fa fa-twitter-square fa-3x social-tw" id="social"></i></a>
+                                    <a href="https://plus.google.com/+Bootsnipp-page"><i class="fa fa-google-plus-square fa-3x social-gp" id="social"></i></a>
+                                    <a href="201501240@iacademy.com.ph"><i class="fa fa-envelope-square fa-3x social-em" id="social"></i></a>
+
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!--header-->
+
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="copyright">
+                        © 2017, iMARKET, All rights reserved
+                    </div>
+
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="design">
+                        <a href="#">iMARKET </a> | <a target="_blank" href="#">Web Design & Development by iACADAMIT</a>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     </body>
 

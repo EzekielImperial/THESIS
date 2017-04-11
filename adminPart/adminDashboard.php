@@ -266,7 +266,7 @@
   		</div>
   	</div>
 
-    <?php include 'footer.php';?>
+    <?php include 'adminfooter.php';?>
 
 
     </body>

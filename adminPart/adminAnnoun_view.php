@@ -176,8 +176,8 @@ $row = $result->fetch_assoc();
 
 
   	</div>
-    
-    <?php include 'footer.php';?>
+
+    <?php include 'adminfooter.php';?>
 
 
 

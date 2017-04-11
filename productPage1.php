@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-require_once('connector.php');
+
 
 
 
@@ -21,18 +21,16 @@ if(!$_SESSION['email']){
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
         <link rel="stylesheet" href="css/login.css" />
         <link rel="stylesheet" href="css/design.css" />
         <link rel="stylesheet" href="css/productsPages.css" />
-
+        
+       
     </head>
 
     <body>
@@ -161,21 +159,78 @@ if(!$_SESSION['email']){
 
         <div class="container-fuild">
             <div class="row">
-                <div class="col-md-12 col-centered formProduct1">
+                <div class="col-md-12 col-centered">
                     <div class="row">
                         <h2> <?php echo "(".$_SESSION['email'].")"; ?> <b> <?php echo $_GET['pname']; ?> </b> </h2>
                         <!-- just testing will going to recode -->
                         <hr>
                     </div>
                     <div class="row">
-                    
-                   <?php echo $_GET['pname']; ?>
 
+                     <?php
+                             $pNAME = $_GET['pname'];
+                             $con=mysqli_connect('localhost','root','','imarketdatabase');
+
+
+                             $results = mysqli_query ($con,'SELECT * FROM products WHERE productStatus LIKE 1 AND productName LIKE "' . $pNAME . '"');
+
+                             while($row = mysqli_fetch_array($results)){
+
+                                 echo'
+                                   <div class="col-md-4">
+                                      <img src="productImages/' .$row['productImage']. '" width="80%" height="80%"/>
+
+                                   </div>
+                                   <div class="col-md-4">
+                                    <b>'.$row['productName'].'</b> <br />
+                                    <b>'.$row['shortDes'].'</b> <br />
+                                    ₱ '.$row['price'].' <br />
+                                    
+                                    <br/><br>
+                                    <ul class="nav nav-tabs">
+                                      <li class="active"><a data-toggle="tab" href="#home">Product Details</a></li>
+                                      <li><a data-toggle="tab" href="#menu1"> Reviews (25) </a></li>
+                                      <li><a data-toggle="tab" href="#menu2"> Seller Details </a></li>
+                          
+                                    </ul>
+
+                                    <div class="tab-content">
+                                      <div id="home" class="tab-pane fade in active">
+                                        <h3>Description</h3>
+                                        <p>'.$row['shortDes'].'</p>
+                                      </div>
+                                      <div id="menu1" class="tab-pane fade">
+                                        <h3>Menu 1</h3>
+                                        <p>Another box box box here shit</p>
+                                      </div>
+                                      <div id="menu2" class="tab-pane fade">
+                                        <h3>Menu 1</h3>
+                                        <p>'.$row['shortDes'].'</p>
+                                     </div>
+                                    
+                                    </div>
+                                    </div> 
+                                    <div class="col-md-4">
+                                     <img src="image/augh1.png">
+                                    </div>
+                                   </div>
+
+                                    ';
+
+
+                             }
+                             mysqli_close($con);
+
+                         ?>
+                     
+                      </div>
                     </div>
             </div>
         </div>
 
         <?php include 'footer.php';?>
+
+
 
     </body>
 
