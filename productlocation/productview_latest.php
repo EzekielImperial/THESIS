@@ -38,50 +38,50 @@
                 <div class="collapse navbar-collapse row" id="myNavbar">
                     <ul class="pull-right">
                         <?php if(isset($_SESSION['email'])&& $_SESSION['userType'] == 'employee'){ ?>
-                        <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
+                        <li class="upper-links"><a class="links" href="../productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                         <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
-                        <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                        <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                        <li class="upper-links"><a class="links" href="../index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
+                        <li class="upper-links"><a class="links" href="../index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                         <li class="upper-links dropdown"><a class="links">My Account</a>
                             <ul class="dropdown-menu">
                                 <li class="profile-li"><a class="profile-links" href="#">My Order</a></li>
-                                <li class="profile-li"><a class="profile-links" href="accountSetting.php">Account Setting</a></li>
+                                <li class="profile-li"><a class="profile-links" href="../accountSetting.php">Account Setting</a></li>
                                 <li class="profile-li"><a class="profile-links" href="#">Change Password </a></li>
-                                <li class="profile-li"><a class="profile-links" href="logout.php">logout</a></li>
+                                <li class="profile-li"><a class="profile-links" href="../logout.php">logout</a></li>
 
                                 <?php }elseif(isset($_SESSION['email'])&& $_SESSION['userType'] == 'student'){ ?>
-                                <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
+                                <li class="upper-links"><a class="links" href="../productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                                 <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
-                                <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                                <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                                <li class="upper-links"><a class="links" href="../index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
+                                <li class="upper-links"><a class="links" href="../index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                                 <li class="upper-links dropdown"><a class="links">My Account</a>
                                     <ul class="dropdown-menu">
                                         <li class="profile-li"><a class="profile-links" href="#">My Order</a></li>
-                                        <li class="profile-li"><a class="profile-links" href="accountSetting.php">Account Setting</a></li>
+                                        <li class="profile-li"><a class="profile-links" href="../accountSetting.php">Account Setting</a></li>
                                         <li class="profile-li"><a class="profile-links" href="#">Change Password </a></li>
-                                        <li class="profile-li"><a class="profile-links" href="logout.php">logout</a></li>
+                                        <li class="profile-li"><a class="profile-links" href="../logout.php">logout</a></li>
 
                                         <?php }elseif(isset($_SESSION['email'])&& $_SESSION['userType'] == 'admin'){ ?>
-                                        <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
+                                        <li class="upper-links"><a class="links" href="../productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                                         <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
-                                        <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                                        <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                                        <li class="upper-links"><a class="links" href="../index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
+                                        <li class="upper-links"><a class="links" href="../index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                                         <li class="upper-links dropdown"><a class="links">My Account</a>
                                             <ul class="dropdown-menu">
-                                                <li class="profile-li"><a class="profile-links" href="adminPart/adminDashboard.php">Admin Dashboard</a></li>
-                                                <li class="profile-li"><a class="profile-links" href="accountSetting.php">Account Setting</a></li>
+                                                <li class="profile-li"><a class="profile-links" href="../adminPart/adminDashboard.php">Admin Dashboard</a></li>
+                                                <li class="profile-li"><a class="profile-links" href="../accountSetting.php">Account Setting</a></li>
                                                 <li class="profile-li"><a class="profile-links" href="#">Change Password </a></li>
-                                                <li class="profile-li"><a class="profile-links" href="logout.php">logout</a></li>
+                                                <li class="profile-li"><a class="profile-links" href="../logout.php">logout</a></li>
 
 
                                 <?php }else { ?>
                                 <li class="upper-links dropdown"><a class="links">My Account</a>
                                     <ul class="dropdown-menu">
-                                        <li class="profile-li"><a class="profile-links" href="login.php">LOGIN</a></li>
-                                        <li class="profile-li"><a class="profile-links" href="signUp.php">REGISTER</a></li>
+                                        <li class="profile-li"><a class="profile-links" href="../login.php">LOGIN</a></li>
+                                        <li class="profile-li"><a class="profile-links" href="../signUp.php">REGISTER</a></li>
                                         <?php } ?>
 
 
@@ -153,14 +153,14 @@
            <div class="row list-group">
                     <?php
                     //get rows query
-                    $query = $dbconn->query("SELECT * FROM products WHERE genderCategory='woman' ORDER BY product_ID");
+                    $query = $dbconn->query("SELECT * FROM products ORDER BY product_ID");
                     if($query->num_rows > 0){
                         while($row = $query->fetch_assoc()){
                     ?>
                     <div class="item col-lg-4">
                         <div class="thumbnail">
                             <div class="caption">
-                              <img src="../productImages/<?php echo $row["productImage"];?>" width="60%" height="60%"/>
+                              <img src="../productImages/<?php echo $row["productImage"];?>" width="250px" height="250px"/>
                                 <h4 class="list-group-item-heading"><a href="#"><?php echo $row["productName"]; ?></a></h4>
                                 <p class="list-group-item-text"><?php echo $row["shortDes"]; ?></p>
                                 <div class="row">
