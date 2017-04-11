@@ -153,7 +153,7 @@
            <div class="row list-group">
                     <?php
                     //get rows query
-                    $query = $dbconn->query("SELECT * FROM products ORDER BY product_ID");
+                    $query = $dbconn->query("SELECT * FROM products ORDER BY product_ID DESC");
                     if($query->num_rows > 0){
                         while($row = $query->fetch_assoc()){
                     ?>
@@ -168,7 +168,7 @@
                                         <p class="lead"><?php echo '₱'.$row["price"]; ?></p>
                                     </div>
                                     <div class="col-md-6">
-                                        <a class="btn btn-success" href="cartAction.php?action=addToCart&productCode=<?php echo $row["product_ID"]; ?>">Add to cart</a>
+                                        <a class="btn btn-success" href="../cartAction.php?action=addToCart&productCode=<?php echo $row["product_ID"]; ?>">Add to cart</a>
                                     </div>
                                 </div>
                             </div>
