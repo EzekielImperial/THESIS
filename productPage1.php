@@ -168,10 +168,9 @@ if(!$_SESSION['email']){
                     <div class="row">
 
                      <?php
+                            $email = $_SESSION['email'];
                              $pNAME = $_GET['pname'];
                              $con=mysqli_connect('localhost','root','','imarketdatabase');
-
-
                              $results = mysqli_query ($con,'SELECT * FROM products WHERE productStatus LIKE 1 AND productName LIKE "' . $pNAME . '"');
 
                              while($row = mysqli_fetch_array($results)){
@@ -208,7 +207,7 @@ if(!$_SESSION['email']){
                                         <p>Another box box box here shit</p>
                                       </div>
                                       <div id="menu2" class="tab-pane fade">
-                                        <h3>Menu 1</h3>
+                                        <h3>Seller Name</h3>
                                         <p>'.$row['shortDes'].'</p>
                                      </div>
 
