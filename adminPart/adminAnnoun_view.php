@@ -170,7 +170,7 @@ $row = $result->fetch_assoc();
 				<a href="./adminWrite.php?bno=<?php echo $bno?>">Write</a>
 				<a href="./adminDelete.php?bno=<?php echo $bno?>">Delete</a>
 				<a href="./adminAnnoun.php">List</a>
-			</div
+			</div>
 </div>
 </article>
 
