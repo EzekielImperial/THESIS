@@ -56,7 +56,7 @@ require_once('connector.php');
       $stmt->close();
 
       echo"<script>window.alert('Post uploaded Successfully !');</script>";
-      echo"<script>location.href='productAdd.php';</script>";
+      echo"<script>location.href='productview.php';</script>";
 			} else {
           echo"<script>window.alert('Sorry, there was an error uploading your file.');</script>";
 		      echo"<script>location.href='index.php';</script>";

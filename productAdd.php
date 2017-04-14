@@ -160,11 +160,13 @@ if(!$_SESSION['email']){
           </div>
       </nav>
 
+      <!-- Main code starts -->
+
         <div class="container-fuild">
             <div class="row">
                 <div class="col-md-12 col-centered formProduct1">
                     <div class="row">
-                        <h2> <?php echo "(".$_SESSION['email'].")"; ?> Sell your Item </h2>
+                        <h2> Sell an Item </h2>
                         <!-- just testing will going to recode -->
                         <hr>
                     </div>
@@ -178,7 +180,7 @@ if(!$_SESSION['email']){
                             <div class="form-group">
                                 <label for="sel1">Whats your Product Category:</label>
                                 <select class="form-control" name="category" id="category" onChange="onSelectChange()" required>
-                                   <option value="" selected disabled>Choose of the following</option>
+                                   <option value="" selected disabled>Choose One</option>
                                    <option value="Mobile Phones Accessories">Mobile Phones Accessories</option>
                                    <option value="Clothing and Accessories">Clothing and Accessories</option>
                                    <option value="Bags and Accessories">Bags and Accessories</option>
