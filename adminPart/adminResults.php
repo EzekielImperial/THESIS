@@ -56,12 +56,12 @@ if (!$link) {
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <form class="navbar-form navbar-left" method="GET" role="search">
-                            <div class="form-group">
-                                <input type="text" name="q" class="form-control" placeholder="Search">
-                            </div>
-                            <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
-                        </form>
+                      <form class="navbar-form navbar-left" action="adminResults.php" method="POST" role="search">
+                        <div class="form-group">
+                          <input type="text" name="search" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+                      </form>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="../index.php">Back to main</a></li>
                             <li class="dropdown ">
@@ -173,7 +173,7 @@ if (!$link) {
 
     $query = $_POST['search'];
 
-    $min_length = 5;
+    $min_length = 4;
 
     if(strlen($query) >= $min_length){
 
@@ -183,19 +183,19 @@ if (!$link) {
         // for SQL injection
 
         $query1 = mysqli_query($link, "SELECT * FROM users
-            WHERE (`email` LIKE '%".$query."%') OR (`userType` LIKE '%".$query."%')");
+            WHERE (`email` LIKE '%".$query."%') OR (`userType` LIKE '%".$query."%')  OR (`course` LIKE '%".$query."%')  OR (`strand` LIKE '%".$query."%')  OR (`department` LIKE '%".$query."%')");
 
 
         if(mysqli_num_rows($query1) > 0){
 
             while($results = mysqli_fetch_array($query1 )){
 
-                echo "<p><h3>".$results['email']."</h3>".$results['firstName']."</p>";
+                echo "<p><h3>".$results['email']."</h3>" . "<h4>First Name : " .$results['firstName']. "</h4>" . "<h4>Last Name : " .$results['lastName']. "</h4>" . "<h4>Course : " .$results['course']. "</h4>"."</p>";
             }
 
         }
         else{
-            echo "No results";
+            echo "No results found";
         }
 
     }

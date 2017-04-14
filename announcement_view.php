@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>:::iMARKET:::</title>
     <meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!--JQUERY-->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<!--CSS-->
+    <!--CSS-->
     <link rel="stylesheet" href="css/design.css" />
-    <link rel="stylesheet" href="css/profile.css" />
-    <link rel="stylesheet" href="css/productsPages.css" />
 
-	</head>
+</head>
 
 <body>
 
-  <?php
+    <?php
         session_start();
         require_once('connector.php');
     ?>
@@ -31,10 +30,10 @@
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    </button>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+  </button>
             </div>
             <div class="collapse navbar-collapse row" id="myNavbar">
                 <ul class="pull-right">
@@ -121,10 +120,10 @@
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mySecondbar">
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    </button>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+  </button>
             </div>
             <!--Size-->
             <div class="col-sm-2">
@@ -147,105 +146,51 @@
         </div>
     </nav>
 
-	<!--First-->
 
-  <div class="container">
-    <h2>My profile</h2><br/>
-    <div class="row">
-      <div class="col-md-3">
-        <ul class="user-side-menu">
-          <div class="user-side-menu_bg">
-            <div class="user-side-menu_name">
-              <?php
-                $email = $_SESSION['email'];
-                $query = $dbconn->query("SELECT * FROM users WHERE email='$email'");
-                if($query->num_rows > 0){
-                  while($row = $query->fetch_assoc()) {
-                    echo $row['firstName']. " " .$row['lastName'];
-                  }
-                }
-              ?>
-            </div>
-          </div>
-          <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
-            <a class="user-side-menu_link" href="accountSetting.php">
-              <div class="user-side-menu_link-text">Account Settings</div>
-            </a>
-          </li>
-          <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
-            <a class="user-side-menu_link" href="#">
-              <div class="user-side-menu_link-text">Notifications</div>
-            </a>
-          </li>
-          <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
-            <a class="user-side-menu_link" href="#">
-              <div class="user-side-menu_link-text">My Orders</div>
-            </a>
-          </li>
-          <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
-            <a class="user-side-menu_link-selected" href="productView.php">
-              <div class="user-side-menu_link-text">My Products</div>
-            </a>
-          </li>
-          <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
-            <a class="user-side-menu_link" href="#">
-              <div class="user-side-menu_link-text">My Sales</div>
-            </a>
-          </li>
-          <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
-            <a class="user-side-menu_link" href="#">
-              <div class="user-side-menu_link-text">Sales Report</div>
-            </a>
-          </li>
-        </ul>
-      </div>
-    <div class="col-md-9">
-    <div class="page-wrapper">
-      <!-- just testing will going to recode -->
-          <?php $glasstype = $_SESSION['email'] ?>
-      <hr>
-      <?php
-        $con=mysqli_connect('localhost','root','','imarketdatabase');
-        $results = mysqli_query ($con,'SELECT * FROM products WHERE productStatus LIKE 1 AND email LIKE "' . $glasstype . '" LIMIT 5');
-        if($results->num_rows > 0) {
-          echo "<h2>" .$_SESSION['email']. ", here are your products</h2><br/>";
-          echo "<a href='productAdd.php' class='btn btn-primary'>Add new product</a>";
-        while($row = mysqli_fetch_array($results)){
-          echo'
-
-            <div class ="proBox1">
-            <img src="productImages/' .$row['productImage']. '" width="60%" height="60%"/>
-            <br>
-            <a href="productPage1.php?pname='.$row['productName'].'" style="color:black; text-decoration:none;";>'.$row['productName'].'</a> <br>
-            '.$row['shortDes'].' <br />
-            ₱ '.$row['price'].'
-            <br>
-            <form class="buttons1" method="POST" action="productEdit.php">
-            <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-            <input class="btn btn-warning" type="submit" value="Edit">
-            </form></td><td>
-            <form class="buttons1" method="POST" action="productDelete.php">
-            <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-            <input class="btn btn-danger" type="submit" value="Delete">
-            </form>
-            </div>
-            ';
-        }
-      } else {
-        echo "<h3>No products listed.</h3><br/>";
-        echo "<a href='productAdd.php' class='btn btn-primary'>Add new product</a>";
-      }
-        mysqli_close($con);
-        ?>
+    <!--Code Start-->
 
 
-    </div>
-  </div>
-</div>
-</div>
-  <br/><hr style="width:80%;"><br/>
+    <div class="container">
+         <table>
+           <h1>Announcement</h1>
+         <tbody>
+
+
+           <?php
+
+           $bno = $_GET['bno'];
+           $sql = 'select board_title, board_content, board_date, board_hit, board_admin from announcement where board_no = ' . $bno;
+           $result = $dbconn->query($sql);
+           $row = $result->fetch_assoc();
+           ?>
+
+           <article class="boardArticle">
+           <div id="boardView">
+           <h3 id="boardTitle"><?php echo $row['board_title']?></h3>
+           <div id="boardInfo">
+           <span id="boardUser">Author: <?php echo $row['board_admin']?></span>
+           <span id="boardDate">Date: <?php echo $row['board_date']?></span>
+           <span id="boardHit">Hit: <?php echo $row['board_hit']?></span>
+           </div>
+           <div id="boardContent"><?php echo $row['board_content']?></div>
+
+           <?php if(isset($_SESSION['email'])&& $_SESSION['userType'] == 'admin'){ ?>
+           <div class="btnSet">
+           				<a href="adminPart/adminWrite.php?bno=<?php echo $bno?>">Write</a>
+           				<a href="adminPart/adminDelete.php?bno=<?php echo $bno?>">Delete</a>
+           				<a href="announcement.php">List</a>
+           			</div>
+                <?php }else{
+                  echo '<a href="announcement.php">List</a>';
+                }?>
+           </div>
+           </article>
+         </tbody>
+       </table>
+     </div>
 
     <?php include 'footer.php';?>
 
 </body>
+
 </html>
