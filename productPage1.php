@@ -246,7 +246,7 @@ if(!$_SESSION['email']){
                             $email = $_SESSION['email'];
                              $pNAME = $_GET['pname'];
                              $con=mysqli_connect('localhost','root','','imarketdatabase');
-                             $results = mysqli_query ($con,'SELECT * FROM products WHERE productStatus LIKE 1 AND productName LIKE "' . $pNAME . '"');
+                             $results = mysqli_query ($con,'SELECT * FROM products WHERE productActive LIKE 1 AND productName LIKE "' . $pNAME . '"');
 
                              while($row = mysqli_fetch_array($results)){
 
