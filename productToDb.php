@@ -19,6 +19,14 @@ require_once('connector.php');
 
   $pcategory = $_POST['category'];
   $pgender=$_POST['gender'];
+
+  if($pgender == 'woman'){
+    $pgender = 'woman';
+  }elseif($pgender == '0'){
+    $pgender = 'NA';
+  }else{
+    $pgender = 'man';
+  }
   //pricepart dont touch
   $pprice = $_POST['price'];
   setlocale(LC_MONETARY,"en_US");            //money shit dont touch
