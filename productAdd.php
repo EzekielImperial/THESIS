@@ -193,6 +193,7 @@ if(!$_SESSION['email']){
 
 
                               <select class="form-control" id="gender" name="gender">
+                                <option value="0" selected>Choose One</option>
                                 <option value="man">Man</option>
                                 <option value="woman">Woman</option>
                               </select>
