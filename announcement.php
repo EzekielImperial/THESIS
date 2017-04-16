@@ -180,7 +180,7 @@
                   ?>
                   <tr>
                     <td><?php echo $row['board_no']?></td>
-                    <td><a href="./adminAnnoun_view.php?bno=<?php echo $row['board_no']?>"><?php echo $row['board_title']?></a></td>
+                    <td><a href="announcement_view.php?bno=<?php echo $row['board_no']?>"><?php echo $row['board_title']?></a></td>
                     <td><?php echo $row['board_admin']?></td>
                     <td><?php echo $row['board_date']?></td>
                     <td><?php echo $row['board_hit']?></td>
