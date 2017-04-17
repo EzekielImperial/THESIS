@@ -158,7 +158,7 @@
 
         <!--First-->
 
-        <div class="container" style="height: 550px;">
+        <div class="container">
             <!-- search body results - khelly -->
 
             <?php
