@@ -12,7 +12,7 @@
 .proBox1 {
   border: 2px solid red;
   width: 220px;
-  height: 250px;
+  height: 230px;
   float: left;
   text-align: center;
   padding-top: 5px;
@@ -20,11 +20,7 @@
   margin-right: 5px;
 }
 
-.buttons1 {
-	 float: none;
-  margin: 0 auto;
-  display:inline-block;
-}
+
 
 #gender{
    display: none;
