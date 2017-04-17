@@ -357,11 +357,7 @@ if(!$_SESSION['email']){
                                              <input type="number" class="form-control" name="qty" required style="width:50%;" min="1" max="100">
                                            </div>
                                          </div>
-                                         <?php if($row['QTY'] >= 1){
-                                           echo "<p>Availability: <font color='#2dd360'>In Stock</font></p>";
-                                         } else {
-                                           echo "<p>Availability: <font color='red'>Out of stock</font></p>";
-                                         } ?><br/>
+                                         <?php echo "<p>". $row['QTY']. " pieces available.</p>"; ?>
                                          <input type="submit" value="ADD TO BAG" class="btn btn-info"><br/>
                                          <a href="#"><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to Wishlist</a>
                                      </form>
