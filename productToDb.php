@@ -56,7 +56,7 @@ require_once('connector.php');
 	} else {
 		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 
-      $stmt = $dbconn->prepare("INSERT INTO products (productName, email, genderCategory, price, shortDes, productCategory, productImage, QTY, date_created, productStatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+      $stmt = $dbconn->prepare("INSERT INTO products (productName, email, genderCategory, price, shortDes, productCategory, productImage, QTY, date_created, productActive) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
       $stmt->bind_param("sssdsssisi", $ptitle, $powner, $pgender, $pprice, $pdes, $pcategory, $photo, $pqty, $createdate, $pstats);
 

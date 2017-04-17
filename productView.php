@@ -201,15 +201,18 @@
       </div>
     <div class="col-md-9">
     <div class="page-wrapper">
+
+    <div class="divhehe">
       <!-- just testing will going to recode -->
           <?php $glasstype = $_SESSION['email'] ?>
       <hr>
       <?php
         $con=mysqli_connect('localhost','root','','imarketdatabase');
-        $results = mysqli_query ($con,'SELECT * FROM products WHERE productStatus LIKE 1 AND email LIKE "' . $glasstype . '" LIMIT 5');
+        $results = mysqli_query ($con,'SELECT * FROM products WHERE productActive LIKE 1 AND email LIKE "' . $glasstype . '" LIMIT 5');
         if($results->num_rows > 0) {
           echo "<h2>" .$_SESSION['email']. ", here are your products</h2><br/>";
-          echo "<a href='productAdd.php' class='btn btn-primary'>Add new product</a>";
+          echo "<a href='productAdd.php' class='btn btn-primary'>Add new product</a> <br/><br/>";
+
         while($row = mysqli_fetch_array($results)){
           echo'
 
@@ -237,7 +240,7 @@
       }
         mysqli_close($con);
         ?>
-
+     </div>
 
     </div>
   </div>

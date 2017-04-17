@@ -16,6 +16,8 @@
   float: left;
   text-align: center;
   padding-top: 5px;
+  margin-top: 5px;
+  margin-right: 5px;
 }
 
 .buttons1 {
@@ -54,7 +56,7 @@
 .modal-content {
   margin: auto;
   display: auto;
-  width: 80%;
+  width: 70%;
   max-width: 700px;
   -webkit-animation-name: zoom;
   -webkit-animation-duration: 0.6s;
@@ -92,4 +94,21 @@
   .modal-content {
     width: 100%;
   }
+}
+
+a {
+  color: black;
+}
+
+a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+.heart:hover {
+  color: red;
+}
+
+.size:hover {
+  text-decoration: underline;
 }
