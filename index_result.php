@@ -2,19 +2,17 @@
 <html lang="en">
 
 <head>
-    <title>Log In</title>
+    <title>:::iMARKET:::</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-    <link rel="stylesheet" href="css/login.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--CSS-->
     <link rel="stylesheet" href="css/design.css" />
 
 </head>
@@ -22,8 +20,16 @@
 <body>
 
     <?php
+
+        $link = mysqli_connect("localhost", "root", "", "imarketdatabase");
+
+        if (!$link) {
+            echo "Error: Unable to connect to MySQL." . PHP_EOL;
+            echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+            echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+            exit;
+        }
         session_start();
-        require_once('connector.php');
     ?>
 
 
@@ -32,10 +38,10 @@
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      </button>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			</button>
                 </div>
                 <div class="collapse navbar-collapse row" id="myNavbar">
                     <ul class="pull-right">
@@ -73,7 +79,7 @@
 
                                         <li class="upper-links dropdown"><a class="links">My Account</a>
                                             <ul class="dropdown-menu">
-                                                <li class="profile-li"><a class="profile-links" href="#">My Order</a></li>
+                                                <li class="profile-li"><a class="profile-links" href="adminPart/adminDashboard.php">Admin Dashboard</a></li>
                                                 <li class="profile-li"><a class="profile-links" href="accountSetting.php">Account Setting</a></li>
                                                 <li class="profile-li"><a class="profile-links" href="#">Change Password </a></li>
                                                 <li class="profile-li"><a class="profile-links" href="logout.php">logout</a></li>
@@ -97,25 +103,24 @@
 
 
 
-  <div class="row">
-      <!--Size-->
-      <div class="col-sm-1">
-      </div>
-      <!--Size-->
-      <div class="col-sm-1">
-          <a href="index.php"><img src="image/logo.png" width="70px" height="70px"></a>
-      </div>
-      <div class="smallsearch col-sm-8 col-xs-11">
-          <div class="row">
-              <input class="navbar-input col-xs-11" type="" placeholder="Search for Products, Brands and more" name="">
-              <form action="index_result.php" method="POST" role="search">
-                <input class="navbar-input col-xs-11" type="text" name="search" placeholder="Search for Products, Brands and more" name="">
-                <button class="navbar-button col-xs-1" type="submit">
-                <svg width="15px" height="15px">
-                    <path d="M11.618 9.897l4.224 4.212c.092.09.1.23.02.312l-1.464 1.46c-.08.08-.222.072-.314-.02L9.868 11.66M6.486 10.9c-2.42 0-4.38-1.955-4.38-4.367 0-2.413 1.96-4.37 4.38-4.37s4.38 1.957 4.38 4.37c0 2.412-1.96 4.368-4.38 4.368m0-10.834C2.904.066 0 2.96 0 6.533 0 10.105 2.904 13 6.486 13s6.487-2.895 6.487-6.467c0-3.572-2.905-6.467-6.487-6.467 "></path>
-                </svg>
-            </button>
-          </form>
+            <div class="row">
+                <!--Size-->
+                <div class="col-sm-1">
+                </div>
+                <!--Size-->
+                <div class="col-sm-1">
+                    <a href="index.php"><img src="image/logo.png" width="70px" height="70px"></a>
+                </div>
+                <div class="smallsearch col-sm-8 col-xs-11">
+                    <div class="row">
+                      <form action="index_result.php" method="POST" role="search">
+                        <input class="navbar-input col-xs-11" type="text" name="search" placeholder="Search for Products, Brands and more" name="">
+                        <button class="navbar-button col-xs-1" type="submit">
+                        <svg width="15px" height="15px">
+                            <path d="M11.618 9.897l4.224 4.212c.092.09.1.23.02.312l-1.464 1.46c-.08.08-.222.072-.314-.02L9.868 11.66M6.486 10.9c-2.42 0-4.38-1.955-4.38-4.367 0-2.413 1.96-4.37 4.38-4.37s4.38 1.957 4.38 4.37c0 2.412-1.96 4.368-4.38 4.368m0-10.834C2.904.066 0 2.96 0 6.533 0 10.105 2.904 13 6.486 13s6.487-2.895 6.487-6.467c0-3.572-2.905-6.467-6.487-6.467 "></path>
+                        </svg>
+                    </button>
+                  </form>
                     </div>
                 </div>
 
@@ -125,10 +130,10 @@
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mySecondbar">
-  			<span class="icon-bar"></span>
-  			<span class="icon-bar"></span>
-  			<span class="icon-bar"></span>
-  			</button>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			</button>
                 </div>
                 <!--Size-->
                 <div class="col-sm-2">
@@ -142,8 +147,7 @@
                         <li><a href="productlocation/productview_men.php">MEN</a></li>
                         <li><a href="productlocation/productview_women.php">WOMEN</a></li>
                         <li><a href="#">iACADEMY MERCHANDISE</a></li>
-                        <li><a href="#">SHOES</a></li>
-                        <li><a href="#">ETC</a></li>
+                        <li><a href="#">CUSTOMIZE</a></li>
                     </ul>
                     </li>
                     </ul>
@@ -152,70 +156,71 @@
             </div>
         </nav>
 
-        <div class="container-fluid">
-            <br><br><br><br>
+        <!--First-->
 
-            <div class="title" id="title1">
-                <h2>Welcome to iACADAMIT</h2>
-            </div>
-            <div class="row">
-                <div class="col-md-6 ">
-                    <form class="form" id="form1" method="post" action="loginProcess.php">
-                        <br>
+        <div class="container" style="height: 550px;">
+            <!-- search body results - khelly -->
 
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control input-lg" placeholder="example: user@gmail.com" name="email">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Input Password</label>
-                            <input type="password" class="form-control input-lg" placeholder="Password" name="password">
-                        </div>
+            <?php
 
-					<!--NEED TO BE REMOVED-->
-                        <div class="radio">
-                          <label><input type="radio" name="userType" value="student" required>Student</label>
-                        </div>
-                        <div class="radio">
-                          <label><input type="radio" name="userType" value="employee" required>Employee</label>
-                        </div>
-                        <div class="radio">
-                          <label><input type="radio" name="userType" value="admin">Admin</label>
-                        </div>
+        $query = $_POST['search'];
 
-                        <div class="form-group">
-                            <div>
-                                <button class="btn btn-primary" name="submit" type="submit">
-             Log In!
-            </button>
-                                <button type="reset" class="btn btn-default">Clear</button> <br/><br/>
-                                <span><a href="forgotPassword.php">Forgot password?</a></span>
+        $min_length = 4;
 
-                            </div>
-                        </div>
-                    </form>
+        if(strlen($query) >= $min_length){
+
+        $query = htmlspecialchars($query);
+
+        $query = mysqli_real_escape_string($link,$query);
+        // for SQL injection
+
+        $query1 = mysqli_query($link, "SELECT * FROM products
+        WHERE (`productName` LIKE '%".$query."%') OR (`shortDes` LIKE '%".$query."%') OR (`email` LIKE '%".$query."%')");
 
 
-                </div>
-                <div class="col-md-6">
-                    <h1> Dont have account yet?</h1>
-                    <h3> Register so you can: </h3> <br>
-                    <p> Manage your iACADAMIT account </p>
-                    <p> Sell your shit / Buy your shit </p>
-                    <p> Add products to your whishlist </p>
-                    </br>
+        if(mysqli_num_rows($query1) > 0){
 
-                    <div class="form-group">
-                        <a href="signUp.php" class="btn btn-info" role="button">Sign Up!</a>
-                    </div>
-                    </form>
+        while($results = mysqli_fetch_array($query1 )){?>
+          <div class="item col-lg-4">
+              <div class="thumbnail">
+                  <div class="caption">
+                    <img src="productImages/<?php echo $results["productImage"];?>" width="250px" height="250px"/>
+                      <h4 class="list-group-item-heading"><a href="../productPage1.php?pname=<?php echo $results['productName']?>"><?php echo $results["productName"]; ?></a></h4>
+                      <p class="list-group-item-text"><?php echo $results["shortDes"]; ?></p>
+                      <div class="row">
+                          <div class="col-md-6">
+                              <p class="lead"><?php echo '₱'.$results["price"]; ?></p>
+                          </div>
+                          <div class="col-md-6">
+                              <a class="btn btn-success" href="../cartAction.php?action=addToCart&productCode=<?php echo $results["product_ID"]; ?>">Add to cart</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div><?php
+        }
 
-                </div>
-                <br/>
-                <hr/><br/>
-            </div>
+        }
+        else{
+        echo "No results found";
+        }
+
+        }
+        else{
+        echo "<p>Minimum length is ".$min_length. " Please search for another word</p>";
+        }
+        ?>
+                <!-- search body results - khelly -->
+        </div>
         </div>
 
+
+
+
+
+
+
+        </div>
     <?php include 'footer.php';?>
 
 </body>

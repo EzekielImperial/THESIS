@@ -116,12 +116,14 @@ if(!$_SESSION['email']){
               </div>
               <div class="smallsearch col-sm-8 col-xs-11">
                   <div class="row">
-                      <input class="navbar-input col-xs-11" type="" placeholder="Search for Products, Brands and more" name="">
-                      <button class="navbar-button col-xs-1">
+                    <form action="index_result.php" method="POST" role="search">
+                      <input class="navbar-input col-xs-11" type="text" name="search" placeholder="Search for Products, Brands and more" name="">
+                      <button class="navbar-button col-xs-1" type="submit">
                       <svg width="15px" height="15px">
                           <path d="M11.618 9.897l4.224 4.212c.092.09.1.23.02.312l-1.464 1.46c-.08.08-.222.072-.314-.02L9.868 11.66M6.486 10.9c-2.42 0-4.38-1.955-4.38-4.367 0-2.413 1.96-4.37 4.38-4.37s4.38 1.957 4.38 4.37c0 2.412-1.96 4.368-4.38 4.368m0-10.834C2.904.066 0 2.96 0 6.533 0 10.105 2.904 13 6.486 13s6.487-2.895 6.487-6.467c0-3.572-2.905-6.467-6.487-6.467 "></path>
                       </svg>
                   </button>
+                </form>
                   </div>
               </div>
 
@@ -168,7 +170,7 @@ if(!$_SESSION['email']){
                     </div>
                     <div class="row">
 
-                        
+
                          <?php $glasstype = $_SESSION['email'];
                                  $pinfo   = $_POST['PNAME'];
                           ?>
@@ -177,7 +179,7 @@ if(!$_SESSION['email']){
         $con=mysqli_connect('localhost','root','','imarketdatabase');
         $results = mysqli_query ($con,'SELECT * FROM products WHERE productName LIKE "' . $pinfo . '" LIMIT 1');
         if($results->num_rows > 0) {
-          
+
         while($row = mysqli_fetch_array($results)){
           echo'
 
@@ -225,15 +227,15 @@ if(!$_SESSION['email']){
 
                     <label for="inputname">Your Product Image:</label> <br>
                     <img src="productImages/' .$row['productImage']. '" width="15%" height="15%"/>
-                    </div>  
+                    </div>
                     <div class="form-group">
                         <label>Product Image</label>
                         <input type="file" name="fileToUpload">
                         <p class="help-block">Example "Recomended Image Size in pixel 400 X 300"</p>
                     </div>
 
-              
-                    
+
+
                     <input type="hidden" name="hiddenPname" value="'.$row['productName'].'">
 
                     <div class="form-group">
@@ -247,7 +249,7 @@ if(!$_SESSION['email']){
             ';
         }
       } else {
-        
+
       }
         mysqli_close($con);
         ?>
