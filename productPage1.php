@@ -336,8 +336,35 @@ if(!$_SESSION['email']){
                                     </div>
                                     </div>
                                     <div class="col-md-4">
-                                     <img src="image/augh1.png">
-                                    </div>
+                                     <form>
+                                       <div class="control-group form-group">
+                                         <div class="controls">
+                                           <h3>Size</h3>
+                                           <select class="form-control col-sm-2" style="width:50%;" name="size" required>
+                                             <option value="XS">XS</option>
+                                             <option value="S">S</option>
+                                             <option value="M">M</option>
+                                             <option value="L">L</option>
+                                             <option value="XL">XL</option>
+                                             <option value="XXL">XXL</option>
+                                           </select>
+                                         </div>
+                                       </div><br/><br/>
+                                         <p>Not sure? <a href="#" class="size">See size details</a></p>
+                                         <div class="control-group form-group">
+                                           <div class="controls">
+                                             <h3>Quantity</h3>
+                                             <input type="number" class="form-control" name="qty" required style="width:50%;" min="1" max="100">
+                                           </div>
+                                         </div>
+                                         <?php if($row['QTY'] >= 1){
+                                           echo "<p>Availability: <font color='#2dd360'>In Stock</font></p>";
+                                         } else {
+                                           echo "<p>Availability: <font color='red'>Out of stock</font></p>";
+                                         } ?><br/>
+                                         <input type="submit" value="ADD TO BAG" class="btn btn-info"><br/>
+                                         <a href="#"><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to Wishlist</a>
+                                     </form>
                                    </div>
                                    <?php
 
