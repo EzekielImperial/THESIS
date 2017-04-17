@@ -1,14 +1,11 @@
 <link rel="stylesheet" href="css/design.css" />
 <link rel="stylesheet" href="css/profile.css" />
 <link rel="stylesheet" href="css/productsPages.css" /> 
-
-<a href="productSort.php">back whohoo!</a>
-<br>
-<br>
-
+<link rel="stylesheet" href="css/hover.css" />
 
 <?php
-  $short = $_POST['ShortA'];
+
+$short = $_POST['ShortA'];
 
 
 switch ($short) {
@@ -19,24 +16,32 @@ switch ($short) {
         if($results->num_rows > 0) {
         while($row = mysqli_fetch_array($results)){
           echo'
+         <div class ="proBox1">
 
-            <div class ="proBox1">
-            <img src="productImages/' .$row['productImage']. '" width="60%" height="60%"/>
-            <br>
-            <a href="productPage1.php?pname='.$row['productName'].'" style="color:black; text-decoration:none;";>'.$row['productName'].'</a> <br>
-            '.$row['shortDes'].' <br />
-            ₱ '.$row['price'].'
-            <br>
-            <form class="buttons1" method="POST" action="productEdit.php">
-            <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-            <input class="btn btn-warning" type="submit" value="Edit">
-            </form></td><td>
-            <form class="buttons1" method="POST" action="productDelete.php">
-            <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-            <input class="btn btn-danger" type="submit" value="Delete">
-            </form>
+            <div class="PHOTOHOVER">
+             <img src="productImages/' .$row['productImage']. '" class="image" height:80%">
+             <div class="middle">
+              <div class="text11">
+                      <form class="buttons1" method="POST" action="productEdit1.php">
+                        <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
+                        <input class="btn btn-warning" type="submit" value="Edit">
+                      </form>
+                    </br>
+                      <form class="buttons1" method="POST" action="productDelete.php">
+                          <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
+                          <input class="btn btn-danger" type="submit" value="Delete">
+                       </form>
+                      </div>
+             </div>
             </div>
-            ';
+
+            <br>
+            <b><a href="productPage1.php?pname='.$row['productName'].'" style="color:black; text-decoration:none;";>'.$row['productName'].'</a></b> <br>
+            '.$row['shortDes'].' <br />
+          ₱ '.$row['price'].'
+            <br>
+            
+            </div>';
         }
       } else {
         echo "<h3>No products listed.</h3><br/>";
@@ -52,21 +57,31 @@ switch ($short) {
         while($row = mysqli_fetch_array($results)){
           echo'
 
-            <div class ="proBox1">
-            <img src="productImages/' .$row['productImage']. '" width="60%" height="60%"/>
+           <div class ="proBox1">
+
+            <div class="PHOTOHOVER">
+             <img src="productImages/' .$row['productImage']. '" class="image" height:80%">
+             <div class="middle">
+              <div class="text11">
+                      <form class="buttons1" method="POST" action="productEdit1.php">
+                        <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
+                        <input class="btn btn-warning" type="submit" value="Edit">
+                      </form>
+                    </br>
+                      <form class="buttons1" method="POST" action="productDelete.php">
+                          <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
+                          <input class="btn btn-danger" type="submit" value="Delete">
+                       </form>
+                      </div>
+             </div>
+            </div>
+
             <br>
-            <a href="productPage1.php?pname='.$row['productName'].'" style="color:black; text-decoration:none;";>'.$row['productName'].'</a> <br>
+            <b><a href="productPage1.php?pname='.$row['productName'].'" style="color:black; text-decoration:none;";>'.$row['productName'].'</a></b> <br>
             '.$row['shortDes'].' <br />
-            ₱ '.$row['price'].'
+          ₱ '.$row['price'].'
             <br>
-            <form class="buttons1" method="POST" action="productEdit.php">
-            <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-            <input class="btn btn-warning" type="submit" value="Edit">
-            </form></td><td>
-            <form class="buttons1" method="POST" action="productDelete.php">
-            <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-            <input class="btn btn-danger" type="submit" value="Delete">
-            </form>
+            
             </div>
             ';
         }
@@ -86,21 +101,30 @@ switch ($short) {
           echo'
 
             <div class ="proBox1">
-            <img src="productImages/' .$row['productImage']. '" width="60%" height="60%"/>
+
+            <div class="PHOTOHOVER">
+             <img src="productImages/' .$row['productImage']. '" class="image" height:80%">
+             <div class="middle">
+              <div class="text11">
+                      <form class="buttons1" method="POST" action="productEdit1.php">
+                        <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
+                        <input class="btn btn-warning" type="submit" value="Edit">
+                      </form>
+                    </br>
+                      <form class="buttons1" method="POST" action="productDelete.php">
+                          <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
+                          <input class="btn btn-danger" type="submit" value="Delete">
+                       </form>
+                      </div>
+             </div>
+            </div>
+
             <br>
-            <a href="productPage1.php?pname='.$row['productName'].'" style="color:black; text-decoration:none;";>'.$row['productName'].'</a> <br>
+            <b><a href="productPage1.php?pname='.$row['productName'].'" style="color:black; text-decoration:none;";>'.$row['productName'].'</a></b> <br>
             '.$row['shortDes'].' <br />
-            '.$row['date_created'].' <br />
-            ₱ '.$row['price'].'
+          ₱ '.$row['price'].'
             <br>
-            <form class="buttons1" method="POST" action="productEdit.php">
-            <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-            <input class="btn btn-warning" type="submit" value="Edit">
-            </form></td><td>
-            <form class="buttons1" method="POST" action="productDelete.php">
-            <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-            <input class="btn btn-danger" type="submit" value="Delete">
-            </form>
+            
             </div>
             ';
         }
@@ -118,22 +142,31 @@ switch ($short) {
         while($row = mysqli_fetch_array($results)){
           echo'
 
-            <div class ="proBox1">
-            <img src="productImages/' .$row['productImage']. '" width="60%" height="60%"/>
+           <div class ="proBox1">
+
+            <div class="PHOTOHOVER">
+             <img src="productImages/' .$row['productImage']. '" class="image" height:80%">
+             <div class="middle">
+              <div class="text11">
+                      <form class="buttons1" method="POST" action="productEdit1.php">
+                        <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
+                        <input class="btn btn-warning" type="submit" value="Edit">
+                      </form>
+                    </br>
+                      <form class="buttons1" method="POST" action="productDelete.php">
+                          <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
+                          <input class="btn btn-danger" type="submit" value="Delete">
+                       </form>
+                      </div>
+             </div>
+            </div>
+
             <br>
-            <a href="productPage1.php?pname='.$row['productName'].'" style="color:black; text-decoration:none;";>'.$row['productName'].'</a> <br>
+            <b><a href="productPage1.php?pname='.$row['productName'].'" style="color:black; text-decoration:none;";>'.$row['productName'].'</a></b> <br>
             '.$row['shortDes'].' <br />
-            '.$row['date_created'].' <br />
-            ₱ '.$row['price'].'
+          ₱ '.$row['price'].'
             <br>
-            <form class="buttons1" method="POST" action="productEdit.php">
-            <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-            <input class="btn btn-warning" type="submit" value="Edit">
-            </form></td><td>
-            <form class="buttons1" method="POST" action="productDelete.php">
-            <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-            <input class="btn btn-danger" type="submit" value="Delete">
-            </form>
+            
             </div>
             ';
         }
@@ -155,21 +188,30 @@ switch ($short) {
           echo'
 
             <div class ="proBox1">
-            <img src="productImages/' .$row['productImage']. '" width="60%" height="60%"/>
+
+            <div class="PHOTOHOVER">
+             <img src="productImages/' .$row['productImage']. '" class="image" height:80%">
+             <div class="middle">
+              <div class="text11">
+                      <form class="buttons1" method="POST" action="productEdit1.php">
+                        <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
+                        <input class="btn btn-warning" type="submit" value="Edit">
+                      </form>
+                    </br>
+                      <form class="buttons1" method="POST" action="productDelete.php">
+                          <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
+                          <input class="btn btn-danger" type="submit" value="Delete">
+                       </form>
+                      </div>
+             </div>
+            </div>
+
             <br>
-            <a href="productPage1.php?pname='.$row['productName'].'" style="color:black; text-decoration:none;";>'.$row['productName'].'</a> <br>
+            <b><a href="productPage1.php?pname='.$row['productName'].'" style="color:black; text-decoration:none;";>'.$row['productName'].'</a></b> <br>
             '.$row['shortDes'].' <br />
-            '.$row['productStatus'].' <br />
-            ₱ '.$row['price'].'
+          ₱ '.$row['price'].'
             <br>
-            <form class="buttons1" method="POST" action="productEdit.php">
-            <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-            <input class="btn btn-warning" type="submit" value="Edit">
-            </form></td><td>
-            <form class="buttons1" method="POST" action="productDelete.php">
-            <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-            <input class="btn btn-danger" type="submit" value="Delete">
-            </form>
+            
             </div>
             ';
         }
@@ -191,21 +233,30 @@ switch ($short) {
           echo'
 
             <div class ="proBox1">
-            <img src="productImages/' .$row['productImage']. '" width="60%" height="60%"/>
+
+            <div class="PHOTOHOVER">
+             <img src="productImages/' .$row['productImage']. '" class="image" height:80%">
+             <div class="middle">
+              <div class="text11">
+                      <form class="buttons1" method="POST" action="productEdit1.php">
+                        <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
+                        <input class="btn btn-warning" type="submit" value="Edit">
+                      </form>
+                    </br>
+                      <form class="buttons1" method="POST" action="productDelete.php">
+                          <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
+                          <input class="btn btn-danger" type="submit" value="Delete">
+                       </form>
+                      </div>
+             </div>
+            </div>
+
             <br>
-            <a href="productPage1.php?pname='.$row['productName'].'" style="color:black; text-decoration:none;";>'.$row['productName'].'</a> <br>
+            <b><a href="productPage1.php?pname='.$row['productName'].'" style="color:black; text-decoration:none;";>'.$row['productName'].'</a></b> <br>
             '.$row['shortDes'].' <br />
-            '.$row['productStatus'].' <br />
-            ₱ '.$row['price'].'
+          ₱ '.$row['price'].'
             <br>
-            <form class="buttons1" method="POST" action="productEdit.php">
-            <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-            <input class="btn btn-warning" type="submit" value="Edit">
-            </form></td><td>
-            <form class="buttons1" method="POST" action="productDelete.php">
-            <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-            <input class="btn btn-danger" type="submit" value="Delete">
-            </form>
+            
             </div>
             ';
         }
@@ -217,6 +268,6 @@ switch ($short) {
         	break;
 
     default:
-        echo "error shorting sorry!- khelly";
+       
 }
 ?>
