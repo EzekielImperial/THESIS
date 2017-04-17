@@ -181,7 +181,7 @@ switch ($short) {
 
         echo " <h2> these product is soldout! </h2> <br>";
 
-        	 $con=mysqli_connect('localhost','root','','imarketdatabase');
+        $con=mysqli_connect('localhost','root','','imarketdatabase');
         $results = mysqli_query ($con,'SELECT * FROM products WHERE productStatus LIKE "soldOut"');
         if($results->num_rows > 0) {
         while($row = mysqli_fetch_array($results)){
@@ -226,7 +226,7 @@ switch ($short) {
 
         echo " <h2> these product are available and on sale! </h2> <br>";
 
-        	 $con=mysqli_connect('localhost','root','','imarketdatabase');
+        $con=mysqli_connect('localhost','root','','imarketdatabase');
         $results = mysqli_query ($con,'SELECT * FROM products WHERE productStatus LIKE "onSale"');
         if($results->num_rows > 0) {
         while($row = mysqli_fetch_array($results)){
