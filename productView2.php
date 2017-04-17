@@ -3,22 +3,22 @@
 <head>
     <title>:::iMARKET:::</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!--JQUERY-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!--CSS-->
+	<!--CSS-->
     <link rel="stylesheet" href="css/design.css" />
     <link rel="stylesheet" href="css/profile.css" />
     <link rel="stylesheet" href="css/productsPages.css" />
     <link rel="stylesheet" href="css/hover.css" />
 
 
-    </head>
+	</head>
 
 <body>
 
@@ -149,7 +149,7 @@
         </div>
     </nav>
 
-    <!--First-->
+	<!--First-->
 
   <div class="container">
     <h2>My profile</h2><br/>
@@ -215,31 +215,25 @@
 
         <a href='productAdd.php' class='btn btn-primary'>Add new product</a>
          <form method="POST" action="" style="float:right;">
-
-                    <select name="ShortA" onchange="javascript: submit()">
-                      <option value="" disabled selected>Filter by:</option>
+                    <select name="ShortA" required>
                       <option value="high">higest to low price</option>
                       <option value="low">lowest to highest price</option>
                       <option value="dateold">Old to New Product Posted</option>
                       <option value="datenew">New to Old Product Posted</option>
                       <option value="sold">Solout!</option>
                       <option value="sale">For Sale!</option>
-              </select>
 
+                    </select>
+                      <input type="submit" name="SubmitButton"/>
 
-                  </form> 
-
-
-
-   
-                  </br> </br>
+                  </form> </br> </br>
 
       <!-- just testing will going to recode -->
       <?php $glasstype = $_SESSION['email'] ?>
 
 
      <?php 
-         if(isset($_POST['ShortA'])) 
+       if(isset($_POST['SubmitButton'])) 
        {
           include 'productSort1.php';
        }
@@ -259,7 +253,7 @@
              <img src="productImages/' .$row['productImage']. '" class="image" height:80%">
              <div class="middle">
               <div class="text11">
-                      <form class="buttons1" method="POST" action="productEdit.php">
+                      <form class="buttons1" method="POST" action="productEdit1.php">
                         <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
                         <input class="btn btn-warning" type="submit" value="Edit">
                       </form>
