@@ -40,8 +40,8 @@
                         <?php if(isset($_SESSION['email'])&& $_SESSION['userType'] == 'employee'){ ?>
                         <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                         <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
-                        <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                        <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                        <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
+                        <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                         <li class="upper-links dropdown"><a class="links">My Account</a>
                             <ul class="dropdown-menu">
@@ -66,8 +66,8 @@
                                         <?php }elseif(isset($_SESSION['email'])&& $_SESSION['userType'] == 'admin'){ ?>
                                         <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                                         <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
-                                        <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                                        <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                                        <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
+                                        <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                                         <li class="upper-links dropdown"><a class="links">My Account</a>
                                             <ul class="dropdown-menu">
@@ -146,38 +146,61 @@
             </div>
         </nav>
 
-        <!--First-->
+        <!--Code Starts Here(main)-->
+        <div class="container">
 
-        <div class="jumbotron text-center">
-            <h1>Slider here in this part</h1>
-            <p>with Sell Buy button</p>
-            <br><br><br>
-        </div>
-        <div class="col-md-12 text-center">
-            <br><br> Product list first line
-            <br><br><br><br><br><br><br>
-        </div>
-        <div class="col-md-12 text-center">
-            Product list second line
-            <br><br><br><br><br><br><br>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6 text-center">
-                <h3>Column 1</h3> Best prod or man prod
-                <br><br><br><br><br><br><br>
-
-            </div>
-            <div class="col-md-6 text-center">
-                <h3>Column 2</h3> woman prod
-                <br><br><br><br><br><br><br>
-
-            </div>
-
-        </div>
+  <h1>Shopping Cart</h1>
+  <table class="table table-hover">
+  <thead>
+      <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+      </tr>
+  </thead>
+  <tbody>
 
 
-        </div>
+      <?php
+
+      include 'cart.php';
+      $cart = new Cart;
+
+
+      if($cart->total_items() > 0){
+          //get cart items from session
+          $cartItems = $cart->contents();
+          foreach($cartItems as $item){
+      ?>
+      <tr>
+          <td><?php echo $item["name"]; ?></td>
+          <td><?php echo '₱'.$item["price"]; ?></td>
+          <td><input type="number" class="form-control text-center" value="<?php echo $item["qty"]; ?>" onchange="updateCartItem(this, '<?php echo $item["rowid"]; ?>')"></td>
+          <td><?php echo '₱'.$item["subtotal"]; ?></td>
+          <td>
+              <a href="cartAction.php?action=removeCartItem&id=<?php echo $item["rowid"]; ?>" class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="glyphicon glyphicon-trash"></i></a>
+          </td>
+      </tr>
+      <?php } }else{ ?>
+      <tr><td colspan="5"><p>Your cart is empty.</p></td><br/></tr>
+      <a href="productView.php" class="btn btn-warning">Go Shopping <i class="glyphicon glyphicon-menu-right"></i></a>
+      <?php } ?>
+  </tbody>
+  <tfoot>
+      <tr>
+          <?php if($cart->total_items() > 0){ ?>
+          <td><button onclick="goBack()" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Continue Shopping</button></td>
+          <td colspan="2"></td>
+          <td class="text-center"><strong>Total <?php echo '₱'.$cart->total(); ?></strong></td>
+          <td><a href="checkOut.php" class="btn btn-success btn-block">Checkout <i class="glyphicon glyphicon-menu-right"></i></a></td>
+          <?php } ?>
+
+
+      </tr>
+  </tfoot>
+  </table>
+</div>
     <?php include 'footer.php';?>
 
 </body>

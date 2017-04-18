@@ -1,39 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
 
-<head>
-    <title>:::iMARKET:::</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+session_start();
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!--JQUERY-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!--CSS-->
-    <link rel="stylesheet" href="css/design.css" />
 
-</head>
 
-<body>
 
-    <?php
-        session_start();
-        require_once('connector.php');
-    ?>
+if(!$_SESSION['email']){
+ header("need to be login", 404);
+          exit;}
+?>
 
+
+
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <title><?php echo $_GET['pname']; ?></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Latest compiled and minified CSS -->
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="css/login.css" />
+        <link rel="stylesheet" href="css/design.css" />
+        <link rel="stylesheet" href="css/productsPages.css" />
+
+
+    </head>
+
+    <body>
 
         <nav id="navbar-main">
           <!--Login System Embedded by Jung Start-->
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			</button>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      </button>
                 </div>
                 <div class="collapse navbar-collapse row" id="myNavbar">
                     <ul class="pull-right">
@@ -71,7 +81,7 @@
 
                                         <li class="upper-links dropdown"><a class="links">My Account</a>
                                             <ul class="dropdown-menu">
-                                                <li class="profile-li"><a class="profile-links" href="adminPart/adminDashboard.php">Admin Dashboard</a></li>
+                                                <li class="profile-li"><a class="profile-links" href="#">My Order</a></li>
                                                 <li class="profile-li"><a class="profile-links" href="accountSetting.php">Account Setting</a></li>
                                                 <li class="profile-li"><a class="profile-links" href="#">Change Password </a></li>
                                                 <li class="profile-li"><a class="profile-links" href="logout.php">logout</a></li>
@@ -107,10 +117,10 @@
                     <div class="row">
                         <input class="navbar-input col-xs-11" type="" placeholder="Search for Products, Brands and more" name="">
                         <button class="navbar-button col-xs-1">
-                        <svg width="15px" height="15px">
-                            <path d="M11.618 9.897l4.224 4.212c.092.09.1.23.02.312l-1.464 1.46c-.08.08-.222.072-.314-.02L9.868 11.66M6.486 10.9c-2.42 0-4.38-1.955-4.38-4.367 0-2.413 1.96-4.37 4.38-4.37s4.38 1.957 4.38 4.37c0 2.412-1.96 4.368-4.38 4.368m0-10.834C2.904.066 0 2.96 0 6.533 0 10.105 2.904 13 6.486 13s6.487-2.895 6.487-6.467c0-3.572-2.905-6.467-6.487-6.467 "></path>
-                        </svg>
-                    </button>
+                          <svg width="15px" height="15px">
+                              <path d="M11.618 9.897l4.224 4.212c.092.09.1.23.02.312l-1.464 1.46c-.08.08-.222.072-.314-.02L9.868 11.66M6.486 10.9c-2.42 0-4.38-1.955-4.38-4.367 0-2.413 1.96-4.37 4.38-4.37s4.38 1.957 4.38 4.37c0 2.412-1.96 4.368-4.38 4.368m0-10.834C2.904.066 0 2.96 0 6.533 0 10.105 2.904 13 6.486 13s6.487-2.895 6.487-6.467c0-3.572-2.905-6.467-6.487-6.467 "></path>
+                          </svg>
+                      </button>
                     </div>
                 </div>
 
@@ -120,10 +130,10 @@
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mySecondbar">
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			</button>
+  			<span class="icon-bar"></span>
+  			<span class="icon-bar"></span>
+  			<span class="icon-bar"></span>
+  			</button>
                 </div>
                 <!--Size-->
                 <div class="col-sm-2">
@@ -137,7 +147,8 @@
                         <li><a href="productlocation/productview_men.php">MEN</a></li>
                         <li><a href="productlocation/productview_women.php">WOMEN</a></li>
                         <li><a href="#">iACADEMY MERCHANDISE</a></li>
-                        <li><a href="#">CUSTOMIZE</a></li>
+                        <li><a href="#">SHOES</a></li>
+                        <li><a href="#">ETC</a></li>
                     </ul>
                     </li>
                     </ul>
@@ -146,40 +157,100 @@
             </div>
         </nav>
 
-        <!--First-->
+        <div class="container-fuild">
+            <div class="row">
+                <div class="col-md-12 col-centered">
+                    <div class="row">
+                        <h2> <?php echo "(".$_SESSION['email'].")"; ?> <b> <?php echo $_GET['pname']; ?> </b> </h2>
+                        <!-- just testing will going to recode -->
+                        <hr>
+                    </div>
+                    <div class="row">
 
-        <div class="jumbotron text-center">
-            <h1>Slider here in this part</h1>
-            <p>with Sell Buy button</p>
-            <br><br><br>
-        </div>
-        <div class="col-md-12 text-center">
-            <br><br> Product list first line
-            <br><br><br><br><br><br><br>
-        </div>
-        <div class="col-md-12 text-center">
-            Product list second line
-            <br><br><br><br><br><br><br>
-        </div>
+                     <?php
+                             $pNAME = $_GET['pname'];
+                             $con=mysqli_connect('localhost','root','','imarketdatabase');
 
-        <div class="row">
-            <div class="col-md-6 text-center">
-                <h3>Column 1</h3> Best prod or man prod
-                <br><br><br><br><br><br><br>
 
+                             $results = mysqli_query ($con,'SELECT * FROM products WHERE productStatus LIKE 1 AND productName LIKE "' . $pNAME . '"');
+
+                             while($row = mysqli_fetch_array($results)){
+
+                                 echo'
+                                   <div class="col-md-4">
+                                      <img id="prodImg" src="productImages/' .$row['productImage']. '" width="80%" height="80%"/>
+
+                                   </div>
+                                   <div id="myModal" class="modal">
+                                    <span class="close">&times;</span>
+                                    <img class="modal-content" id="img01">
+                                   </div>
+                                   <div class="col-md-4">
+                                    <b>'.$row['productName'].'</b> <br />
+                                    <b>'.$row['shortDes'].'</b> <br />
+                                    ₱ '.$row['price'].' <br />
+
+                                    <br/><br>
+                                    <ul class="nav nav-tabs">
+                                      <li class="active"><a data-toggle="tab" href="#home">Product Details</a></li>
+                                      <li><a data-toggle="tab" href="#menu1"> Reviews (25) </a></li>
+                                      <li><a data-toggle="tab" href="#menu2"> Seller Details </a></li>
+
+                                    </ul>
+
+                                    <div class="tab-content">
+                                      <div id="home" class="tab-pane fade in active">
+                                        <h3>Description</h3>
+                                        <p>'.$row['shortDes'].'</p>
+                                      </div>
+                                      <div id="menu1" class="tab-pane fade">
+                                        <h3>Menu 1</h3>
+                                        <p>Another box box box here shit</p>
+                                      </div>
+                                      <div id="menu2" class="tab-pane fade">
+                                        <h3>Menu 1</h3>
+                                        <p>'.$row['shortDes'].'</p>
+                                     </div>
+
+                                    </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                     <img src="image/augh1.png">
+                                    </div>
+                                   </div>
+
+                                    ';
+
+
+                             }
+                             mysqli_close($con);
+
+                         ?>
+
+                      </div>
+                    </div>
             </div>
-            <div class="col-md-6 text-center">
-                <h3>Column 2</h3> woman prod
-                <br><br><br><br><br><br><br>
-
-            </div>
-
         </div>
 
+        <?php include 'footer.php';?>
 
-        </div>
-    <?php include 'footer.php';?>
+        <script>
+          var modal = document.getElementById('myModal');
+          var img = document.getElementById('prodImg');
+          var modalImg = document.getElementById('img01');
 
-</body>
+          img.onclick = function() {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+          }
 
-</html>
+          var span = document.getElementsByClassName("close")[0];
+          span.onclick = function() {
+            modal.style.display = "none";
+          }
+        </script>
+
+
+    </body>
+
+    </html>
