@@ -45,9 +45,9 @@
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<form class="navbar-form navbar-left" method="GET" role="search">
+      <form class="navbar-form navbar-left" action="adminResults.php" method="POST" role="search">
 				<div class="form-group">
-					<input type="text" name="q" class="form-control" placeholder="Search">
+					<input type="text" name="search" class="form-control" placeholder="Search">
 				</div>
 				<button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
 			</form>
@@ -247,8 +247,9 @@
                  // output data of each row
                  while($row = $result->fetch_assoc()) {
                    echo
-                   "<tr>
-                    <td>{$row['user_ID']}</td>
+                   "<tr>";
+                   echo '<td><a href="adminView_spec.php?usersid=' . $row['user_ID'] . '">' . $row['user_ID'] . '</a></td>';
+                   echo"
                      <td>{$row['email']}</td>
                      <td>{$row['firstName']}</td>
                      <td>{$row['lastName']}</td>
@@ -259,6 +260,7 @@
                      <td>{$row['strand']}</td>
                      <td>{$row['department']}</td>
                    </tr>\n";
+
                  }
 
              } else {

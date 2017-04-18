@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>:::iMARKET:::</title>
     <meta charset="utf-8">
@@ -13,16 +14,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!--CSS-->
     <link rel="stylesheet" href="css/design.css" />
-    <link rel="stylesheet" href="css/profile.css" />
-    <link rel="stylesheet" href="css/productsPages.css" />
-    <link rel="stylesheet" href="css/hover.css" />
 
-
-    </head>
+</head>
 
 <body>
 
-  <?php
+    <?php
         session_start();
         require_once('connector.php');
     ?>
@@ -33,10 +30,10 @@
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    </button>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+  </button>
             </div>
             <div class="collapse navbar-collapse row" id="myNavbar">
                 <ul class="pull-right">
@@ -108,12 +105,14 @@
             </div>
             <div class="smallsearch col-sm-8 col-xs-11">
                 <div class="row">
-                    <input class="navbar-input col-xs-11" type="" placeholder="Search for Products, Brands and more" name="">
-                    <button class="navbar-button col-xs-1">
+                  <form action="index_result.php" method="POST" role="search">
+                    <input class="navbar-input col-xs-11" type="text" name="search" placeholder="Search for Products, Brands and more" name="">
+                    <button class="navbar-button col-xs-1" type="submit">
                     <svg width="15px" height="15px">
                         <path d="M11.618 9.897l4.224 4.212c.092.09.1.23.02.312l-1.464 1.46c-.08.08-.222.072-.314-.02L9.868 11.66M6.486 10.9c-2.42 0-4.38-1.955-4.38-4.367 0-2.413 1.96-4.37 4.38-4.37s4.38 1.957 4.38 4.37c0 2.412-1.96 4.368-4.38 4.368m0-10.834C2.904.066 0 2.96 0 6.533 0 10.105 2.904 13 6.486 13s6.487-2.895 6.487-6.467c0-3.572-2.905-6.467-6.487-6.467 "></path>
                     </svg>
                 </button>
+              </form>
                 </div>
             </div>
 
@@ -123,10 +122,10 @@
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mySecondbar">
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    </button>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+  </button>
             </div>
             <!--Size-->
             <div class="col-sm-2">
@@ -149,157 +148,51 @@
         </div>
     </nav>
 
-    <!--First-->
 
-  <div class="container">
-    <h2>My profile</h2><br/>
-    <div class="row">
-      <div class="col-md-3">
-        <ul class="user-side-menu">
-          <div class="user-side-menu_bg">
-            <div class="user-side-menu_name">
-              <?php
-                $email = $_SESSION['email'];
-                $query = $dbconn->query("SELECT * FROM users WHERE email='$email'");
-                if($query->num_rows > 0){
-                  while($row = $query->fetch_assoc()) {
-                    echo $row['firstName']. " " .$row['lastName'];
-                  }
-                }
-              ?>
-            </div>
-          </div>
-          <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
-            <a class="user-side-menu_link" href="accountSetting.php">
-              <div class="user-side-menu_link-text">Account Settings</div>
-            </a>
-          </li>
-          <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
-            <a class="user-side-menu_link" href="#">
-              <div class="user-side-menu_link-text">Notifications</div>
-            </a>
-          </li>
-          <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
-            <a class="user-side-menu_link" href="#">
-              <div class="user-side-menu_link-text">My Orders</div>
-            </a>
-          </li>
-          <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
-            <a class="user-side-menu_link-selected" href="productView.php">
-              <div class="user-side-menu_link-text">My Products</div>
-            </a>
-          </li>
-          <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
-            <a class="user-side-menu_link" href="#">
-              <div class="user-side-menu_link-text">My Sales</div>
-            </a>
-          </li>
-          <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
-            <a class="user-side-menu_link" href="#">
-              <div class="user-side-menu_link-text">Sales Report</div>
-            </a>
-          </li>
-        </ul>
-      </div>
-    <div class="col-md-9">
-    <div class="page-wrapper">
-
-   
-    <div class="divhehe">
+    <!--Code Start-->
 
 
-
-     <h2> Here are your available products </h2>
-          <hr>
-
-
-        <a href='productAdd.php' class='btn btn-primary'>Add new product</a>
-         <form method="POST" action="" style="float:right;">
-
-                    <select name="ShortA" onchange="javascript: submit()">
-                      <option value="" disabled selected>Filter by:</option>
-                      <option value="high">higest to low price</option>
-                      <option value="low">lowest to highest price</option>
-                      <option value="dateold">Old to New Product Posted</option>
-                      <option value="datenew">New to Old Product Posted</option>
-                      <option value="sold">Solout!</option>
-                      <option value="sale">For Sale!</option>
-              </select>
+    <div class="container">
+         <table>
+           <h1>Announcement</h1>
+         <tbody>
 
 
-                  </form> 
+           <?php
 
+           $bno = $_GET['bno'];
+           $sql = 'select board_title, board_content, board_date, board_hit, board_admin from announcement where board_no = ' . $bno;
+           $result = $dbconn->query($sql);
+           $row = $result->fetch_assoc();
+           ?>
 
+           <article class="boardArticle">
+           <div id="boardView">
+           <h3 id="boardTitle"><?php echo $row['board_title']?></h3>
+           <div id="boardInfo">
+           <span id="boardUser">Author: <?php echo $row['board_admin']?></span>
+           <span id="boardDate">Date: <?php echo $row['board_date']?></span>
+           <span id="boardHit">Hit: <?php echo $row['board_hit']?></span>
+           </div>
+           <div id="boardContent"><?php echo $row['board_content']?></div>
 
-   
-                  </br> </br>
-
-      <!-- just testing will going to recode -->
-      <?php $glasstype = $_SESSION['email'] ?>
-
-
-     <?php 
-         if(isset($_POST['ShortA'])) 
-       {
-          include 'productSort1.php';
-       }
-       else               
-       {
-   
-        $con=mysqli_connect('localhost','root','','imarketdatabase');
-        $results = mysqli_query ($con,'SELECT * FROM products WHERE productActive LIKE 1 AND email LIKE "' . $glasstype . '" LIMIT 5');
-
-        if($results->num_rows > 0) {
-          
-        while($row = mysqli_fetch_array($results)){
-          echo'
-            <div class ="proBox1">
-
-            <div class="PHOTOHOVER">
-             <img src="productImages/' .$row['productImage']. '" class="image" height:80%">
-             <div class="middle">
-              <div class="text11">
-                      <form class="buttons1" method="POST" action="productEdit.php">
-                        <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-                        <input class="btn btn-warning" type="submit" value="Edit">
-                      </form>
-                    </br>
-                      <form class="buttons1" method="POST" action="productDelete.php">
-                          <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-                          <input class="btn btn-danger" type="submit" value="Delete">
-                       </form>
-                      </div>
-             </div>
-            </div>
-
-            <br>
-            <b><a href="productPage1.php?pname='.$row['productName'].'" style="color:black; text-decoration:none;";>'.$row['productName'].'</a></b> <br>
-            '.$row['shortDes'].' <br />
-          ₱ '.$row['price'].'
-            <br>
-            
-            </div>
-            ';
-          }
-        } else {
-          echo "<h3>No products listed.</h3><br/>";
-          echo "<a href='productAdd.php' class='btn btn-primary'>Add new product</a>";
-        }
-          mysqli_close($con);
-        }
-     ?>
-
+           <?php if(isset($_SESSION['email'])&& $_SESSION['userType'] == 'admin'){ ?>
+           <div class="btnSet">
+           				<a href="adminPart/adminWrite.php?bno=<?php echo $bno?>">Write</a>
+           				<a href="adminPart/adminDelete.php?bno=<?php echo $bno?>">Delete</a>
+           				<a href="announcement.php">List</a>
+           			</div>
+                <?php }else{
+                  echo '<a href="announcement.php">List</a>';
+                }?>
+           </div>
+           </article>
+         </tbody>
+       </table>
      </div>
-
-     </div>
-
-    </div>
-  </div>
-</div>
-</div>
-  <br/><hr style="width:80%;"><br/>
 
     <?php include 'footer.php';?>
 
 </body>
+
 </html>

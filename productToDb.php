@@ -19,6 +19,14 @@ require_once('connector.php');
 
   $pcategory = $_POST['category'];
   $pgender=$_POST['gender'];
+
+  if($pgender == 'woman'){
+    $pgender = 'woman';
+  }elseif($pgender == '0'){
+    $pgender = 'NA';
+  }else{
+    $pgender = 'man';
+  }
   //pricepart dont touch
   $pprice = $_POST['price'];
   setlocale(LC_MONETARY,"en_US");            //money shit dont touch
@@ -48,7 +56,7 @@ require_once('connector.php');
 	} else {
 		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 
-      $stmt = $dbconn->prepare("INSERT INTO products (productName, email, genderCategory, price, shortDes, productCategory, productImage, QTY, date_created, productStatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+      $stmt = $dbconn->prepare("INSERT INTO products (productName, email, genderCategory, price, shortDes, productCategory, productImage, QTY, date_created, productActive) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
       $stmt->bind_param("sssdsssisi", $ptitle, $powner, $pgender, $pprice, $pdes, $pcategory, $photo, $pqty, $createdate, $pstats);
 
@@ -56,7 +64,7 @@ require_once('connector.php');
       $stmt->close();
 
       echo"<script>window.alert('Post uploaded Successfully !');</script>";
-      echo"<script>location.href='productAdd.php';</script>";
+      echo"<script>location.href='productview.php';</script>";
 			} else {
           echo"<script>window.alert('Sorry, there was an error uploading your file.');</script>";
 		      echo"<script>location.href='index.php';</script>";

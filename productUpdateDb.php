@@ -58,7 +58,6 @@
   }else{
 
     echo "<script>alert('Update Failed Please, try again !');</script>";
-    echo"<script>location.href='productView.php';</script>";
   }
  }
  }
