@@ -49,6 +49,7 @@ switch ($short) {
       }
         mysqli_close($con);
         break;
+        
     case "low":
         
         $con=mysqli_connect('localhost','root','','imarketdatabase');
