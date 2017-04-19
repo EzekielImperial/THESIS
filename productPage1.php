@@ -269,8 +269,8 @@ if(!$_SESSION['email']){
                                     <br/><br>
                                     <ul class="nav nav-tabs">
                                       <li class="active"><a data-toggle="tab" href="#home">Product Details</a></li>
-                                      <li><a data-toggle="tab" href="#menu1"> Reviews</a></li>
-                                      <li><a data-toggle="tab" href="#menu2"> Seller Details </a></li>
+                                      <li><a data-toggle="tab" href="#menu1"> Seller Details</a></li>
+                                      <li><a data-toggle="tab" href="#menu2"> Reviews </a></li>
 
                                     </ul>
 
@@ -279,30 +279,12 @@ if(!$_SESSION['email']){
                                         <h3>Description</h3>
                                         <p><?php echo $row['shortDes']?></p>
                                       </div>
-                                      <!--Review implements-->
 
+                                      <!-- Start of  Review -->
                                       <div id="menu1" class="tab-pane fade">
-                                        <div class="form-group">
-
-                                          <h3>Leave a Comment</h3>
-
-                                          <form action="#" method="post">
-
-                                            <label for="comment_author" class="required">Your email</label>
-                                            <?php echo $row['email']?>
-                                            <br>
-                                            <label for="comment" class="required">Your message</label>
-                                            <textarea class="form-control" rows="5" id="comment" required="required"></textarea>
-                                            <input name="submit" type="submit"  class="btn btn-info" value="Submit comment" />
-
-                                          </form>
-
-                                        </div>
-                                      </div>
-
-                                      <div id="menu2" class="tab-pane fade">
                                         <h3>Seller Details</h3>
-                                        <p><?php echo $row['shortDes'] ?></p>
+                                        <p>Seller Name : <?php echo $row['email'] ?></p>
+
 
 
 
@@ -334,7 +316,60 @@ if(!$_SESSION['email']){
                                           <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
                                         </div>
                                      </div>
+                                     <!-- End of Review-->
 
+                                     <!--Review implements-->
+
+                                     <div id="menu2" class="tab-pane fade">
+                                       <div class="form-group">
+                                         <table>
+                                           <thead>
+                                             <tr>
+
+                                               <td>User</td>
+                                               <td>Comments</td>
+                                               <td>Date</td>
+                                             </tr>
+
+                                           </thead>
+                                               <tbody>
+                                         <?php
+                                              $sql = 'select * from rating order by id desc';
+                                              $result = $con->query($sql);
+                                              while($row = $result->fetch_assoc())
+                                              {
+                                                $datetime = explode(' ', $row['product_date']);
+                                                $date = $datetime[0];
+                                                $time = $datetime[1];
+                                                if($date == Date('Y-m-d'))
+                                                $row['product_date'] = $time;
+                                                else
+                                                $row['product_date'] = $date;
+                                                ?>
+
+                                                <tr>
+                                                  <td><?php echo $row['user_ID']?></td>
+                                                  <td><?php echo $row['product_comment']?></td>
+                                                  <td><?php echo $row['product_date']?></td>
+                                                </tr>
+                                                <?php
+                                              }
+                                              ?>
+                                            </tbody>
+                                          </table>
+                                         <form action="#" method="post">
+
+                                           <?php echo $row['email']?>
+                                           <br>
+                                           <label for="comment" class="required">Your Comments</label>
+                                           <textarea class="form-control" rows="5" id="comment" required="required"></textarea>
+                                           <input name="submit" type="submit"  class="btn btn-info" value="Submit comment" />
+
+                                         </form>
+
+                                       </div>
+                                     </div>
+                                     <!--End of review-->
                                     </div>
                                     </div>
                                     <div class="col-md-4">

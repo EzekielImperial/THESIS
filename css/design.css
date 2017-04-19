@@ -326,8 +326,29 @@
 }
 
 /*===========================*/
+<<<<<<< HEAD
 
 
 /*========= WHISLIST PART - KHELLY =================*/
 
 /*========= WHISLIST PART - KHELLY =================*/
+=======
+/*TABLE*/
+table, td, th {
+    text-align: left;
+    font-family: "roboto",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+}
+
+table {
+    border-collapse: collapse;
+    margin: auto;
+}
+
+th, td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+>>>>>>> refs/remotes/origin/master
