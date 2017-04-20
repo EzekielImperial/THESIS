@@ -5,9 +5,10 @@ session_start();
 
 
 
-if(!$_SESSION['email']){
- header("need to be login", 404);
-          exit;}
+if(!isset($_SESSION['email'])){
+ echo '<script type="text/javascript">alert("Log-in to view the product !");window.location.href="login.php";
+    </script>';
+ exit;}
 ?>
 
 
@@ -396,16 +397,16 @@ if(!$_SESSION['email']){
                                          </div>
                                          <?php echo "<p>". $row['QTY']. " pieces available.</p>"; ?>
                                          <input type="submit" value="ADD TO BAG" class="btn btn-info"><br/></br>
-                                         
 
-                                         
+
+
 
 
                                          <a href="productWishListToDB.php?pname= <?php echo $row['productName']?>" style="color:black; text-decoration:none;";><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist </a>
 
                                     <!--     <a href="#"><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist</a>  -->
                                      </form>
-                                     
+
                                      </br> </br>
 
                                      <form method="POST" action="productWishListToDB.php">
