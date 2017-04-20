@@ -1,11 +1,8 @@
 <?php
-
 session_start();
-
-
-
-
-
+if(!$_SESSION['email']){
+ header("need to be login", 404);
+          exit;}
 ?>
 
 
@@ -31,7 +28,6 @@ session_start();
         <script>
                         $(document).ready(function () {
                             $("#demo1 .stars").click(function () {
-
                                 $.post('rating.php',{rate:$(this).val()},function(d){
                                     if(d>0)
                                     {
@@ -43,10 +39,8 @@ session_start();
                                 $(this).attr("checked");
                             });
                         });
-
                         $(document).ready(function () {
                             $("#demo2 .stars").click(function () {
-
                                 $.post('ratingproduct.php',{rate:$(this).val()},function(d){
                                     if(d>0)
                                     {
@@ -65,14 +59,11 @@ session_start();
         <link rel="stylesheet" href="css/productsPages.css" />
         <style>
         @import url(http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
-
                     fieldset, label { margin: 0; padding: 0; }
-
                     .rating {
                         border: none;
                         float: left;
                     }
-
                     .rating > input { display: none; }
                     .rating > label:before {
                         margin: 5px;
@@ -81,21 +72,17 @@ session_start();
                         display: inline-block;
                         content: "\f005";
                     }
-
                     .rating > .half:before {
                         content: "\f089";
                         position: absolute;
                     }
-
                     .rating > label {
                         color: #ddd;
                         float: right;
                     }
-
                     .rating > input:checked ~ label,
                     .rating:not(:checked) > label:hover,
                     .rating:not(:checked) > label:hover ~ label { color: #FFD700;  }
-
                     .rating > input:checked + label:hover,
                     .rating > input:checked ~ label:hover,
                     .rating > label:hover ~ input:checked ~ label,
@@ -243,13 +230,11 @@ session_start();
                     <div class="row">
 
                      <?php
-                             $email = (isset($_SESSION['email']));
+                             $email = $_SESSION['email'];
                              $pNAME = $_GET['pname'];
                              $con=mysqli_connect('localhost','root','','imarketdatabase');
                              $results = mysqli_query ($con,'SELECT * FROM products WHERE productActive LIKE 1 AND productName LIKE "' . $pNAME . '"');
-
                              while($row = mysqli_fetch_array($results)){
-
                                  echo'
                                    <div class="col-md-4">
                                       <img id="prodImg" src="productImages/' .$row['productImage']. '" width="80%" height="80%"/>
@@ -392,19 +377,18 @@ session_start();
                                              <input type="number" class="form-control" name="qty"  style="width:50%;" min="1" max="100">
                                            </div>
                                          </div>
-                                         <?php echo $row['user_ID']?>
-                                         <?php echo "<p>". $row['qty']. " pieces available.</p>"; ?>
+                                         <?php echo "<p>". $row['QTY']. " pieces available.</p>"; ?>
                                          <input type="submit" value="ADD TO BAG" class="btn btn-info"><br/></br>
+                                         
 
-
-
+                                         
 
 
                                          <a href="productWishListToDB.php?pname= <?php echo $row['productName']?>" style="color:black; text-decoration:none;";><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist </a>
 
                                     <!--     <a href="#"><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist</a>  -->
                                      </form>
-
+                                     
                                      </br> </br>
 
                                      <form method="POST" action="productWishListToDB.php">
@@ -413,12 +397,8 @@ session_start();
                                           </form>
                                    </div>
                                    <?php
-
-
-
                              }
                              mysqli_close($con);
-
                          ?>
 
                       </div>
@@ -432,12 +412,10 @@ session_start();
           var modal = document.getElementById('myModal');
           var img = document.getElementById('prodImg');
           var modalImg = document.getElementById('img01');
-
           img.onclick = function() {
             modal.style.display = "block";
             modalImg.src = this.src;
           }
-
           var span = document.getElementsByClassName("close")[0];
           span.onclick = function() {
             modal.style.display = "none";
