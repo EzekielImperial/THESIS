@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-
-
 <html lang="en">
 
 <head>
-    <title>My Wishlist</title>
+    <title>:::iMARKET:::</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -16,36 +14,42 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!--CSS-->
     <link rel="stylesheet" href="css/design.css" />
-    <link rel="stylesheet" href="css/productsPages.css" />
-
 
 </head>
 
 <body>
 
     <?php
+
+        $link = mysqli_connect("localhost", "root", "", "imarketdatabase");
+
+        if (!$link) {
+            echo "Error: Unable to connect to MySQL." . PHP_EOL;
+            echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+            echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+            exit;
+        }
         session_start();
-        require_once('connector.php');
     ?>
 
 
         <nav id="navbar-main">
-            <!--Login System Embedded by Jung Start-->
+          <!--Login System Embedded by Jung Start-->
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            </button>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			</button>
                 </div>
                 <div class="collapse navbar-collapse row" id="myNavbar">
                     <ul class="pull-right">
                         <?php if(isset($_SESSION['email'])&& $_SESSION['userType'] == 'employee'){ ?>
                         <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                         <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
-                        <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                        <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                        <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
+                        <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                         <li class="upper-links dropdown"><a class="links">My Account</a>
                             <ul class="dropdown-menu">
@@ -57,8 +61,8 @@
                                 <?php }elseif(isset($_SESSION['email'])&& $_SESSION['userType'] == 'student'){ ?>
                                 <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                                 <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
-                                <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                                <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                                <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
+                                <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                                 <li class="upper-links dropdown"><a class="links">My Account</a>
                                     <ul class="dropdown-menu">
@@ -70,8 +74,8 @@
                                         <?php }elseif(isset($_SESSION['email'])&& $_SESSION['userType'] == 'admin'){ ?>
                                         <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                                         <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
-                                        <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                                        <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                                        <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
+                                        <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                                         <li class="upper-links dropdown"><a class="links">My Account</a>
                                             <ul class="dropdown-menu">
@@ -81,19 +85,17 @@
                                                 <li class="profile-li"><a class="profile-links" href="logout.php">logout</a></li>
 
 
-                                                <?php }else { ?>
-                                                <li class="upper-links dropdown"><a class="links">My Account</a>
-                                                    <ul class="dropdown-menu">
-                                                        <li class="profile-li"><a class="profile-links" href="login.php">LOGIN</a></li>
-                                                        <li class="profile-li"><a class="profile-links" href="signUp.php">REGISTER</a></li>
-                                                        <?php } ?>
+                                <?php }else { ?>
+                                <li class="upper-links dropdown"><a class="links">My Account</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="profile-li"><a class="profile-links" href="login.php">LOGIN</a></li>
+                                        <li class="profile-li"><a class="profile-links" href="signUp.php">REGISTER</a></li>
+                                        <?php } ?>
 
 
-                                                    </ul>
-                                                </li>
-                                            </ul>
                                     </ul>
-                            </ul>
+                                </li>
+                            </ul></ul></ul>
                     </ul>
                 </div>
             </div>
@@ -111,12 +113,14 @@
                 </div>
                 <div class="smallsearch col-sm-8 col-xs-11">
                     <div class="row">
-                        <input class="navbar-input col-xs-11" type="" placeholder="Search for Products, Brands and more" name="">
-                        <button class="navbar-button col-xs-1">
+                      <form action="index_result.php" method="POST" role="search">
+                        <input class="navbar-input col-xs-11" type="text" name="search" placeholder="Search for Products, Brands and more" name="">
+                        <button class="navbar-button col-xs-1" type="submit">
                         <svg width="15px" height="15px">
                             <path d="M11.618 9.897l4.224 4.212c.092.09.1.23.02.312l-1.464 1.46c-.08.08-.222.072-.314-.02L9.868 11.66M6.486 10.9c-2.42 0-4.38-1.955-4.38-4.367 0-2.413 1.96-4.37 4.38-4.37s4.38 1.957 4.38 4.37c0 2.412-1.96 4.368-4.38 4.368m0-10.834C2.904.066 0 2.96 0 6.533 0 10.105 2.904 13 6.486 13s6.487-2.895 6.487-6.467c0-3.572-2.905-6.467-6.487-6.467 "></path>
                         </svg>
                     </button>
+                  </form>
                     </div>
                 </div>
 
@@ -126,10 +130,10 @@
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mySecondbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            </button>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			</button>
                 </div>
                 <!--Size-->
                 <div class="col-sm-2">
@@ -154,105 +158,70 @@
 
         <!--First-->
 
-        <div class="container-fuild">
-            <div class="row">
-                <div class="col-md-12 col-centered formProduct1">
+        <div class="container">
+            <!-- search body results - khelly -->
 
-                    <h2> My Wishlist </h2>
+            <?php
 
-                    <form method="POST" action="" style="float:right;">
-                        <select name="ShortA" onchange="javascript: submit()">
-                              <option value="" disabled selected>Sort by:</option>
-                              <option value="high">higest to low price</option>
-                              <option value="low">lowest to highest price</option>
-                      </select>
-                    </form>
-                    
-                    <?php $glasstype = $_SESSION['email'] ?>
-                    
+        $query = $_POST['search'];
 
-                    <?php 
-         if(isset($_POST['ShortA'])) 
-       {
-          include 'productWishListSort.php';
-       }
-       else               
-       {
-   
-        
-               
-                  
-                      
-            $querry = 'SELECT *
-               FROM wishlist
-               LEFT JOIN products
-               ON wishlist.productName = products.productName
-               WHERE wishlist.wishListActive=1 AND products.email LIKE "' . $glasstype . '"  ';
+        $min_length = 4;
 
-              $response = @mysqli_query($dbconn, $querry);
+        if(strlen($query) >= $min_length){
 
-              if($response) {  
+        $query = htmlspecialchars($query);
 
-                $rowcount=mysqli_num_rows($response);
-                printf(" You have %d Items in your wishlist.\n",$rowcount);
-        
-                echo "<table class='table'>";
-                //echo "<tr><td> Brand Name </td><td> Brand Description </td><td> Brand Image </td>";
+        $query = mysqli_real_escape_string($link,$query);
+        // for SQL injection
 
-                echo "<thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Product Name</th>
-                                            <th></th>
-                                            <th>Price</th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                      ";
+        $query1 = mysqli_query($link, "SELECT * FROM products
+        WHERE (`productName` LIKE '%".$query."%') OR (`shortDes` LIKE '%".$query."%') OR (`email` LIKE '%".$query."%')");
 
 
+        if(mysqli_num_rows($query1) > 0){
 
-               while ($row = @mysqli_fetch_array($response)) {
-                echo "<tr><td>";
-
-                echo '<img src="productImages/' .$row['productImage']. '" width="70" height="70"> </td><td>';
-                echo '<b><a href="productPage1.php?pname='.$row['productName'].'" style="color:black; text-decoration:none;";>'.$row['productName'].'</a></b></td><td>';
-                echo $row['shortDes'] . '</td><td>';
-                echo $row['price'] . '</td><td>';   
-                echo $row['QTY'] . '</td><td>';
-                
-    
-                echo '
-                  <form method="POST" action="#">
-                  <input type="hidden" name="idtest" value="" />
-                  <input class="btn btn-info" type="submit" value="Add to Cart">
-                  </form>
-                  </td><td>
-                  <form method="POST" action="#">
-                  <input type="hidden" name="idtest" value="" />
-                  <input class="btn btn-warning" type="submit" value="X">
-                  </form></td><td> ';
-
-
-             }
-            echo "</table>";
-           } else {
-          echo "<h3>No products listed.</h3><br/>";
-          echo "<a href='productAdd.php' class='btn btn-primary'>Add new product</a>";
+        while($results = mysqli_fetch_array($query1 )){?>
+          <div class="item col-lg-4">
+              <div class="thumbnail">
+                  <div class="caption">
+                    <img src="productImages/<?php echo $results["productImage"];?>" width="250px" height="250px"/>
+                      <h4 class="list-group-item-heading"><a href="../productPage1.php?pname=<?php echo $results['productName']?>"><?php echo $results["productName"]; ?></a></h4>
+                      <p class="list-group-item-text"><?php echo $results["shortDes"]; ?></p>
+                      <div class="row">
+                          <div class="col-md-6">
+                              <p class="lead"><?php echo '₱'.$results["price"]; ?></p>
+                          </div>
+                          <div class="col-md-6">
+                              <a class="btn btn-success" href="../cartAction.php?action=addToCart&productCode=<?php echo $results["product_ID"]; ?>">Add to cart</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div><?php
         }
-        }
-     ?>
 
-                </div>
-            </div>
+        }
+        else{
+        echo "No results found";
+        }
+
+        }
+        else{
+        echo "<p>Minimum length is ".$min_length. " Please search for another word</p>";
+        }
+        ?>
+                <!-- search body results - khelly -->
+        </div>
         </div>
 
 
 
-        <?php include 'footer.php';?>
+
+
+
+
+        </div>
+    <?php include 'footer.php';?>
 
 </body>
 

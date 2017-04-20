@@ -169,6 +169,20 @@ if (!$link) {
 
                 <div class="container" style="height: 550px;">
                     <!-- search body results - khelly -->
+                         <table>
+                           <h1>Your Result !</h1>
+                         <thead>
+                           <tr>
+                             <th>Email_Address</th>
+                             <th>firstname</th>
+                             <th>lastname</th>
+                             <th>Course</th>
+                             <th>Strand</th>
+                             <th>Department</th>
+                             <th>User Type</th>
+                           </tr>
+                         </thead>
+                         <tbody>
                     <?php
 
     $query = $_POST['search'];
@@ -189,8 +203,16 @@ if (!$link) {
         if(mysqli_num_rows($query1) > 0){
 
             while($results = mysqli_fetch_array($query1 )){
-
-                echo "<p><h3>".$results['email']."</h3>" . "<h4>First Name : " .$results['firstName']. "</h4>" . "<h4>Last Name : " .$results['lastName']. "</h4>" . "<h4>Course : " .$results['course']. "</h4>"."</p>";
+              echo
+              " <tr>
+              <td>".$results['email']."</td>
+                <td>" .$results['firstName']. "</td>
+                <td>" .$results['lastName']. "</td>
+                <td>" .$results['course']. "</td>
+                <td>" .$results['strand']. "</td>
+                <td>" .$results['department']. "</td>
+                <td>" .$results['userType']. "</td>
+              </tr>\n";
             }
 
         }
@@ -204,7 +226,7 @@ if (!$link) {
     }
 ?>
                         <!-- search body results - khelly -->
-                </div>
+                </tbody></table></div>
             </div>
 
     <?php include 'adminfooter.php';?>

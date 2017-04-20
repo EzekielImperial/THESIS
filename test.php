@@ -160,91 +160,61 @@
 
                     <h2> My Wishlist </h2>
 
-                    <form method="POST" action="" style="float:right;">
-                        <select name="ShortA" onchange="javascript: submit()">
-                              <option value="" disabled selected>Sort by:</option>
-                              <option value="high">higest to low price</option>
-                              <option value="low">lowest to highest price</option>
-                      </select>
-                    </form>
-                    
-                    <?php $glasstype = $_SESSION['email'] ?>
-                    
-
                     <?php 
-         if(isset($_POST['ShortA'])) 
-       {
-          include 'productWishListSort.php';
-       }
-       else               
-       {
-   
-        
-               
-                  
                       
-            $querry = 'SELECT *
-               FROM wishlist
-               LEFT JOIN products
-               ON wishlist.productName = products.productName
-               WHERE wishlist.wishListActive=1 AND products.email LIKE "' . $glasstype . '"  ';
+              $querry = "SELECT * from wishlist ";
 
               $response = @mysqli_query($dbconn, $querry);
 
               if($response) {  
 
-                $rowcount=mysqli_num_rows($response);
-                printf(" You have %d Items in your wishlist.\n",$rowcount);
-        
+              $emails[] = $row['productName'];  
+
+              $querry = "SELECT * from products WHERE productName LIKE ".$emails."  ";
+
+              $response = @mysqli_query($dbconn, $querry);
+
                 echo "<table class='table'>";
                 //echo "<tr><td> Brand Name </td><td> Brand Description </td><td> Brand Image </td>";
 
                 echo "<thead>
                                         <tr>
-                                            <th></th>
+
+                                            <!-- th yung mga name ng table -->
                                             <th>Product Name</th>
-                                            <th></th>
-                                            <th>Price</th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
+                                            <th>What do you wanna do</th>
+
                                         </tr>
                                     </thead>
-                      ";
+        ";
 
 
 
                while ($row = @mysqli_fetch_array($response)) {
                 echo "<tr><td>";
-
-                echo '<img src="productImages/' .$row['productImage']. '" width="70" height="70"> </td><td>';
                 echo '<b><a href="productPage1.php?pname='.$row['productName'].'" style="color:black; text-decoration:none;";>'.$row['productName'].'</a></b></td><td>';
-                echo $row['shortDes'] . '</td><td>';
-                echo $row['price'] . '</td><td>';   
-                echo $row['QTY'] . '</td><td>';
-                
-    
-                echo '
-                  <form method="POST" action="#">
+                echo $row['productName'] . '</td><td>';
+                echo $row['price'] . '</td><td>';
+
+                  echo '<form method="POST" action="deactivate.php">
                   <input type="hidden" name="idtest" value="" />
-                  <input class="btn btn-info" type="submit" value="Add to Cart">
-                  </form>
-                  </td><td>
-                  <form method="POST" action="#">
+                  <input class="btn btn-info" type="submit" value="Remove from Wishlist">
+                  </form></td><td>';
+                  echo '<form method="POST" action="updateProduct1.php">
                   <input type="hidden" name="idtest" value="" />
-                  <input class="btn btn-warning" type="submit" value="X">
-                  </form></td><td> ';
+                  <input class="btn btn-info" type="submit" value="Add to My Cart">
+                  </form></td><td>';
 
 
              }
             echo "</table>";
            } else {
-          echo "<h3>No products listed.</h3><br/>";
-          echo "<a href='productAdd.php' class='btn btn-primary'>Add new product</a>";
-        }
-        }
-     ?>
+            echo "No records to display from Product Database";
+           }
+
+
+                    ?>
+
 
                 </div>
             </div>

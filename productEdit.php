@@ -116,12 +116,14 @@ if(!$_SESSION['email']){
               </div>
               <div class="smallsearch col-sm-8 col-xs-11">
                   <div class="row">
-                      <input class="navbar-input col-xs-11" type="" placeholder="Search for Products, Brands and more" name="">
-                      <button class="navbar-button col-xs-1">
+                    <form action="index_result.php" method="POST" role="search">
+                      <input class="navbar-input col-xs-11" type="text" name="search" placeholder="Search for Products, Brands and more" name="">
+                      <button class="navbar-button col-xs-1" type="submit">
                       <svg width="15px" height="15px">
                           <path d="M11.618 9.897l4.224 4.212c.092.09.1.23.02.312l-1.464 1.46c-.08.08-.222.072-.314-.02L9.868 11.66M6.486 10.9c-2.42 0-4.38-1.955-4.38-4.367 0-2.413 1.96-4.37 4.38-4.37s4.38 1.957 4.38 4.37c0 2.412-1.96 4.368-4.38 4.368m0-10.834C2.904.066 0 2.96 0 6.533 0 10.105 2.904 13 6.486 13s6.487-2.895 6.487-6.467c0-3.572-2.905-6.467-6.487-6.467 "></path>
                       </svg>
                   </button>
+                </form>
                   </div>
               </div>
 
@@ -163,21 +165,34 @@ if(!$_SESSION['email']){
             <div class="row">
                 <div class="col-md-12 col-centered formProduct1">
                     <div class="row">
-                        <h2> <?php echo "(".$_SESSION['email'].")"; ?> Edit are your product: <?php echo $_POST['PNAME'] ?> </h2>
+                        <h2> Edit are your product: <b> <?php echo $_POST['PNAME'] ?> </b> </h2>
                         <hr>
                     </div>
                     <div class="row">
 
-                         <form class="form" action="productUpdateDb.php" method="post" enctype="multipart/form-data">
+
+                         <?php $glasstype = $_SESSION['email'];
+                                 $pinfo   = $_POST['PNAME'];
+                          ?>
+      <?php
+
+        $con=mysqli_connect('localhost','root','','imarketdatabase');
+        $results = mysqli_query ($con,'SELECT * FROM products WHERE productName LIKE "' . $pinfo . '" LIMIT 1');
+        if($results->num_rows > 0) {
+
+        while($row = mysqli_fetch_array($results)){
+          echo'
+
+            <form class="form" action="productUpdateDb.php" method="post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="inputname">Rename your Product:</label>
-                                <input type="text" class="form-control" placeholder="Enter product name/title" name="title" required>
+                                <input type="text" class="form-control" placeholder='.$row['productName'].' name="title" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="sel1">Change the Product Category:</label>
                                 <select class="form-control" name="category" id="category" onChange="onSelectChange()" required>
-                                   <option value="" selected disabled>Choose of the following</option>
+                                   <option value="" selected disabled>'.$row['productCategory'].'</option>
                                    <option value="Mobile Phones Accessories">Mobile Phones Accessories</option>
                                    <option value="Clothing and Accessories">Clothing and Accessories</option>
                                    <option value="Bags and Accessories">Bags and Accessories</option>
@@ -188,7 +203,7 @@ if(!$_SESSION['email']){
                                    <option value="Toys Stuffs">Toys Stuffs</option>
                                 </select>
 
-                                <select class="form-control" id="gender" name="gender">
+                                <select class="form-control" id="gender" name="genderCategory">
                                   <option value="man">Man</option>
                                   <option value="woman">Woman</option>
                                 </select>
@@ -198,20 +213,21 @@ if(!$_SESSION['email']){
                     </div>
                     <div class="form-group">
                         <label for="inputname">Product Price: </label>
-                        <input type="number" class="form-control" placeholder=" &#8369 1,000" name="price" required>
+                        <input type="number" class="form-control" placeholder=" &#8369 '.$row['price'].'" name="price" required>
                     </div>
                     <div class="form-group">
                         <label for="comment">Product Description:</label>
-                        <textarea class="form-control" rows="5" name="description" required></textarea>
+                        <textarea class="form-control" rows="5" name="description" placeholder='.$row['shortDes'].'  required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="inputname">Product Quantity:</label>
-                        <input type="number" class="form-control" name="qty" required>
+                        <input type="number" class="form-control" name="qty" placeholder='.$row['QTY'].' required>
                     </div>
-                    <!--    <div class="form-group">
-                    <label for="inputname">Upload Your Product Image:</label>
+                    <div class="form-group">
 
-                </div>  need to put code to upload pictures here lol -->
+                    <label for="inputname">Your Product Image:</label> <br>
+                    <img src="productImages/' .$row['productImage']. '" width="15%" height="15%"/>
+                    </div>
                     <div class="form-group">
                         <label>Product Image</label>
                         <input type="file" name="fileToUpload">
@@ -219,8 +235,8 @@ if(!$_SESSION['email']){
                     </div>
 
 
-                    <?php $pname=$_POST['PNAME']?>
-                    <input type="hidden" name="hiddenPname" value="<?php echo htmlspecialchars($pname); ?>">
+
+                    <input type="hidden" name="hiddenPname" value="'.$row['productName'].'">
 
                     <div class="form-group">
                         <div>
@@ -230,7 +246,13 @@ if(!$_SESSION['email']){
                     </div>
                     </form>
 
+            ';
+        }
+      } else {
 
+      }
+        mysqli_close($con);
+        ?>
 
 
 

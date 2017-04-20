@@ -200,7 +200,7 @@
                 //echo "<tr><td> Brand Name </td><td> Brand Description </td><td> Brand Image </td>";
 
                 echo "<thead>
-                                        <tr>
+                                         <tr>
                                             <th></th>
                                             <th>Product Name</th>
                                             <th></th>

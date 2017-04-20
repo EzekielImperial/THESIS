@@ -16,11 +16,6 @@
     <link rel="stylesheet" href="../css/adminOnly.css">
     <!--Javascript-->
     <script src="../jsforAdmin/jsAdmin.js"></script>
-    <script>
-    function goBack() {
-      window.history.back();
-    }
-    </script>
 
 </head>
 
@@ -150,83 +145,136 @@
 
 
 
+<!--2ndMain starts (table for user) - Jung-->
+<!--<div class="form-group">
+    <select class="form-control" name="usercat" required>
+       <option value="" selected disabled>Choose</option>
+       <option value="admin">Admin</option>
+       <option value="employee">Employee</option>
+       <option value="student">Student</option>
+    </select>
+</div>-->
 
-<!--Code Starts Here-->
 
-<?php
-//$_GET['boardNum'] setting - Jung
-if(isset($_GET['bno'])) {
-  $bNo = $_GET['bno'];
-}
 
-if(isset($bNo)) {
-  $sql = 'select board_title, board_content, board_admin from announcement where board_no = ' . $bNo;
-  $result = $dbconn->query($sql);
-  $row = $result->fetch_assoc();
-}
-?>
 
 <div class="container">
-	<div class="row">
+     <table>
+       <h1>Administrator User View</h1>
+     <thead>
+       <tr>
+         <th>USER_ID</th>
+         <th>Email_Address</th>
+         <th>firstname</th>
+         <th>lastname</th>
+         <th>Contact_Number</th>
+         <th>Birthdate</th>
+         <th>User Type</th>
+         <th>Course</th>
+         <th>Strand</th>
+         <th>Department</th>
+       </tr>
+     </thead>
+     <tbody>
 
-	    <div class="col-md-8 col-md-offset-2">
-
-    		<h1>Create post</h1>
-
-    		<form action="adminwrite_update.php" method="POST">
-
-          <?php
-				      if(isset($bNo)) {
-					           echo '<input type="hidden" name="bno" value="' . $bNo . '">';
-				               }
-				?>
-        <label for="bID"></label>
-          <input type="hidden" class="form-control" name="bID" value="admin">
 
 
-    		    <div class="form-group">
-    		        <label for="bTitle">Title <span class="require">*</span></label>
-    		        <input type="text" class="form-control" name="bTitle" id="bTitle"  value="<?php echo isset($row['board_title'])?$row['board_title']:null?>" />
-    		    </div>
+       <?php
 
-            <div class="form-group">
-    		        <label for="bPassword">Password <span class="require">*</span></label>
-    		        <input type="password" class="form-control" name="bPassword" id="bPassword"  />
-    		    </div>
 
-    		    <div class="form-group">
-    		        <label for="boardContent">Description</label>
-    		        <textarea rows="5" class="form-control" name="bContent" id="bContent" ><?php echo isset($row['board_content'])?$row['board_content']:null?></textarea>
-    		    </div>
+              $usernumber = $_GET['usersid'];
+             $sql = "SELECT * FROM users WHERE user_ID=$usernumber" ;
+             $result = $dbconn->query($sql);
 
-    		    <div class="form-group">
-    		        <p><span class="require">*</span> - required fields</p>
-    		    </div>
+             if ($result->num_rows > 0) {
+                 // output data of each row
+                 while($row = $result->fetch_assoc()) {
+                   echo
+                   " <tr>
+                   <td>{$row['user_ID']}</td>
+                     <td>{$row['email']}</td>
+                     <td>{$row['firstName']}</td>
+                     <td>{$row['lastName']}</td>
+                     <td>{$row['contactNum']}</td>
+                     <td>{$row['birthDate']}</td>
+                     <td>{$row['userType']}</td>
+                     <td>{$row['course']}</td>
+                     <td>{$row['strand']}</td>
+                     <td>{$row['department']}</td>
+                   </tr>\n";
+                 }
 
-    		    <div class="form-group">
-    		        <button type="submit" class="btn btn-primary">
-    		            <?php echo isset($bnum)?'Rewrite':'Write'?>
-    		        </button>
-    		        <button class="btn btn-default" onclick="goBack()">
-    		            <a href="adminAnnoun.php">Cancel</a>
-    		        </button>
-    		    </div>
+             } else {
+                 echo "<tr><td>0 results</td></tr>";
+             }
 
-    		</form>
-		</div>
 
-	</div>
+
+
+
+       ?>
+
+       <thead>
+           <tr>
+             <th>House Number</th>
+             <th>Street</th>
+             <th>Building</th>
+             <th>Subdivision</th>
+             <th>Barangay</th>
+             <th>City</th>
+             <th>Province</th>
+             <th>Zipcode</th>
+           </tr>
+       </thead>
+       <?php
+
+
+              $usernumber = $_GET['usersid'];
+             $sql = "SELECT * FROM address WHERE user_ID=$usernumber" ;
+             $result = $dbconn->query($sql);
+
+             if ($result->num_rows > 0) {
+                 // output data of each row
+                 while($row = $result->fetch_assoc()) {
+                   echo "
+                   <tr>
+                     <td>{$row['houseNum']}</td>
+                     <td>{$row['street']}</td>
+                     <td>{$row['building']}</td>
+                     <td>{$row['subdivision']}</td>
+                     <td>{$row['barangay']}</td>
+                     <td>{$row['city']}</td>
+                     <td>{$row['province']}</td>
+                     <td>{$row['zipCode']}</td>
+                   </tr>\n";
+
+                 }
+
+             } else {
+                 echo "<tr><td>0 results</td></tr>";
+             }
+
+
+
+
+
+       ?>
+       <button onclick="goBack()">Go Back</button>
+
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>
+     </tbody>
+   </table>
+
+
 </div>
 
-
-
-
-
-
-
-
   	</div>
-    <!--Footers-->
+
+    <!--Footer-->
     <footer class="footer1">
         <div class="container">
 
