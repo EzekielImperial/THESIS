@@ -392,7 +392,8 @@ session_start();
                                              <input type="number" class="form-control" name="qty"  style="width:50%;" min="1" max="100">
                                            </div>
                                          </div>
-                                         <?php echo "<p>". $row['QTY']. " pieces available.</p>"; ?>
+                                         <?php echo $row['user_ID']?>
+                                         <?php echo "<p>". $row['qty']. " pieces available.</p>"; ?>
                                          <input type="submit" value="ADD TO BAG" class="btn btn-info"><br/></br>
 
 
