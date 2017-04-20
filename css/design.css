@@ -326,6 +326,13 @@
 }
 
 /*===========================*/
+<<<<<<< HEAD
+
+
+/*========= WHISLIST PART - KHELLY =================*/
+
+/*========= WHISLIST PART - KHELLY =================*/
+=======
 /*TABLE*/
 table, td, th {
     text-align: left;
@@ -344,3 +351,4 @@ th, td {
     padding: 15px;
     border-bottom: 1px solid #ddd;
 }
+>>>>>>> refs/remotes/origin/master
