@@ -158,7 +158,7 @@
                <br><br> <h2 style="color:#0fad00">Success</h2>
                <img src="image/reg_true.jpg">
                <h3>Dear, Sir/Maam</h3>
-                <p style="font-size:20px;color:#5C5C5C;">Thank you for registering in iMARKET Buy&Sell. Please verify your account by clicking the activation link that has been sent to your email. Login to your account to enjoy to buy & sell now !</p>
+                <p style="font-size:20px;color:#5C5C5C;">Thank you for registering in iMARKET Buy&Sell. Login to your account to enjoy to buy & sell now !</p>
                             <a href="login.php" class="btn btn-success">     Log-in      </a>
                             <br><br>
                           </div>
