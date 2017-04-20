@@ -175,6 +175,7 @@
          if(isset($_POST['ShortA'])) 
        {
           include 'productWishListSort.php';
+          include 'productWishListDeactivate.php';
        }
        else               
        {
@@ -223,8 +224,10 @@
                   <input class="btn btn-info" type="submit" value="Add to Cart">
                   </form>
                   </td><td>
-                  <form method="POST" action="#">
-                  <input type="hidden" name="idtest" value="" />
+
+                  <form method="POST" action="productWishListDeactivate.php"> '; ?>
+                  <input type="hidden" name="PNAME" value="<?php echo $row['productName']?>" />
+                <?php echo '
                   <input class="btn btn-warning" type="submit" value="X">
                   </form></td><td> ';
              }
