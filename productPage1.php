@@ -5,9 +5,7 @@ session_start();
 
 
 
-if(!$_SESSION['email']){
- header("need to be login", 404);
-          exit;}
+
 ?>
 
 
@@ -245,7 +243,7 @@ if(!$_SESSION['email']){
                     <div class="row">
 
                      <?php
-                             $email = $_SESSION['email'];
+                             $email = (isset($_SESSION['email']));
                              $pNAME = $_GET['pname'];
                              $con=mysqli_connect('localhost','root','','imarketdatabase');
                              $results = mysqli_query ($con,'SELECT * FROM products WHERE productActive LIKE 1 AND productName LIKE "' . $pNAME . '"');
@@ -396,16 +394,16 @@ if(!$_SESSION['email']){
                                          </div>
                                          <?php echo "<p>". $row['QTY']. " pieces available.</p>"; ?>
                                          <input type="submit" value="ADD TO BAG" class="btn btn-info"><br/></br>
-                                         
 
-                                         
+
+
 
 
                                          <a href="productWishListToDB.php?pname= <?php echo $row['productName']?>" style="color:black; text-decoration:none;";><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist </a>
 
                                     <!--     <a href="#"><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist</a>  -->
                                      </form>
-                                     
+
                                      </br> </br>
 
                                      <form method="POST" action="productWishListToDB.php">
