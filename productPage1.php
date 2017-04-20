@@ -391,13 +391,27 @@ if(!$_SESSION['email']){
                                          <div class="control-group form-group">
                                            <div class="controls">
                                              <h3>Quantity</h3>
-                                             <input type="number" class="form-control" name="qty" required style="width:50%;" min="1" max="100">
+                                             <input type="number" class="form-control" name="qty"  style="width:50%;" min="1" max="100">
                                            </div>
                                          </div>
                                          <?php echo "<p>". $row['QTY']. " pieces available.</p>"; ?>
-                                         <input type="submit" value="ADD TO BAG" class="btn btn-info"><br/>
-                                         <a href="#"><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to Wishlist</a>
+                                         <input type="submit" value="ADD TO BAG" class="btn btn-info"><br/></br>
+                                         
+
+                                         
+
+
+                                         <a href="productWishListToDB.php?pname= <?php echo $row['productName']?>" style="color:black; text-decoration:none;";><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist </a>
+
+                                    <!--     <a href="#"><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist</a>  -->
                                      </form>
+                                     
+                                     </br> </br>
+
+                                     <form method="POST" action="productWishListToDB.php">
+                                            <input type="hidden" name="pname" value="<?php echo $row['productName']?>" />
+                                            <input type="submit" value="Add to My Wishlist">
+                                          </form>
                                    </div>
                                    <?php
 
