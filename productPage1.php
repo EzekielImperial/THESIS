@@ -5,10 +5,7 @@ session_start();
 
 
 
-if(!isset($_SESSION['email'])){
- echo '<script type="text/javascript">alert("Log-in to view the product !");window.location.href="login.php";
-    </script>';
- exit;}
+
 ?>
 
 
@@ -246,7 +243,7 @@ if(!isset($_SESSION['email'])){
                     <div class="row">
 
                      <?php
-                             $email = $_SESSION['email'];
+                             $email = (isset($_SESSION['email']));
                              $pNAME = $_GET['pname'];
                              $con=mysqli_connect('localhost','root','','imarketdatabase');
                              $results = mysqli_query ($con,'SELECT * FROM products WHERE productActive LIKE 1 AND productName LIKE "' . $pNAME . '"');
