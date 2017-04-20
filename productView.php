@@ -28,6 +28,9 @@
   <?php
         session_start();
         require_once('connector.php');
+        if(!$_SESSION['email']){
+         header("need to be login", 404);
+                  exit;}
     ?>
 
 
@@ -207,9 +210,9 @@
     <div class="col-md-9">
     <div class="page-wrapper">
 
-   
+
     <div class="divhehe">
-     
+
     <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home">ALL</a></li>
     <li><a data-toggle="tab" href="#menu1">On Sale</a></li>
@@ -219,13 +222,12 @@
 
   <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
-         
+
 
      <h2> Here are your available products </h2>
           <hr>
 
 
-        <a href='productAdd.php' class='btn btn-primary'>Add new product</a>
 
          <form method="POST" action="" style="float:right;">
                     <select name="ShortA" onchange="javascript: submit()">
@@ -239,30 +241,30 @@
               </select>
 
 
-                  </form> 
+                  </form>
 
 
 
-   
+
                   </br> </br>
 
       <!-- just testing will going to recode -->
       <?php $glasstype = $_SESSION['email'] ?>
 
 
-     <?php 
-         if(isset($_POST['ShortA'])) 
+     <?php
+         if(isset($_POST['ShortA']))
        {
           include 'productSort1.php';
        }
-       else               
+       else
        {
-   
+
         $con=mysqli_connect('localhost','root','','imarketdatabase');
         $results = mysqli_query ($con,'SELECT * FROM products WHERE productActive LIKE 1 AND email LIKE "' . $glasstype . '" ');
 
         if($results->num_rows > 0) {
-          
+
         while($row = mysqli_fetch_array($results)){
           echo'
             <div class ="proBox1">
@@ -289,7 +291,7 @@
             '.$row['shortDes'].' <br />
           ₱ '.$row['price'].'
             <br>
-            
+
             </div>
             ';
           }
@@ -302,13 +304,13 @@
      ?>
     </div>
     <div id="menu1" class="tab-pane fade">
-      
-      <?php 
+
+      <?php
           echo " <h2> these product are available and on sale! </h2> <br>";
 
         $con=mysqli_connect('localhost','root','','imarketdatabase');
         $results = mysqli_query ($con,'SELECT * FROM products WHERE productStatus LIKE "onSale" AND productActive LIKE 1 AND email LIKE "' . $glasstype . '" ');
-   
+
         if($results->num_rows > 0) {
         while($row = mysqli_fetch_array($results)){
           echo'
@@ -337,7 +339,7 @@
             '.$row['shortDes'].' <br />
           ₱ '.$row['price'].'
             <br>
-            
+
             </div>
             ';
         }
@@ -346,15 +348,15 @@
         echo "<a href='productAdd.php' class='btn btn-primary'>Add new product</a>";
       }
         mysqli_close($con);
-        
+
 
       ?>
 
       </div>
     <div id="menu2" class="tab-pane fade">
-      
+
       <?php
-        
+
          echo " <h2> these product is soldout! </h2> <br>";
 
         $con=mysqli_connect('localhost','root','','imarketdatabase');
@@ -388,7 +390,7 @@
             '.$row['shortDes'].' <br />
           ₱ '.$row['price'].'
             <br>
-            
+
             </div>
             ';
         }
@@ -404,7 +406,7 @@
   </div>
 
 
-  
+
    </div>
    </div>
    </div>
