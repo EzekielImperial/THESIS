@@ -166,7 +166,7 @@
               <input type="password" class="form-control" name="password" id="password" required placeholder="Enter Password">
             </div>
           </div>
-          <input type="submit" value="Continue" class="btn btn-primary">
+          <input type="submit" class="btn btn-primary" value="Continue" onclick="return confirm('Are you sure you want to continue?')">
         </form>
       </div>
       <br/><hr style="width:80%;"><br/>
@@ -282,7 +282,6 @@
             </div>
         </div>
     </div>
-
 
 </body>
 
