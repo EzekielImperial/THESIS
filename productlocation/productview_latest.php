@@ -153,7 +153,7 @@
            <div class="row list-group">
                     <?php
                     //get rows query
-                    $query = $dbconn->query("SELECT * FROM products ORDER BY product_ID DESC");
+                    $query = $dbconn->query("SELECT * FROM products WHERE productActive = 1 ORDER BY product_ID DESC");
                     if($query->num_rows > 0){
                         while($row = mysqli_fetch_array($query)){
                     ?>
