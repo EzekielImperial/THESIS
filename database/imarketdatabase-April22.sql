@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.6.5.2
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- 생성 시간: 17-04-21 15:46
--- 서버 버전: 10.1.10-MariaDB
--- PHP 버전: 7.0.2
+-- Generation Time: Apr 22, 2017 at 01:31 AM
+-- Server version: 10.1.21-MariaDB
+-- PHP Version: 7.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- 데이터베이스: `imarketdatabase`
+-- Database: `imarketdatabase`
 --
 
 -- --------------------------------------------------------
 
 --
--- 테이블 구조 `address`
+-- Table structure for table `address`
 --
 
 CREATE TABLE `address` (
@@ -42,7 +42,7 @@ CREATE TABLE `address` (
 -- --------------------------------------------------------
 
 --
--- 테이블 구조 `announcement`
+-- Table structure for table `announcement`
 --
 
 CREATE TABLE `announcement` (
@@ -56,7 +56,7 @@ CREATE TABLE `announcement` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- 테이블의 덤프 데이터 `announcement`
+-- Dumping data for table `announcement`
 --
 
 INSERT INTO `announcement` (`board_no`, `board_title`, `board_content`, `board_date`, `board_hit`, `board_admin`, `board_password`) VALUES
@@ -65,7 +65,7 @@ INSERT INTO `announcement` (`board_no`, `board_title`, `board_content`, `board_d
 -- --------------------------------------------------------
 
 --
--- 테이블 구조 `orders`
+-- Table structure for table `orders`
 --
 
 CREATE TABLE `orders` (
@@ -78,7 +78,7 @@ CREATE TABLE `orders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- 테이블의 덤프 데이터 `orders`
+-- Dumping data for table `orders`
 --
 
 INSERT INTO `orders` (`id`, `user_ID`, `total_price`, `created`, `modified`, `status`) VALUES
@@ -93,7 +93,7 @@ INSERT INTO `orders` (`id`, `user_ID`, `total_price`, `created`, `modified`, `st
 -- --------------------------------------------------------
 
 --
--- 테이블 구조 `order_items`
+-- Table structure for table `order_items`
 --
 
 CREATE TABLE `order_items` (
@@ -104,7 +104,7 @@ CREATE TABLE `order_items` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- 테이블의 덤프 데이터 `order_items`
+-- Dumping data for table `order_items`
 --
 
 INSERT INTO `order_items` (`id`, `order_id`, `product_ID`, `qty`) VALUES
@@ -119,7 +119,7 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_ID`, `qty`) VALUES
 -- --------------------------------------------------------
 
 --
--- 테이블 구조 `products`
+-- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
@@ -141,22 +141,17 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- 테이블의 덤프 데이터 `products`
+-- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`product_ID`, `email`, `user_ID`, `productName`, `price`, `shortDes`, `longDes`, `productCategory`, `productImage`, `qty`, `date_created`, `date_update`, `productActive`, `productStatus`, `genderCategory`) VALUES
-(5, 'student@test.com', 1, 'someone sell', '1500.00', 'Bag', '', 'Services', '', 1, 'April 15, 2017 3:18:pm', 'April 16, 2017 3:18:pm', 1, 'onSale', 'NA'),
-(19, 'khellytaguinod@gmail.com', 0, 'Product 1', '12.00', 'test test test', '', 'Bags and Accessories', 'j88hbs.jpg', 1, 'April 20, 2017 10:38:pm  ', '', 1, '', 'man'),
-(20, 'khellytaguinod@gmail.com', 0, 'test test test', '1234.00', 'qwegnbf1234', '', 'Services', '17457256_669327076596050_6894527303830224820_n.jpg', 213, 'April 20, 2017 10:39:pm  ', '', 0, 'onSale', 'NA'),
-(21, 'khellytaguinod@gmail.com', 0, 'Jamie Fuck Princess', '1.00', 'gold digger', '', 'Services', 'photo_2016-07-20_23-06-26.jpg', 1, 'April 21, 2017 1:14:pm  ', '', 1, 'soldOut', 'NA'),
-(22, 'khellytaguinod@gmail.com', 0, 'Jamies 111', '11.00', '11', '', 'Services', 'image_2017-03-21_16-42-26.png', 11, 'April 21, 2017 1:55:pm  ', '', 0, 'OnSale', 'NA'),
-(23, '', 6, 'Joanne Imperial', '69.00', 'sex slave', '', 'Services', '12308816_10204803564602352_5695523333994529172_n.jpg', 69, 'April 21, 2017 3:15:pm  ', '', 1, 'OnSale', 'NA'),
-(24, '', 6, 'Bo sack noodle', '99999999.99', 'Katas ni Carlo', '', 'Services', '13731582_1347579501923597_773599118497127360_n.jpg', 10, 'April 21, 2017 3:23:pm  ', '', 1, 'OnSale', 'NA');
+(27, '', 6, 'Iphone s3', '35000.00', 'wow iphone', '', 'Mobile Phones Accessories', 'IPhone-Apple-PNG-File.png', 3, 'April 22, 2017 5:21:am  ', '', 1, 'OnSale', 'NA'),
+(28, '', 6, 'Google Pixel', '35000.00', 'wow pixel ', '', 'Mobile Phones Accessories', 'img_preorder-form_pixel_en-1.png', 12, 'April 22, 2017 5:23:am  ', '', 1, 'OnSale', 'NA');
 
 -- --------------------------------------------------------
 
 --
--- 테이블 구조 `rating`
+-- Table structure for table `rating`
 --
 
 CREATE TABLE `rating` (
@@ -169,7 +164,7 @@ CREATE TABLE `rating` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- 테이블의 덤프 데이터 `rating`
+-- Dumping data for table `rating`
 --
 
 INSERT INTO `rating` (`id`, `rate`, `user_ID`, `product_comment`, `product_ID`, `product_date`) VALUES
@@ -182,7 +177,7 @@ INSERT INTO `rating` (`id`, `rate`, `user_ID`, `product_comment`, `product_ID`, 
 -- --------------------------------------------------------
 
 --
--- 테이블 구조 `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -205,7 +200,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- 테이블의 덤프 데이터 `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`user_ID`, `email`, `password`, `userType`, `firstName`, `lastName`, `contactNum`, `birthdate`, `year_level`, `course`, `strand`, `department`, `userStatus`, `check_User`, `hash`, `date_created`) VALUES
@@ -218,7 +213,7 @@ INSERT INTO `users` (`user_ID`, `email`, `password`, `userType`, `firstName`, `l
 -- --------------------------------------------------------
 
 --
--- 테이블 구조 `wishlist`
+-- Table structure for table `wishlist`
 --
 
 CREATE TABLE `wishlist` (
@@ -230,120 +225,118 @@ CREATE TABLE `wishlist` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- 테이블의 덤프 데이터 `wishlist`
+-- Dumping data for table `wishlist`
 --
 
 INSERT INTO `wishlist` (`wishListID`, `user_ID`, `productName`, `date_created`, `wishListActive`) VALUES
-(33, '6', 'test test test', 'April 20, 2017 10:53:pm  ', 1),
-(35, '6', 'Product 1', 'April 21, 2017 1:02:pm  ', 0),
-(36, '6', 'Product 1', 'April 21, 2017 2:22:pm  ', 1),
-(37, '6', 'Bo sack noodle', 'April 21, 2017 3:42:pm  ', 1);
+(46, '6', 'Iphone s3', 'April 22, 2017 5:36:am  ', 1),
+(47, '6', 'Google Pixel', 'April 22, 2017 5:36:am  ', 1);
 
 --
--- 덤프된 테이블의 인덱스
+-- Indexes for dumped tables
 --
 
 --
--- 테이블의 인덱스 `address`
+-- Indexes for table `address`
 --
 ALTER TABLE `address`
   ADD PRIMARY KEY (`user_ID`);
 
 --
--- 테이블의 인덱스 `announcement`
+-- Indexes for table `announcement`
 --
 ALTER TABLE `announcement`
   ADD PRIMARY KEY (`board_no`);
 
 --
--- 테이블의 인덱스 `orders`
+-- Indexes for table `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_ID` (`user_ID`);
 
 --
--- 테이블의 인덱스 `order_items`
+-- Indexes for table `order_items`
 --
 ALTER TABLE `order_items`
   ADD PRIMARY KEY (`id`),
   ADD KEY `order_id` (`order_id`);
 
 --
--- 테이블의 인덱스 `products`
+-- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`product_ID`);
 
 --
--- 테이블의 인덱스 `rating`
+-- Indexes for table `rating`
 --
 ALTER TABLE `rating`
   ADD PRIMARY KEY (`id`);
 
 --
--- 테이블의 인덱스 `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_ID`);
 
 --
--- 테이블의 인덱스 `wishlist`
+-- Indexes for table `wishlist`
 --
 ALTER TABLE `wishlist`
   ADD PRIMARY KEY (`wishListID`);
 
 --
--- 덤프된 테이블의 AUTO_INCREMENT
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- 테이블의 AUTO_INCREMENT `announcement`
+-- AUTO_INCREMENT for table `announcement`
 --
 ALTER TABLE `announcement`
   MODIFY `board_no` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- 테이블의 AUTO_INCREMENT `orders`
+-- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
--- 테이블의 AUTO_INCREMENT `order_items`
+-- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
--- 테이블의 AUTO_INCREMENT `products`
+-- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `product_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 --
--- 테이블의 AUTO_INCREMENT `rating`
+-- AUTO_INCREMENT for table `rating`
 --
 ALTER TABLE `rating`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
--- 테이블의 AUTO_INCREMENT `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `user_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
--- 테이블의 AUTO_INCREMENT `wishlist`
+-- AUTO_INCREMENT for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  MODIFY `wishListID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `wishListID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 --
--- 덤프된 테이블의 제약사항
+-- Constraints for dumped tables
 --
 
 --
--- 테이블의 제약사항 `orders`
+-- Constraints for table `orders`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_ID`) REFERENCES `users` (`user_ID`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
--- 테이블의 제약사항 `order_items`
+-- Constraints for table `order_items`
 --
 ALTER TABLE `order_items`
   ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
