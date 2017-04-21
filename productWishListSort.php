@@ -1,7 +1,3 @@
-<?php
-// Start the session
-session_start();
-?>
 
 <link rel="stylesheet" href="css/design.css" />
 <link rel="stylesheet" href="css/profile.css" />
@@ -11,7 +7,6 @@ session_start();
 <?php
 
 $short = $_POST['ShortA'];
-$glasstype = $_SESSION['email']; 
 
 switch ($short) {
 	case "high":
@@ -20,7 +15,7 @@ switch ($short) {
                FROM wishlist
                LEFT JOIN products
                ON wishlist.productName = products.productName
-               WHERE wishlist.wishListActive=1 AND products.email LIKE " $glasstype"
+               WHERE wishlist.wishListActive=1
                ORDER BY products.price DESC ';
 
               $response = @mysqli_query($dbconn, $querry);
