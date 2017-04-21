@@ -1,6 +1,6 @@
 <?php
 echo '<!--Footer-->
-        <footer class="footer1">
+        <footer class="footer1" style="text-decoration:none;">
             <div class="container">
 
                 <div class="row">

@@ -155,7 +155,7 @@
             <br><br><br><br>
 
             <div class="title" id="title1">
-                <h2>Welcome to iACADAMIT</h2>
+                <h2>Welcome to iMarket</h2>
             </div>
             <div class="row">
                 <div class="col-md-6 ">
@@ -199,9 +199,10 @@
                 <div class="col-md-6">
                     <h1> Dont have account yet?</h1>
                     <h3> Register so you can: </h3> <br>
-                    <p> Manage your iACADAMIT account </p>
-                    <p> Sell your shit / Buy your shit </p>
-                    <p> Add products to your whishlist </p>
+                    <p>  Manage your iMarket Account </p>
+                    <p>  Add products to your whishlist </p>
+                    <p>  Show your School Pride! </p>
+                    <p>  Sell and Buy Stuffs </p>
                     </br>
 
                     <div class="form-group">
