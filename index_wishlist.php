@@ -167,29 +167,29 @@
                               <option value="low">lowest to highest price</option>
                       </select>
                     </form>
-                    
-                    <?php $glasstype = $_SESSION['user_ID'] ?>
-                    
 
-                    <?php 
-         if(isset($_POST['ShortA'])) 
+                    <?php $glasstype = $_SESSION['user_ID'] ?>
+
+
+                    <?php
+         if(isset($_POST['ShortA']))
        {
           include 'productWishListSort.php';
        }
-       else               
+       else
        {
-   
-                      
+
+
             $querry = 'SELECT *
                FROM wishlist
                LEFT JOIN products
                ON wishlist.productName = products.productName
                WHERE wishlist.wishListActive=1 AND wishlist.user_ID LIKE "' . $glasstype . '"  ';
               $response = @mysqli_query($dbconn, $querry);
-              if($response) {  
+              if($response) {
                 $rowcount=mysqli_num_rows($response);
                 printf(" You have %d Items in your wishlist.\n",$rowcount);
-        
+
                 echo "<table class='table'>";
                 //echo "<tr><td> Brand Name </td><td> Brand Description </td><td> Brand Image </td>";
                 echo "<thead>
@@ -210,10 +210,10 @@
                 echo '<img src="productImages/' .$row['productImage']. '" width="70" height="70"> </td><td>';
                 echo '<b><a href="productPage1.php?pname='.$row['productName'].'" style="color:black; text-decoration:none;";>'.$row['productName'].'</a></b></td><td>';
                 echo $row['shortDes'] . '</td><td>';
-                echo $row['price'] . '</td><td>';   
-                echo $row['QTY'] . '</td><td>';
-                
-    
+                echo $row['price'] . '</td><td>';
+                echo $row['qty'] . '</td><td>';
+
+
                 echo'
                   <form method="POST" action="#">
                   <input type="hidden" name="idtest" value=""/>
