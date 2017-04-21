@@ -46,13 +46,13 @@
 			$stmt2->bind_param('sssssssdss', $marketEmail, $marketPassword, $marketFirstName, $marketLastName, $userType, $marketBirthDate, $marketContactNum, $marketStats, $hash, $createdate);
 			$stmt2->execute();
 
-				header('Location: index.php');
+				header('Location: registerWelcome.php');
 		}
 		else if ($userType == "employee") {
 			$query =  "INSERT INTO users (email, firstName, lastName, password, userType, birthDate, contactNum, hash, date_created) VALUES ('" . $marketEmail . "','" . $marketFirstName . "','" . $marketLastName . "','" . $marketPassword . "','" . $userType .  "','" . $marketBirthDate . "','" . $marketContactNum . "','" . $hash . "','" . $createdate . "')";
 
 			if(@mysqli_query($dbconn, $query)){
-				header('Location: index.php');
+				header('Location: registerWelcome.php');
 			}else{
 				echo mysqli_error($dbconn);
 			}
@@ -81,7 +81,7 @@
 
 		$bodyContent = '<h1>Welcome to iMarket, ' .$marketFirstName. '</h1>';
 		$bodyContent .= 'Please click the link below to verify your account:<br/>';
-		$bodyContent .= '<a href="http://localhost/THESIS/registerWelcome.php">http://localhost/THESIS/registerProcess.php?email='.$marketEmail.'&hash='.$hash.'</a>';
+		$bodyContent .= 'http://localhost/THESIS/accountVerify.php?email='.$marketEmail.'&hash='.$hash;
 
 		$mail->Subject = 'iMARKET Account Verification';
 		$mail->Body    = $bodyContent;

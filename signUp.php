@@ -271,7 +271,7 @@
                         </div>
                         </div>
 
-                        <input type="hidden" name="Status" value=1>
+                        <input type="hidden" name="Status" value=0>
 
                         <div class="form-group">
                             <div>
