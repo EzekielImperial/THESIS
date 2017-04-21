@@ -199,6 +199,11 @@
               <div class="user-side-menu_link-text">Sales Report</div>
             </a>
           </li>
+          <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
+            <a class="user-side-menu_link" href="productInventory.php">
+              <div class="user-side-menu_link-text">Inventory System</div>
+            </a>
+          </li>
         </ul>
       </div>
     <div class="col-md-9">
