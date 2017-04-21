@@ -165,7 +165,7 @@
                     <p class="list-group-item-text"><?php echo $row["shortDes"]; ?></p>
                     <div class="row">
                         <div class="col-md-6">
-                            <p class="lead"><?php echo '$'.$row["price"].' USD'; ?></p>
+                            <p class="lead"><?php echo '$'.$row["price"].' PHP'; ?></p>
                         </div>
                         <div class="col-md-6">
                             <a class="btn btn-success" href="../cartAction.php?action=addToCart&id=<?php echo $row["product_ID"]; ?>">Add to cart</a>
