@@ -264,13 +264,11 @@
 
 
       <?php  }
-      } else {
-      echo "<p>You have no previous transactions.</p>";
-    }
-
-       ?>
-     </tbody>
-     </table>
+      echo "</tbody>";
+      echo "</table>";
+    } else {
+        echo "<p>You have no previous transactions.</p>";
+     } ?>
     </div>
   </div>
 
