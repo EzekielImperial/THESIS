@@ -344,16 +344,12 @@ if(!$_SESSION['email']){
                                          </div>
                                          <?php echo "<p>". $row['qty']. " pieces available.</p>"; ?>
                                          <input type="submit" value="ADD TO BAG" class="btn btn-info"><br/></br>
-
-
-
+<!--  
 
                                          <a href="productWishListToDB.php?pname=<?php echo $row['productName']?>" style="color:black; text-decoration:none;";><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist </a>
 
-                                    <!--     <a href="#"><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist</a>  -->
+                                       <a href="#"><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist</a>  -->
                                      </form>
-
-                                     </br> </br>
 
                                      <form method="POST" action="productWishListToDB.php">
                                             <input type="hidden" name="pname" value="<?php echo $row['productName']?>" />

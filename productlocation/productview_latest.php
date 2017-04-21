@@ -148,8 +148,8 @@
 
         <!--Code Starts Here (main)-->
 
-
         <div class="row">
+        <br>
            <div class="row list-group">
                     <?php
         //get rows query
@@ -157,15 +157,15 @@
         if($query->num_rows > 0){
             while($row = $query->fetch_assoc()){
         ?>
-        <div class="item col-lg-4">
+        <div class="item col-lg-4" style="text-align: center;">
             <div class="thumbnail">
                 <div class="caption">
-				<img src="../productImages/<?php echo $row["productImage"];?>" width="250px" height="250px"/>
+				<img src="../productImages/<?php echo $row["productImage"];?>" width="150px" height="150px"/>
                     <h4 class="list-group-item-heading"><a href="../productPage1.php?pname=<?php echo $row['productName']?>"><?php echo $row["productName"]; ?></a></h4>
                     <p class="list-group-item-text"><?php echo $row["shortDes"]; ?></p>
                     <div class="row">
                         <div class="col-md-6">
-                            <p class="lead"><?php echo '$'.$row["price"].' PHP'; ?></p>
+                            <p class="lead"><?php echo "₱ " .$row["price"]; ?></p>
                         </div>
                         <div class="col-md-6">
                             <a class="btn btn-success" href="../cartAction.php?action=addToCart&id=<?php echo $row["product_ID"]; ?>">Add to cart</a>
