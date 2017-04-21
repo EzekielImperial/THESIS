@@ -39,13 +39,14 @@ if(isset($_SESSION['email'])){
   $orderuser=$_SESSION['email'];
 }else{
   echo "<script>LOG IN</script>";
+
 }
 
-// get customer details by session customer ID
+if(!$_SESSION['email']){
+ header("Location: login.php", 404);
+          exit;}
 
-$sql='SELECT * FROM users WHERE email = "'.$_SESSION['email'].'"';
-$query = $dbconn->query($sql) or die($dbconn->error);
-$row = $query->fetch_assoc();
+// get customer details by session customer ID
 ?>
 
 
@@ -126,7 +127,7 @@ $row = $query->fetch_assoc();
                 </div>
                 <!--Size-->
                 <div class="col-sm-1">
-                    <a href="../index.php"><img src="../image/logo.png" width="70px" height="70px"></a>
+                    <a href="index.php"><img src="image/logo.png" width="70px" height="70px"></a>
                 </div>
                 <div class="smallsearch col-sm-8 col-xs-11">
                     <div class="row">
@@ -179,20 +180,265 @@ $row = $query->fetch_assoc();
 
 <div class="container">
     <h1>Order Preview</h1>
-    <table class="table">
-    <thead>
-        <tr>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Subtotal</th>
-        </tr>
-    </thead>
-    <tbody>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="shipAddr">
+            <h4>Personal Info</h4><hr>
+            <?php $query = $dbconn->query('SELECT * FROM users WHERE email="'.$_SESSION['email'].'"');
+            if($query->num_rows > 0){
+              while($row = $query->fetch_assoc()) {
+            ?>
+            <p><?php echo $row['firstName']. " " .$row['lastName'] ?></p>
+            <p><?php echo $row['email'] ?></p>
+            <p><?php echo $row['contactNum'] ?></p>
+            <p><?php echo $row['birthdate'] ?></p>
+            <button id='personal-btn' class='btn btn-info'>Edit Info</button><br/>
+            <form name="personalInfo" method="post" action="updateInfo.php" id="personal-form">
+              <fieldset>
+                <div class="control-group form-group">
+                  <div class="controls"><br/>
+                    <input type="email" class="form-control" name="email" id="email" value=<?php echo $row['email'] ?>>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="control-group form-group col-lg-6">
+                    <div class="controls">
+                      <input type="text" class="form-control" name="firstName" id="firstName" value=<?php echo $row['firstName'] ?>>
+                    </div>
+                  </div>
+                  <div class="control-group form-group col-lg-6">
+                    <div class="controls">
+                      <input type="text" class="form-control" name="lastName" id="lastName" value=<?php echo $row['lastName'] ?>>
+                    </div>
+                  </div>
+                </div>
+                  <div class="control-group form-group col-lg-6">
+                    <div class="controls">
+                      <label>Contact Number</label>
+                      <input type="text" class="form-control" name="contactNum" id="contactNum" value=<?php echo $row['contactNum'] ?>>
+                    </div>
+                  </div>
+                  <div class="control-group form-group col-lg-6">
+                    <div class="controls">
+                      <label>Birthdate</label>
+                      <input type="date" class="form-control" name="birthDate" id="birthDate" required>
+                    </div>
+                  </div>
+                  <input type="submit" value="Update" class="btn btn-primary"> &nbsp;&nbsp;&nbsp;
+                  <input type="reset" value="Clear" class="btn">
+                </form>
+              </fieldset>
+            <?php
+              }
+            }
+             ?>
+
+             <br/><h4>Payment Method</h4><hr>
+             <div class="control-group form-group col-lg-4">
+               <div class="controls">
+                 <select class="form-control col-sm-2" name="payment" id="payment" required>
+                   <option value="">Select Payment Method</option>
+                   <option value="Bank Deposit">Bank Deposit</option>
+                   <option value="COD">Cash On Delivery</option>
+                </select>
+              </div>
+            </div>
+            <div class="control-group form-group col-lg-4">
+              <div class="controls">
+                <select class="form-control col-sm-2" name="delivery" id="delivery" required onChange="onSelectChange()">
+                  <option value="">Select Delivery Method</option>
+                  <option value="Shipping">Shipping</option>
+                  <option value="Meetup">Meetup</option>
+               </select>
+             </div>
+           </div><br/><br/><br/>
+           <div id="address">
+            <br/><h4>Shipping Info</h4><hr>
+            <?php $query = $dbconn->query('SELECT * FROM address WHERE email="'.$_SESSION['email'].'"');
+            if($query->num_rows > 0){
+              while($row = $query->fetch_assoc()) {
+            ?>
+            <p>House No./Unit and Floor No.: <?php echo $row['houseNum']; ?></p>
+            <p>Street: <?php echo $row['street']; ?></p>
+            <p>Building: <?php echo $row['building']; ?></p>
+            <p>Subd./Apartment/Village: <?php echo $row['subdivision']; ?></p>
+            <p>Barangay: <?php echo $row['barangay']; ?></p>
+            <p>City: <?php echo $row['city']; ?></p>
+            <p>Province: <?php echo $row['province']; ?></p>
+            <p>Zip Code: <?php echo $row['zipCode']; ?></p>
+            <button id="address-btn" class="btn btn-info">Edit Address</button>
+          </fieldset>
+            <?php
+              }
+            } else {
+            ?>    <form name="address" method="post" action="updateAddress.php" id="address-form">
+                  <div class="control-group form-group">
+                    <div class="controls">
+                      <input type="hidden" value=<?php $_SESSION['email']; ?> name="email">
+                      <label>House No./Unit and Floor No.</label><small> eg. #72 or 1635 16/F</small>
+                      <input type="text" class="form-control" name="houseNum" id="houseNum" required>
+                    </div>
+                  </div>
+                  <div class="control-group form-group">
+                    <div class="controls">
+                      <label>Street</label>
+                      <input type="text" class="form-control" name="street" id="street" required>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="control-group form-group col-lg-6">
+                      <div class="controls">
+                        <label>Building</label>
+                        <input type="text" class="form-control" name="building" id="building">
+                      </div>
+                    </div>
+                    <div class="control-group form-group col-lg-6">
+                      <div class="controls">
+                        <label>Subd./Apartment/Village</label>
+                        <input type="text" class="form-control" name="subd" id="subd">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="control-group form-group col-lg-6">
+                      <div class="controls">
+                        <label>Barangay</label>
+                        <input type="text" class="form-control" name="brgy" id="brgy">
+                      </div>
+                    </div>
+                    <div class="control-group form-group col-lg-6">
+                      <div class="controls">
+                        <label>City</label>
+                        <input type="text" class="form-control" name="city" id="city" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                  <div class="control-group form-group col-lg-6">
+                    <div class="controls">
+                      <label>Province</label>
+                        <select class="form-control col-sm-2" name="province" id="province" required>
+                            <option value="">--Select Province--</option>
+                            <option value="Metro Manila">Metro Manila</option>
+                            <option value="Abra">Abra</option>
+                            <option value="Agusan del Norte">Agusan del Norte</option>
+                            <option value="Agusan del Su">Agusan del Sur</option>
+                            <option value="Aklan">Aklan</option>
+                            <option value="Albay">Albay</option>
+                            <option value="Antique">Antique</option>
+                            <option value="Apayao">Apayao</option>
+                            <option value="Aurora">Aurora</option>
+                            <option value="Basilan">Basilan</option>
+                            <option value="Bataan">Bataan</option>
+                            <option value="Batanes">Batanes</option>
+                            <option value="Batangas">Batangas</option>
+                            <option value="Benguet">Benguet</option>
+                            <option value="Biliran">Biliran</option>
+                            <option value="Bohol">Bohol</option>
+                            <option value="Bukidnon">Bukidnon</option>
+                            <option value="Bulacan">Bulacan</option>
+                            <option value="Cagayan">Cagayan</option>
+                            <option value="Camarines Norte">Camarines Norte</option>
+                            <option value="Camarines Sur">Camarines Sur</option>
+                            <option value="Camiguin">Camiguin</option>
+                            <option value="Capiz">Capiz</option>
+                            <option value="Catanduanes">Catanduanes</option>
+                            <option value="Cavite">Cavite</option>
+                            <option value="Cebu">Cebu</option>
+                            <option value="Compostela Valley">Compostela Valley</option>
+                            <option value="Cotabato">Cotabato</option>
+                            <option value="Davao Oriental">Davao Oriental</option>
+                            <option value="Davao del Norte">Davao del Norte</option>
+                            <option value="Davao del Sur">Davao del Sur</option>
+                            <option value="Dinagat Islands">Dinagat Islands</option>
+                            <option value="Eastern Samar">Eastern Samar</option>
+                            <option value="Guimaras">Guimaras</option>
+                            <option value="Ifugao">Ifugao</option>
+                            <option value="Ilocos Norte">Ilocos Norte</option>
+                            <option value="Ilocos Sur">Ilocos Sur</option>
+                            <option value="Iloilo">Iloilo</option>
+                            <option value="Isabela">Isabela</option>
+                            <option value="Kalinga">Kalinga</option>
+                            <option value="La Union">La Union</option>
+                            <option value="Laguna">Laguna</option>
+                            <option value="Lanao del Norte">Lanao del Norte</option>
+                            <option value="Lanao del Sur">Lanao del Sur</option>
+                            <option value="Leyte">Leyte</option>
+                            <option value="Maguin">Maguindanao</option>
+                            <option value="Marinduque">Marinduque</option>
+                            <option value="Masbate">Masbate</option>
+                            <option value="Mindoro Occidental">Mindoro Occidental</option>
+                            <option value="Mindoro Oriental">Mindoro Oriental</option>
+                            <option value="Misamis Occidental">Misamis Occidental</option>
+                            <option value="Misamis Oriental">Misamis Oriental</option>
+                            <option value="Mountain Province">Mountain Province</option>
+                            <option value="Negros Occidental">Negros Occidental</option>
+                            <option value="Negros Oriental">Negros Oriental</option>
+                            <option value="North Cotabato">North Cotabato</option>
+                            <option value="Northern Samar">Northern Samar</option>
+                            <option value="Nueva Ecija">Nueva Ecija</option>
+                            <option value="Nueva Vizcaya">Nueva Vizcaya</option>
+                            <option value="Palawan">Palawan</option>
+                            <option value="Pampanga">Pampanga</option>
+                            <option value="Pangasinan">Pangasinan</option>
+                            <option value="Quezon">Quezon</option>
+                            <option value="Quirino">Quirino</option>
+                            <option value="Rizal">Rizal</option>
+                            <option value="Romblon">Romblon</option>
+                            <option value="Samar">Samar</option>
+                            <option value="Sarangani">Sarangani</option>
+                            <option value="Siquijor">Siquijor</option>
+                            <option value="Sorsogon">Sorsogon</option>
+                            <option value="South Cotabato">South Cotabato</option>
+                            <option value="Southern Leyte">Southern Leyte</option>
+                            <option value="Sultan Kudarat">Sultan Kudarat</option>
+                            <option value="Sulu">Sulu</option>
+                            <option value="Surigao del Norte">Surigao del Norte</option>
+                            <option value="Surigao del Sur">Surigao del Sur</option>
+                            <option value="Tarlac">Tarlac</option>
+                            <option value="Tawi-Tawi">Tawi-Tawi</option>
+                            <option value="Zambales">Zambales</option>
+                            <option value="Zamboanga Sibugay">Zamboanga Sibugay</option>
+                            <option value="Zamboanga del Norte">Zamboanga del Norte</option>
+                            <option value="Zamboanga del Sur">Zamboanga del Sur</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="control-group form-group col-lg-6">
+                      <div class="controls">
+                        <label>Zip Code</label>
+                        <input type="number" class="form-control" name="zipCode" id="zipCode" required>
+                      </div>
+                    </div>
+                  </div>
+                  <input type="submit" value="Save Address to my profile" class="btn btn-primary"> &nbsp;&nbsp;&nbsp;
+                  <input type="reset" value="Clear" class="btn"><br/><br/>
+                </form>
+              </div>
+            <?php
+            }
+             ?>
+
+        </div>
+
+      </div>
+      <div class="col-md-4">
         <?php
         if($cart->total_items() > 0){
             //get cart items from session
             $cartItems = $cart->contents();
+        ?>
+            <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+        <?php
             foreach($cartItems as $item){
         ?>
         <tr>
@@ -201,32 +447,64 @@ $row = $query->fetch_assoc();
             <td><?php echo $item["qty"]; ?></td>
             <td><?php echo '$'.$item["subtotal"].' Php'; ?></td>
         </tr>
-        <?php } }else{ ?>
-        <tr><td colspan="4"><p>No items in your cart......</p></td>
+      </tbody>
+        <?php }?>
+        <tfoot>
+            <tr>
+                <td colspan="2"></td>
+                <?php if($cart->total_items() > 0){ ?>
+                <td colspan="2" class="text-center"><strong>Total <?php echo '$'.$cart->total().' Php'; ?></strong></td>
+                <?php } ?>
+            </tr>
+        </tfoot>
+        </table>
+        <?php } else{ ?>
+        <p>Your cart is empty.</p>
         <?php } ?>
-    </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="3"></td>
-            <?php if($cart->total_items() > 0){ ?>
-            <td class="text-center"><strong>Total <?php echo '$'.$cart->total().' Php'; ?></strong></td>
-            <?php } ?>
-        </tr>
-    </tfoot>
-    </table>
-    <div class="shipAddr">
+        <div class="footBtn">
+            <a href="index.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Continue Shopping</a>
+            <a href="cartAction.php?action=placeOrder" onclick="return confirm('Are you sure you want to place an order?')" class="btn btn-success orderBtn">Place Order <i class="glyphicon glyphicon-menu-right"></i></a>
+        </div>
+      </div>
+    </div>
 
-        <h4>Shipping Details</h4>
-        <p><?php echo $row['lastName']; ?></p>
-        <p><?php echo $row['email']; ?></p>
-        <p><?php echo $row['contactNum']; ?></p>
-        <p><?php echo $row['birthdate']; ?></p>
-    </div>
-    <div class="footBtn">
-        <a href="index.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Continue Shopping</a>
-        <a href="cartAction.php?action=placeOrder" class="btn btn-success orderBtn">Place Order <i class="glyphicon glyphicon-menu-right"></i></a>
-    </div>
+
+
 </div>
     <?php include 'footer.php';?>
+
+    <script type="text/javascript">
+      var button = document.getElementById("personal-btn");
+      var myDiv = document.getElementById("personal-form");
+
+      function show() {
+        myDiv.style.display = "block";
+      }
+
+      function hide() {
+        myDiv.style.display = "none";
+      }
+
+      function toggle() {
+        if (myDiv.style.display === "none") {
+            show();
+        } else {
+            hide();
+        }
+      }
+
+      hide();
+
+      button.addEventListener("click", toggle, false);
+
+      function onSelectChange() {
+          var value = document.getElementById("delivery").value;
+          if (value == 'Shipping') {
+              document.getElementById('address').style.display = 'block';
+          } else {
+              document.getElementById('address').style.display = 'none';
+          }
+      }
+    </script>
 </body>
 </html>

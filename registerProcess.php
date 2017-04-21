@@ -11,7 +11,8 @@
     $marketContactNum=$_POST['contactNum'];
     $marketStats=$_POST['Status'];
 		$hash = md5( rand(0,1000) );
-
+		date_default_timezone_set('Asia/Manila');  // creating date_created
+        $createdate =date('F j, Y g:i:a  ');          // date_created format
 
 	if(!filter_var($marketEmail, FILTER_VALIDATE_EMAIL)) {
       	echo "<script>alert('Email is Invalid.');history.back();</script>";
@@ -39,14 +40,16 @@
 		exit;
 	} else {
 		if ($userType == "student") {
-			$stmt2 = $dbconn->prepare('INSERT INTO users (email, password, firstName, lastName, userType, birthDate, contactNum, userStatus, hash) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
-			$stmt2->bind_param('sssssssds', $marketEmail, $marketPassword, $marketFirstName, $marketLastName, $userType, $marketBirthDate, $marketContactNum, $marketStats, $hash);
+			$stmt2 = $dbconn->prepare('INSERT INTO users (email, password, firstName, lastName, userType, birthDate, contactNum, userStatus, hash, date_created) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+			$stmt2->bind_param('sssssssdss', $marketEmail, $marketPassword, $marketFirstName, $marketLastName, $userType, $marketBirthDate, $marketContactNum, $marketStats, $hash, $createdate);
 			$stmt2->execute();
 
 				header('Location: registerWelcome.php');
 		}
 		else if ($userType == "employee") {
-			$query =  "INSERT INTO users (email, firstName, lastName, password, userType, birthDate, contactNum)values ('" . $marketEmail . "','" . $marketFirstName . "','" . $marketLastName . "','" . $marketPassword . "','" . $userType .  "','" . $marketBirthDate . "','" . $marketContactNum . "')";
+			$query = $dbconn->prepare('INSERT INTO users (email, password, firstName, lastName, userType, birthDate, contactNum, userStatus, hash, date_created) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+			$query->bind_param('sssssssdss', $marketEmail, $marketPassword, $marketFirstName, $marketLastName, $userType, $marketBirthDate, $marketContactNum, $marketStats, $hash, $createdate);
+			$query->execute();
 
 			if(@mysqli_query($dbconn, $query)){
 				header('Location: registerWelcome.php');

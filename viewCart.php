@@ -168,21 +168,25 @@
 
 <div class="container">
     <h1>Shopping Cart</h1>
-    <table class="table">
-    <thead>
-        <tr>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Subtotal</th>
-            <th>&nbsp;</th>
-        </tr>
-    </thead>
-    <tbody>
+
         <?php
         if($cart->total_items() > 0){
             //get cart items from session
             $cartItems = $cart->contents();
+        ?>
+        <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        <?php
             foreach($cartItems as $item){
         ?>
         <tr>
@@ -194,7 +198,8 @@
                 <a href="cartAction.php?action=removeCartItem&id=<?php echo $item["rowid"]; ?>" class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="glyphicon glyphicon-trash"></i></a>
             </td>
         </tr>
-        <?php } }else{ ?>
+        <?php }
+        }else{ ?>
         <tr><td colspan="5"><p>Your cart is empty.....</p></td>
         <?php } ?>
     </tbody>
