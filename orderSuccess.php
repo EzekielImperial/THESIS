@@ -1,3 +1,8 @@
+<?php
+if(!isset($_REQUEST['id'])){
+    header("Location: index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,28 +24,10 @@
 
 <body>
 
-
     <?php
+        session_start();
         require_once('connector.php');
-		
-
-
-// initializ shopping cart class
-include 'Cart.php';
-$cart = new Cart;
-
-// redirect to home if cart is empty
-if($cart->total_items() <= 0){
-    header("Location: index.php");
-}
-// set customer ID in session
-$orderuser=$_SESSION['sessCustomerID'];
-
-// get customer details by session customer ID
-$query = $dbconn->query("SELECT * FROM users WHERE user_ID = ".$orderuser);
-$row = $query->fetch_assoc();
-?>
-
+    ?>
 
 
         <nav id="navbar-main">
@@ -165,60 +152,9 @@ $row = $query->fetch_assoc();
         </nav>
 
         <!--Code Starts Here (main)-->
-
-
-    
-
-
 <div class="container">
-    <h1>Order Preview</h1>
-    <table class="table">
-    <thead>
-        <tr>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Subtotal</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        if($cart->total_items() > 0){
-            //get cart items from session
-            $cartItems = $cart->contents();
-            foreach($cartItems as $item){
-        ?>
-        <tr>
-            <td><?php echo $item["name"]; ?></td>
-            <td><?php echo '$'.$item["price"].' Php'; ?></td>
-            <td><?php echo $item["qty"]; ?></td>
-            <td><?php echo '$'.$item["subtotal"].' Php'; ?></td>
-        </tr>
-        <?php } }else{ ?>
-        <tr><td colspan="4"><p>No items in your cart......</p></td>
-        <?php } ?>
-    </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="3"></td>
-            <?php if($cart->total_items() > 0){ ?>
-            <td class="text-center"><strong>Total <?php echo '$'.$cart->total().' Php'; ?></strong></td>
-            <?php } ?>
-        </tr>
-    </tfoot>
-    </table>
-    <div class="shipAddr">
-	
-        <h4>Shipping Details</h4>
-        <p><?php echo $row['lastName']; ?></p>
-        <p><?php echo $row['email']; ?></p>
-        <p><?php echo $row['contactNum']; ?></p>
-        <p><?php echo $row['birthdate']; ?></p>
-    </div>
-    <div class="footBtn">
-        <a href="index.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Continue Shopping</a>
-        <a href="cartAction.php?action=placeOrder" class="btn btn-success orderBtn">Place Order <i class="glyphicon glyphicon-menu-right"></i></a>
-    </div>
+    <h1>Order Status</h1>
+    <p>Your order has submitted successfully. Order ID is #<?php echo $_GET['id']; ?></p>
 </div>
     <?php include 'footer.php';?>
 </body>
