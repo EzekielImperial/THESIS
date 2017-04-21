@@ -184,7 +184,7 @@
                FROM wishlist
                LEFT JOIN products
                ON wishlist.productName = products.productName
-               WHERE wishlist.wishListActive=1 AND products.user_ID LIKE "' . $glasstype . '"  ';
+               WHERE wishlist.wishListActive=1 AND wishlist.user_ID LIKE "' . $glasstype . '"  ';
               $response = @mysqli_query($dbconn, $querry);
               if($response) {  
                 $rowcount=mysqli_num_rows($response);

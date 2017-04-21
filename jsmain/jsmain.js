@@ -1,3 +1,6 @@
+
+
+
 function onSelectChange() {
     var value = document.getElementById("category").value;
     if ( (value == 'Clothing and Accessories') || (value == 'Bags and Accessories')) {
@@ -6,3 +9,4 @@ function onSelectChange() {
         document.getElementById('gender').style.display = 'none';
     }
 }
+

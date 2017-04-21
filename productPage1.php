@@ -1,4 +1,4 @@
-<?php
+  <?php
 session_start();
 if(!$_SESSION['email']){
  header("need to be login", 404);
@@ -348,7 +348,7 @@ if(!$_SESSION['email']){
 
 
 
-                                         <a href="productWishListToDB.php?pname= <?php echo $row['productName']?>" style="color:black; text-decoration:none;";><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist </a>
+                                         <a href="productWishListToDB.php?pname=<?php echo $row['productName']?>" style="color:black; text-decoration:none;";><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist </a>
 
                                     <!--     <a href="#"><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist</a>  -->
                                      </form>
