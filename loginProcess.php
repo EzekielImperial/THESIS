@@ -30,7 +30,7 @@
 					$_SESSION['password']=$rows['password'];
 					$_SESSION['userType']=$rows['userType'];
 					$userStatus=$rows['userStatus'];
-					echo"<script>window.alert('Welcome');</script>";
+					echo"<script>window.alert('Welcome Back');</script>";
 					echo"<script>location.href='index.php';</script>";
 
 				}else{
@@ -46,6 +46,7 @@
 
 				if($rows = $result->fetch_assoc()){
 					$_SESSION['email']=$rows['email'];
+					$_SESSION['user_ID']=$rows['user_ID'];
 					$_SESSION['password']=$rows['password'];
 					$_SESSION['userType']=$rows['userType'];
 					$userStatus=$rows['userStatus'];
