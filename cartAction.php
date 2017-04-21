@@ -17,7 +17,7 @@ if(isset($_REQUEST['action']) && !empty($_REQUEST['action'])){
             'price' => $row['price'],
             'qty' => 1
         );
-        
+
         $insertItem = $cart->insert($itemData);
         $redirectLoc = $insertItem?'viewCart.php':'index.php';
         header("Location: ".$redirectLoc);
@@ -31,10 +31,10 @@ if(isset($_REQUEST['action']) && !empty($_REQUEST['action'])){
     }elseif($_REQUEST['action'] == 'removeCartItem' && !empty($_REQUEST['id'])){
         $deleteItem = $cart->remove($_REQUEST['id']);
         header("Location: viewCart.php");
-    }elseif($_REQUEST['action'] == 'placeOrder' && $cart->total_items() > 0 && !empty($_SESSION['sessCustomerID'])){
+    }elseif($_REQUEST['action'] == 'placeOrder' && $cart->total_items() > 0 && !empty($_SESSION['user_ID'])){
         // insert order details into database
-        $insertOrder = $dbconn->query("INSERT INTO orders (user_ID, total_price, created, modified) VALUES ('".$_SESSION['sessCustomerID']."', '".$cart->total()."', '".date("Y-m-d H:i:s")."', '".date("Y-m-d H:i:s")."')");
-        
+        $insertOrder = $dbconn->query("INSERT INTO orders (user_ID, total_price, created, modified) VALUES ('".$_SESSION['user_ID']."', '".$cart->total()."', '".date("Y-m-d H:i:s")."', '".date("Y-m-d H:i:s")."')");
+
         if($insertOrder){
             $orderID = $dbconn->insert_id;
             $sql = '';
@@ -45,7 +45,7 @@ if(isset($_REQUEST['action']) && !empty($_REQUEST['action'])){
             }
             // insert order items into database
             $insertOrderItems = $dbconn->multi_query($sql);
-            
+
             if($insertOrderItems){
                 $cart->destroy();
                 header("Location: orderSuccess.php?id=$orderID");
