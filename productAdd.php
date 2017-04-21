@@ -226,7 +226,7 @@ if(!$_SESSION['email']){
                         <p class="help-block">Example "Recomended Image Size in pixel 400 X 300"</p>
                     </div>
 
-                    <input type="hidden" name="ownerEmail" value="<?php echo $_SESSION['email']; ?>">
+                    <input type="hidden" name="ownerID" value="<?php echo $_SESSION['user_ID']; ?>">
 
 
                     <div class="form-group">

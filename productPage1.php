@@ -346,7 +346,6 @@ if(!$_SESSION['email']){
                                          <input type="submit" value="ADD TO BAG" class="btn btn-info"><br/></br>
                                          
 
-                                         
 
 
                                          <a href="productWishListToDB.php?pname= <?php echo $row['productName']?>" style="color:black; text-decoration:none;";><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist </a>
