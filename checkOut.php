@@ -34,10 +34,17 @@ if($cart->total_items() <= 0){
     header("Location: index.php");
 }
 // set customer ID in session
-$orderuser=$_SESSION['sessCustomerID'];
+
+if(isset($_SESSION['email'])){
+  $orderuser=$_SESSION['email'];
+}else{
+  echo "<script>LOG IN</script>";
+}
 
 // get customer details by session customer ID
-$query = $dbconn->query("SELECT * FROM users WHERE user_ID = ".$orderuser);
+
+$sql='SELECT * FROM users WHERE email = "'.$_SESSION['email'].'"';
+$query = $dbconn->query($sql) or die($dbconn->error);
 $row = $query->fetch_assoc();
 ?>
 
