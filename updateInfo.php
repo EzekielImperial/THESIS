@@ -2,6 +2,7 @@
   session_start();
   require_once('connector.php');
 
+  $emailorig=$_POST['emailorig'];
   $email=$_POST['email'];
   $firstName=$_POST['firstName'];
   $lastName=$_POST['lastName'];
@@ -18,11 +19,11 @@
     exit;
   }
 
-  if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  if(!filter_var($emailorig, FILTER_VALIDATE_EMAIL)) {
     echo "<script>alert('Email is Invalid. Please try again !');history.back();</script>";
   } else {
-    $stmt = $dbconn->prepare('UPDATE users SET firstName=?, lastName=?, contactNum=?, birthDate=? WHERE email=?');
-    $stmt->bind_param('sssss', $firstName, $lastName, $contactNum, $birthDate, $email);
+    $stmt = $dbconn->prepare('UPDATE users SET email=?, firstName=?, lastName=?, contactNum=?, birthDate=? WHERE email=?');
+    $stmt->bind_param('ssssss', $email, $firstName, $lastName, $contactNum, $birthDate, $emailorig);
 
     if($stmt->execute()) {
       echo "<script>window.alert('Your Account is updated.');</script>";
