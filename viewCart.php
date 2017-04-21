@@ -14,14 +14,27 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!--CSS-->
     <link rel="stylesheet" href="css/design.css" />
+	<script>
+    function updateCartItem(obj,id){
+        $.get("cartAction.php", {action:"updateCartItem", id:id, qty:obj.value}, function(data){
+            if(data == 'ok'){
+                location.reload();
+            }else{
+                alert('Cart update failed, please try again.');
+            }
+        });
+    }
+    </script>
 
 </head>
 
 <body>
 
     <?php
-        session_start();
         require_once('connector.php');
+		// initializ shopping cart class
+		include 'Cart.php';
+		$cart = new Cart;
     ?>
 
 
@@ -40,8 +53,8 @@
                         <?php if(isset($_SESSION['email'])&& $_SESSION['userType'] == 'employee'){ ?>
                         <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                         <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
-                        <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                        <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                        <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
+                        <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                         <li class="upper-links dropdown"><a class="links">My Account</a>
                             <ul class="dropdown-menu">
@@ -66,8 +79,8 @@
                                         <?php }elseif(isset($_SESSION['email'])&& $_SESSION['userType'] == 'admin'){ ?>
                                         <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                                         <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
-                                        <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                                        <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                                        <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
+                                        <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                                         <li class="upper-links dropdown"><a class="links">My Account</a>
                                             <ul class="dropdown-menu">
@@ -105,12 +118,14 @@
                 </div>
                 <div class="smallsearch col-sm-8 col-xs-11">
                     <div class="row">
-                        <input class="navbar-input col-xs-11" type="" placeholder="Search for Products, Brands and more" name="">
-                        <button class="navbar-button col-xs-1">
+                      <form action="index_result.php" method="POST" role="search">
+                        <input class="navbar-input col-xs-11" type="text" name="search" placeholder="Search for Products, Brands and more" name="">
+                        <button class="navbar-button col-xs-1" type="submit">
                         <svg width="15px" height="15px">
                             <path d="M11.618 9.897l4.224 4.212c.092.09.1.23.02.312l-1.464 1.46c-.08.08-.222.072-.314-.02L9.868 11.66M6.486 10.9c-2.42 0-4.38-1.955-4.38-4.367 0-2.413 1.96-4.37 4.38-4.37s4.38 1.957 4.38 4.37c0 2.412-1.96 4.368-4.38 4.368m0-10.834C2.904.066 0 2.96 0 6.533 0 10.105 2.904 13 6.486 13s6.487-2.895 6.487-6.467c0-3.572-2.905-6.467-6.487-6.467 "></path>
                         </svg>
                     </button>
+                  </form>
                     </div>
                 </div>
 
@@ -146,63 +161,55 @@
             </div>
         </nav>
 
-        <!--Code Starts Here(main)-->
-        <div class="container">
-
-  <h1>Shopping Cart</h1>
-  <table class="table table-hover">
-  <thead>
-      <tr>
-          <th>Product</th>
-          <th>Price</th>
-          <th>Quantity</th>
-          <th>Subtotal</th>
-      </tr>
-  </thead>
-  <tbody>
+        <!--First-->
+        <!--Code Starts Here (main)-->
 
 
-      <?php
 
-      include 'cart.php';
-      $cart = new Cart;
-
-
-      if($cart->total_items() > 0){
-          //get cart items from session
-          $cartItems = $cart->contents();
-          foreach($cartItems as $item){
-      ?>
-      <tr>
-          <td><?php echo $item["name"]; ?></td>
-          <td><?php echo '₱'.$item["price"]; ?></td>
-          <td><input type="number" class="form-control text-center" value="<?php echo $item["qty"]; ?>" onchange="updateCartItem(this, '<?php echo $item["rowid"]; ?>')"></td>
-          <td><?php echo '₱'.$item["subtotal"]; ?></td>
-          <td>
-              <a href="cartAction.php?action=removeCartItem&id=<?php echo $item["rowid"]; ?>" class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="glyphicon glyphicon-trash"></i></a>
-          </td>
-      </tr>
-      <?php } }else{ ?>
-      <tr><td colspan="5"><p>Your cart is empty.</p></td><br/></tr>
-      <a href="productView.php" class="btn btn-warning">Go Shopping <i class="glyphicon glyphicon-menu-right"></i></a>
-      <?php } ?>
-  </tbody>
-  <tfoot>
-      <tr>
-          <?php if($cart->total_items() > 0){ ?>
-          <td><button onclick="goBack()" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Continue Shopping</button></td>
-          <td colspan="2"></td>
-          <td class="text-center"><strong>Total <?php echo '₱'.$cart->total(); ?></strong></td>
-          <td><a href="checkOut.php" class="btn btn-success btn-block">Checkout <i class="glyphicon glyphicon-menu-right"></i></a></td>
-          <?php } ?>
-
-
-      </tr>
-  </tfoot>
-  </table>
+<div class="container">
+    <h1>Shopping Cart</h1>
+    <table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        if($cart->total_items() > 0){
+            //get cart items from session
+            $cartItems = $cart->contents();
+            foreach($cartItems as $item){
+        ?>
+        <tr>
+            <td><?php echo $item["name"]; ?></td>
+            <td><?php echo '$'.$item["price"].' USD'; ?></td>
+            <td><input type="number" class="form-control text-center" value="<?php echo $item["qty"]; ?>" onchange="updateCartItem(this, '<?php echo $item["rowid"]; ?>')"></td>
+            <td><?php echo '$'.$item["subtotal"].' USD'; ?></td>
+            <td>
+                <a href="cartAction.php?action=removeCartItem&id=<?php echo $item["rowid"]; ?>" class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="glyphicon glyphicon-trash"></i></a>
+            </td>
+        </tr>
+        <?php } }else{ ?>
+        <tr><td colspan="5"><p>Your cart is empty.....</p></td>
+        <?php } ?>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td><a href="index.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Continue Shopping</a></td>
+            <td colspan="2"></td>
+            <?php if($cart->total_items() > 0){ ?>
+            <td class="text-center"><strong>Total <?php echo '$'.$cart->total().' USD'; ?></strong></td>
+            <td><a href="checkout.php" class="btn btn-success btn-block">Checkout <i class="glyphicon glyphicon-menu-right"></i></a></td>
+            <?php } ?>
+        </tr>
+    </tfoot>
+    </table>
 </div>
     <?php include 'footer.php';?>
-
 </body>
-
 </html>

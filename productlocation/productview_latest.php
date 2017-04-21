@@ -41,7 +41,7 @@
                         <li class="upper-links"><a class="links" href="../productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                         <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
                         <li class="upper-links"><a class="links" href="../index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                        <li class="upper-links"><a class="links" href="../index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                        <li class="upper-links"><a class="links" href="../viewCart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                         <li class="upper-links dropdown"><a class="links">My Account</a>
                             <ul class="dropdown-menu">
@@ -54,7 +54,7 @@
                                 <li class="upper-links"><a class="links" href="../productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                                 <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
                                 <li class="upper-links"><a class="links" href="../index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                                <li class="upper-links"><a class="links" href="../index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                                <li class="upper-links"><a class="links" href="../viewCart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                                 <li class="upper-links dropdown"><a class="links">My Account</a>
                                     <ul class="dropdown-menu">
@@ -67,7 +67,7 @@
                                         <li class="upper-links"><a class="links" href="../productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                                         <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
                                         <li class="upper-links"><a class="links" href="../index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                                        <li class="upper-links"><a class="links" href="../index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                                        <li class="upper-links"><a class="links" href="../viewCart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                                         <li class="upper-links dropdown"><a class="links">My Account</a>
                                             <ul class="dropdown-menu">
@@ -152,31 +152,31 @@
         <div class="row">
            <div class="row list-group">
                     <?php
-                    //get rows query
-                    $query = $dbconn->query("SELECT * FROM products WHERE productActive = 1 ORDER BY product_ID DESC");
-                    if($query->num_rows > 0){
-                        while($row = mysqli_fetch_array($query)){
-                    ?>
-                    <div class="item col-lg-4">
-                        <div class="thumbnail">
-                            <div class="caption">
-                              <img src="../productImages/<?php echo $row["productImage"];?>" width="250px" height="250px"/>
-                                <h4 class="list-group-item-heading"><a href="../productPage1.php?pname=<?php echo $row['productName']?>"><?php echo $row["productName"]; ?></a></h4>
-                                <p class="list-group-item-text"><?php echo $row["shortDes"]; ?></p>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <p class="lead"><?php echo '₱'.$row["price"]; ?></p>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <a class="btn btn-success" href="../cartAction.php?action=addToCart&productCode=<?php echo $row["product_ID"]; ?>">Add to cart</a>
-                                    </div>
-                                </div>
-                            </div>
+        //get rows query
+        $query = $dbconn->query("SELECT * FROM products WHERE productActive = 1 ORDER BY product_ID DESC");
+        if($query->num_rows > 0){
+            while($row = $query->fetch_assoc()){
+        ?>
+        <div class="item col-lg-4">
+            <div class="thumbnail">
+                <div class="caption">
+				<img src="../productImages/<?php echo $row["productImage"];?>" width="250px" height="250px"/>
+                    <h4 class="list-group-item-heading"><?php echo $row["productName"]; ?></h4>
+                    <p class="list-group-item-text"><?php echo $row["shortDes"]; ?></p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="lead"><?php echo '$'.$row["price"].' PHP'; ?></p>
+                        </div>
+                        <div class="col-md-6">
+                            <a class="btn btn-success" href="../cartAction.php?action=addToCart&id=<?php echo $row["product_ID"]; ?>">Add to cart</a>
                         </div>
                     </div>
-                    <?php } }else{ ?>
-                    <p>No products listed.</p><br/><br/><br/><br/>
-                    <?php } ?>
+                </div>
+            </div>
+        </div>
+        <?php } }else{ ?>
+        <p>Product(s) not found.....</p>
+        <?php } ?>
                 </div>
         </div>
 
