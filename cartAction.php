@@ -1,17 +1,15 @@
 <?php
 // initialize shopping cart class
-include 'cart.php';
+include 'Cart.php';
 $cart = new Cart;
+
 // include database configuration file
 include 'connector.php';
-
-
-
 if(isset($_REQUEST['action']) && !empty($_REQUEST['action'])){
-    if($_REQUEST['action'] == 'addToCart' && !empty($_REQUEST['product_ID'])){
-        $productID = $_REQUEST['product_ID'];
+    if($_REQUEST['action'] == 'addToCart' && !empty($_REQUEST['id'])){
+        $productID = $_REQUEST['id'];
         // get product details
-        $query = $dbconn->query("SELECT * FROM products WHERE product_ID = '$productID'");
+        $query = $dbconn->query("SELECT * FROM products WHERE product_ID = ".$productID);
         $row = $query->fetch_assoc();
         $itemData = array(
             'id' => $row['product_ID'],
@@ -19,13 +17,13 @@ if(isset($_REQUEST['action']) && !empty($_REQUEST['action'])){
             'price' => $row['price'],
             'qty' => 1
         );
-
+        
         $insertItem = $cart->insert($itemData);
         $redirectLoc = $insertItem?'viewCart.php':'index.php';
         header("Location: ".$redirectLoc);
-    }elseif($_REQUEST['action'] == 'updateCartItem' && !empty($_REQUEST['productCode'])){
+    }elseif($_REQUEST['action'] == 'updateCartItem' && !empty($_REQUEST['id'])){
         $itemData = array(
-            'rowid' => $_REQUEST['productCode'],
+            'rowid' => $_REQUEST['id'],
             'qty' => $_REQUEST['qty']
         );
         $updateItem = $cart->update($itemData);
@@ -34,36 +32,32 @@ if(isset($_REQUEST['action']) && !empty($_REQUEST['action'])){
         $deleteItem = $cart->remove($_REQUEST['id']);
         header("Location: viewCart.php");
     }elseif($_REQUEST['action'] == 'placeOrder' && $cart->total_items() > 0 && !empty($_SESSION['sessCustomerID'])){
-
-
         // insert order details into database
-
-        $insertOrder = $dbconn->query("INSERT INTO orderlist (email, totalAmount) VALUES ('".$_SESSION['sessCustomerID']."', '".$cart->total()."')");
-
+        $insertOrder = $dbconn->query("INSERT INTO orders (user_ID, total_price, created, modified) VALUES ('".$_SESSION['sessCustomerID']."', '".$cart->total()."', '".date("Y-m-d H:i:s")."', '".date("Y-m-d H:i:s")."')");
+        
         if($insertOrder){
-            $orderNumber = $dbconn->insert_orderNumber;
+            $orderID = $dbconn->insert_id;
+            $sql = '';
             // get cart items
             $cartItems = $cart->contents();
             foreach($cartItems as $item){
-                $sql .= "INSERT INTO orderdetails (orderNumber, productCode, quantity) VALUES ('".$orderNumber."', '".$item['productCode']."', '".$item['qty']."');";
-				echo $orderNumber;
+                $sql .= "INSERT INTO order_items (order_id, product_ID, qty) VALUES ('".$orderID."', '".$item['id']."', '".$item['qty']."');";
             }
             // insert order items into database
             $insertOrderItems = $dbconn->multi_query($sql);
-
+            
             if($insertOrderItems){
                 $cart->destroy();
-                header("Location: orderSuccess.php?id=$orderNumber");
+                header("Location: orderSuccess.php?id=$orderID");
             }else{
-                header("Location: checkOut.php");
+                header("Location: checkout.php");
             }
         }else{
-            header("Location: checkOut.php");
+            header("Location: checkout.php");
         }
     }else{
-        header("Location: indexshop.php");
+        header("Location: index.php");
     }
 }else{
-    header("Location: indexshop.php");
+    header("Location: index.php");
 }
-?>
