@@ -1,4 +1,4 @@
-<?php
+  <?php
 session_start();
 if(!$_SESSION['email']){
  header("need to be login", 404);
@@ -342,17 +342,17 @@ if(!$_SESSION['email']){
                                              <input type="number" class="form-control" name="qty"  style="width:50%;" min="1" max="100">
                                            </div>
                                          </div>
-                                         <?php echo "<p>". $row['QTY']. " pieces available.</p>"; ?>
+                                         <?php echo "<p>". $row['qty']. " pieces available.</p>"; ?>
                                          <input type="submit" value="ADD TO BAG" class="btn btn-info"><br/></br>
-                                         
 
 
 
-                                         <a href="productWishListToDB.php?pname= <?php echo $row['productName']?>" style="color:black; text-decoration:none;";><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist </a>
+
+                                         <a href="productWishListToDB.php?pname=<?php echo $row['productName']?>" style="color:black; text-decoration:none;";><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist </a>
 
                                     <!--     <a href="#"><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist</a>  -->
                                      </form>
-                                     
+
                                      </br> </br>
 
                                      <form method="POST" action="productWishListToDB.php">

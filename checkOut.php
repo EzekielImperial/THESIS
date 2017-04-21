@@ -22,7 +22,7 @@
 
     <?php
         require_once('connector.php');
-		
+
 
 
 // initializ shopping cart class
@@ -167,7 +167,7 @@ $row = $query->fetch_assoc();
         <!--Code Starts Here (main)-->
 
 
-    
+
 
 
 <div class="container">
@@ -208,7 +208,7 @@ $row = $query->fetch_assoc();
     </tfoot>
     </table>
     <div class="shipAddr">
-	
+
         <h4>Shipping Details</h4>
         <p><?php echo $row['lastName']; ?></p>
         <p><?php echo $row['email']; ?></p>

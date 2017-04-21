@@ -34,7 +34,6 @@ if(!$_SESSION['email']){
         <link rel="stylesheet" href="css/productsPages.css" />
         <script src="jsmain/jsmain.js"></script>
 
-
     </head>
 
     <body>
@@ -202,8 +201,6 @@ if(!$_SESSION['email']){
 
                             </div>
 
-
-                    </div>
                     <div class="form-group">
                         <label for="inputname">Product Price: </label>
                         <input type="number" class="form-control" placeholder=" &#8369 1,000" name="price" required>
@@ -220,6 +217,8 @@ if(!$_SESSION['email']){
                     <label for="inputname">Upload Your Product Image:</label>
 
                 </div>  need to put code to upload pictures here lol -->
+                  
+
                     <div class="form-group">
                         <label>product image</label>
                         <input type="file" name="fileToUpload">
