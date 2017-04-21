@@ -2,6 +2,7 @@
   session_start();
   require_once('connector.php');
 
+  $emailorig=$_POST['emailorig'];
   $email=$_SESSION['email'];
   $houseNum=$_POST['houseNum'];
   $street=$_POST['street'];
@@ -22,8 +23,8 @@
     $stmt->execute();
     $result = $stmt->get_result();
     if($rows = $result->fetch_assoc()) {
-      $querr = $dbconn->prepare('UPDATE address SET houseNum=?, street=?, building=?, subdivision=?, barangay=?, city=?, province=?, zipCode=? WHERE email=?');
-      $querr->bind_param('sssssssis', $houseNum, $street, $bldg, $subd, $brgy, $city, $province, $zipCode, $email);
+      $querr = $dbconn->prepare('UPDATE address SET email=?, houseNum=?, street=?, building=?, subdivision=?, barangay=?, city=?, province=?, zipCode=? WHERE email=?');
+      $querr->bind_param('ssssssssis', $houseNum, $street, $bldg, $subd, $brgy, $city, $province, $zipCode, $email);
       $querr->execute();
 
       echo "<script>window.alert('Account updated.');</script>";
