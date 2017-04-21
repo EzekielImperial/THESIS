@@ -79,7 +79,7 @@ $result = mysqli_query($dbconn, "SELECT email FROM users WHERE userStatus=1 AND 
     foreach ($result as $row) { //This iterator syntax only works in PHP 5.4+
 				$body = "<h2>Greetings from iMARKET!</h2>";
 				$body .= "<p>There is a new announcement posted in iMARKET. Check it out by clicking the link below:</p>";
-				$body .="http://localhost/THESIS/announcement.php"
+				$body .="http://localhost/THESIS/announcement.php";
         $mail->msgHTML($body);
 
         $mail->addBCC($row['email']);

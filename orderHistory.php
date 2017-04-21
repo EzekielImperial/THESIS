@@ -28,8 +28,9 @@
   <?php
         session_start();
         require_once('connector.php');
+
         if(!$_SESSION['email']){
-         header("need to be login", 404);
+         header("Location: login.php", 404);
                   exit;}
     ?>
 
@@ -205,6 +206,11 @@
               <div class="user-side-menu_link-text">Sales Report</div>
             </a>
           </li>
+          <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
+            <a class="user-side-menu_link" href="productInventory.php">
+              <div class="user-side-menu_link-text">Inventory System</div>
+            </a>
+          </li>
         </ul>
       </div>
     <div class="col-md-9">
@@ -224,132 +230,48 @@
     <div id="home" class="tab-pane fade in active">
 
 
+   <?php $glasstype = $_SESSION['user_ID'] ?>
+
      <h2> Order History </h2>
           <hr>
       <!-- just testing will going to recode -->
-      <?php $glasstype = $_SESSION['email'] ?>
-
-
-     <?php
-         if(isset($_POST['ShortA']))
-       {
-          include 'productSort1.php';
-       }
-       else
-       {
-
-        $con=mysqli_connect('localhost','root','','imarketdatabase');
-        $results = mysqli_query ($con,'SELECT * FROM products WHERE productActive LIKE 1 AND email LIKE "' . $glasstype . '" ');
-
-        if($results->num_rows > 0) {
-
-        while($row = mysqli_fetch_array($results)){
-
-          }
-        } else {
-          echo "<p>You have no previous transactions.</p>";
-        }
-          mysqli_close($con);
-        }
-     ?>
-    </div>
-    <div id="menu1" class="tab-pane fade">
-      <h2> Order History </h2>
-      <hr>
       <?php
+        $query = 'SELECT *
+        FROM orders
+        LEFT JOIN users
+        ON orders.user_ID = users.user_ID
+        WHERE orders.status=1 AND orders.user_ID LIKE "' . $glasstype . '"  ';
+        $response = @mysqli_query($dbconn, $query);
+        if($response) { ?>
+          <table class="table">
+            <thead>
+                <tr>
+                    <th>Order Number</th>
+                    <th>Date Ordered</th>
+                    <th># of Items</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+              <?php while ($row = @mysqli_fetch_array($response)) {
+                $id = $row['id']; ?>
+                <tr>
+                  <td><?php echo "<a href='orderSuccess.php?id=".$id."'>" .$row['id']. "</a>" ?></td>
+                  <td><?php echo $row['created'] ?></td>
+                  <td>X</td>
+                  <td><?php echo $row['total_price'] ?></td>
+                </tr>
 
-        $con=mysqli_connect('localhost','root','','imarketdatabase');
-        $results = mysqli_query ($con,'SELECT * FROM products WHERE productStatus LIKE "onSale" AND productActive LIKE 1 AND email LIKE "' . $glasstype . '" ');
 
-        if($results->num_rows > 0) {
-        while($row = mysqli_fetch_array($results)){
-          echo'
-
-            <div class ="proBox1">
-
-            <div class="PHOTOHOVER">
-             <img src="productImages/' .$row['productImage']. '" class="image" height:80%">
-             <div class="middle">
-              <div class="text11">
-                      <form class="buttons1" method="POST" action="productEdit1.php">
-                        <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-                        <input class="btn btn-warning" type="submit" value="Edit">
-                      </form>
-                    </br>
-                      <form class="buttons1" method="POST" action="productDelete.php">
-                          <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-                          <input class="btn btn-danger" type="submit" value="Delete">
-                       </form>
-                      </div>
-             </div>
-            </div>
-
-            <br>
-            <b><a href="productPage1.php?pname='.$row['productName'].'" style="color:black; text-decoration:none;";>'.$row['productName'].'</a></b> <br>
-            '.$row['shortDes'].' <br />
-          ₱ '.$row['price'].'
-            <br>
-
-            </div>
-            ';
-        }
+      <?php  }
       } else {
-        echo "<p>You have no previous transactions.</p>";
-      }
-        mysqli_close($con);
+      echo "<p>You have no previous transactions.</p>";
+    }
 
-
-      ?>
-
-      </div>
-    <div id="menu2" class="tab-pane fade">
-      <h2> Order History </h2>
-      <hr>
-      <?php
-
-        $con=mysqli_connect('localhost','root','','imarketdatabase');
-        $results = mysqli_query ($con,'SELECT * FROM products WHERE productStatus LIKE "soldOut" AND email LIKE "' . $glasstype . '" ');
-
-        if($results->num_rows > 0) {
-        while($row = mysqli_fetch_array($results)){
-          echo'
-
-            <div class ="proBox1">
-
-            <div class="PHOTOHOVER">
-             <img src="productImages/' .$row['productImage']. '" class="image" height:80%">
-             <div class="middle">
-              <div class="text11">
-                      <form class="buttons1" method="POST" action="productEdit1.php">
-                        <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-                        <input class="btn btn-warning" type="submit" value="Edit">
-                      </form>
-                    </br>
-                      <form class="buttons1" method="POST" action="productDelete.php">
-                          <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-                          <input class="btn btn-danger" type="submit" value="Delete">
-                       </form>
-                      </div>
-             </div>
-            </div>
-
-            <br>
-            <b><a href="productPage1.php?pname='.$row['productName'].'" style="color:black; text-decoration:none;";>'.$row['productName'].'</a></b> <br>
-            '.$row['shortDes'].' <br />
-          ₱ '.$row['price'].'
-            <br>
-
-            </div>
-            ';
-        }
-      } else {
-        echo "<p>You have no previous transactions.</p>";
-      }
-        mysqli_close($con);
-      ?>
-
+       ?>
+     </tbody>
+     </table>
     </div>
-
   </div>
 
 
