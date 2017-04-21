@@ -221,7 +221,7 @@ if(!$_SESSION['email']){
                     </div>
                     <div class="form-group">
                         <label for="inputname">Product Quantity:</label>
-                        <input type="number" class="form-control" name="qty" placeholder='.$row['QTY'].' required>
+                        <input type="number" class="form-control" name="qty" placeholder='.$row['qty'].' required>
                     </div>
                     <div class="form-group">
 

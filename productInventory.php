@@ -158,7 +158,7 @@
     <!--First-->
 
   <div class="container">
-    <h2>My profile</h2><br/>
+    <h2>Inventory System</h2><br/>
     <div class="row">
       <div class="col-md-3">
         <ul class="user-side-menu">
@@ -191,7 +191,7 @@
             </a>
           </li>
           <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
-            <a class="user-side-menu_link-selected" href="productView.php">
+            <a class="user-side-menu_link" href="productView.php">
               <div class="user-side-menu_link-text">My Products</div>
             </a>
           </li>
@@ -206,7 +206,7 @@
             </a>
           </li>
           <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
-            <a class="user-side-menu_link" href="productInventory.php">
+            <a class="user-side-menu_link-selected" href="#">
               <div class="user-side-menu_link-text">Inventory System</div>
             </a>
           </li>
@@ -217,195 +217,83 @@
 
 
     <div class="divhehe">
+        <h2>Product Listing</h2>
+  <div class="table-responsive">          
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Product ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Catagory</th>
+        <th>Stock</th>
+        <th>Date Created</th>
+        <th>Date Updated</th>
+        <th>Status</th>
+        <th>Conditon</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
 
-    <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#home">ALL</a></li>
-    <li><a data-toggle="tab" href="#menu1">On Sale</a></li>
-    <li><a data-toggle="tab" href="#menu2">Sold Out</a></li>
+  <?php
+        $glasstype = $_SESSION['user_ID'];
 
-  </ul>
-
-  <div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-
-
-     <h2> Here are your available products </h2>
-          <hr>
-
-
-
-         <form method="POST" action="" style="float:right;">
-                    <select name="ShortA" onchange="javascript: submit()">
-                      <option value="" disabled selected>Filter by:</option>
-                      <option value="high">higest to low price</option>
-                      <option value="low">lowest to highest price</option>
-                      <option value="dateold">Old to New Product Posted</option>
-                      <option value="datenew">New to Old Product Posted</option>
-                      <option value="sold">Solout!</option>
-                      <option value="sale">For Sale!</option>
-              </select>
-
-
-                  </form>
-
-
-
-
-                  </br> </br>
-
-      <!-- just testing will going to recode -->
-      <?php $glasstype = $_SESSION['user_ID'] ?>
-
-
-      <?php
-         if(isset($_POST['ShortA']))
-       {
-          include 'productSort1.php';
-       }
-       else
-       {
 
         $con=mysqli_connect('localhost','root','','imarketdatabase');
-        $results = mysqli_query ($con,'SELECT * FROM products WHERE productActive LIKE 1 AND user_ID LIKE "' . $glasstype . '" ');
+        $results = mysqli_query ($con,'SELECT * FROM products WHERE user_ID LIKE "' . $glasstype . '" ');
 
         if($results->num_rows > 0) {
 
         while($row = mysqli_fetch_array($results)){
-          echo'
-            <div class ="proBox1">
+          echo' <td> '.$row['product_ID'].' </td>
+                <td> <b><a href="productPage1.php?pname='.$row['productName'].'" style="color:black; text-decoration:none;";>'.$row['productName'].'</a></b> </td>
+                <td> '.$row['price'].' </td>
+                <td> '.$row['productCategory'].' </td>
+                <td> '.$row['qty'].' </td>
+                <td> '.$row['date_created'].' </td>
+                <td> '.$row['date_update'].' </td> ';
 
-            <div class="PHOTOHOVER">
-             <img src="productImages/' .$row['productImage']. '" class="image" width="70%" height="70%">
-             <div class="middle">
-              <div class="text11">
-                      <form class="buttons1" method="POST" action="productEdit.php">
+                $sts = $row['productActive']; 
+
+                        switch ($sts ) {
+                            case "0":
+                            echo "<td> Deactivated</td>";
+                                break;
+                            case "1":
+                            echo "<td> Active </td>";
+                                break;
+                            default:
+                                echo "Active";
+                                }
+                echo '
+                <td> '.$row['productStatus'].' </td>
+                <td> <form class="buttons1" method="POST" action="productEdit.php">
                         <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-                        <input class="btn btn-warning" type="submit" value="Edit">
+                        <button class="btn btn-warning" type="submit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
                       </form>
                     </br>
                       <form class="buttons1" method="POST" action="productDelete.php">
                           <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-                          <input class="btn btn-danger" type="submit" value="Delete">
+                          <button class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                        </form>
                       </div>
-             </div>
-            </div>
+                </td>
 
-            <br>
-            <b><a href="productPage1.php?pname='.$row['productName'].'" style="color:black; text-decoration:none;";>'.$row['productName'].'</a></b> <br>
-            '.$row['shortDes'].' <br />
-          ₱ '.$row['price'].'
-            <br>
-
-            </div>
-            ';
+      </tr>
+    </tbody>
+        ';
           }
         } else {
           echo "<h3>No products listed.</h3><br/>";
           echo "<a href='productAdd.php' class='btn btn-primary'>Add new product</a>";
         }
-          mysqli_close($con);
-        }
+          
      ?>
-    </div>
-    <div id="menu1" class="tab-pane fade">
 
-      <?php
-          echo " <h2> these product are available and on sale! </h2> <br>";
-
-        $con=mysqli_connect('localhost','root','','imarketdatabase');
-        $results = mysqli_query ($con,'SELECT * FROM products WHERE productStatus LIKE "onSale" AND productActive LIKE 1 AND user_ID LIKE "' . $glasstype . '" ');
-
-        if($results->num_rows > 0) {
-        while($row = mysqli_fetch_array($results)){
-          echo'
-
-            <div class ="proBox1">
-
-            <div class="PHOTOHOVER">
-             <img src="productImages/' .$row['productImage']. '" class="image" height:80%">
-             <div class="middle">
-              <div class="text11">
-                      <form class="buttons1" method="POST" action="productEdit1.php">
-                        <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-                        <input class="btn btn-warning" type="submit" value="Edit">
-                      </form>
-                    </br>
-                      <form class="buttons1" method="POST" action="productDelete.php">
-                          <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-                          <input class="btn btn-danger" type="submit" value="Delete">
-                       </form>
-                      </div>
-             </div>
-            </div>
-
-            <br>
-            <b><a href="productPage1.php?pname='.$row['productName'].'" style="color:black; text-decoration:none;";>'.$row['productName'].'</a></b> <br>
-            '.$row['shortDes'].' <br />
-          ₱ '.$row['price'].'
-            <br>
-
-            </div>
-            ';
-        }
-      } else {
-        echo "<h3>No products listed.</h3><br/>";
-        echo "<a href='productAdd.php' class='btn btn-primary'>Add new product</a>";
-      }
-        mysqli_close($con);
-
-
-      ?>
-
-      </div>
-    <div id="menu2" class="tab-pane fade">
-
-      <?php
-
-        echo " <h2> these product is soldout! </h2> <br>";
-
-        $con=mysqli_connect('localhost','root','','imarketdatabase');
-        $results = mysqli_query ($con,'SELECT * FROM products WHERE productStatus LIKE "soldOut" AND email LIKE "' . $glasstype . '" ');
-
-        if($results->num_rows > 0) {
-        while($row = mysqli_fetch_array($results)){
-          echo'
-
-            <div class ="proBox1">
-
-            <div class="PHOTOHOVER">
-             <img src="productImages/' .$row['productImage']. '" class="image" height:80%">
-             <div class="middle">
-              <div class="text11">
-                      <form class="buttons1" method="POST" action="productEdit1.php">
-                        <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-                        <input class="btn btn-warning" type="submit" value="Edit">
-                      </form>
-                    </br>
-                      <form class="buttons1" method="POST" action="productDelete.php">
-                          <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-                          <input class="btn btn-danger" type="submit" value="Delete">
-                       </form>
-                      </div>
-             </div>
-            </div>
-
-            <br>
-            <b><a href="productPage1.php?pname='.$row['productName'].'" style="color:black; text-decoration:none;";>'.$row['productName'].'</a></b> <br>
-            '.$row['shortDes'].' <br />
-          ₱ '.$row['price'].'
-            <br>
-
-            </div>
-            ';
-        }
-      } else {
-        echo "<h3>No products listed.</h3><br/>";
-        echo "<a href='productAdd.php' class='btn btn-primary'>Add new product</a>";
-      }
-        mysqli_close($con);
-      ?>
-
+  </table>
+  </div>
     </div>
 
   </div>
