@@ -254,7 +254,7 @@
                      <td>{$row['firstName']}</td>
                      <td>{$row['lastName']}</td>
                      <td>{$row['contactNum']}</td>
-                     <td>{$row['birthDate']}</td>
+                     <td>{$row['birthdate']}</td>
                      <td>{$row['userType']}</td>
                      <td>{$row['course']}</td>
                      <td>{$row['strand']}</td>
