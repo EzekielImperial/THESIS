@@ -11,7 +11,7 @@
 
 <?php
 
-	$user = $_SESSION['email'];
+	$user = $_SESSION['user_ID'];
     $Pname = $_POST['pname'];
     $active = 1;
 
@@ -20,7 +20,7 @@
 
 
 
-    $query = "INSERT INTO wishlist (email, productName, date_created, wishListActive)
+    $query = "INSERT INTO wishlist (user_ID, productName, date_created, wishListActive)
 	values ('" . $user . "','" . $Pname . "','" . $newdate . "','" . $active . "')";
 
 

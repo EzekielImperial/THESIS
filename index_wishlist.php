@@ -168,27 +168,23 @@
                       </select>
                     </form>
                     
-                    <?php $glasstype = $_SESSION['email'] ?>
+                    <?php $glasstype = $_SESSION['user_ID'] ?>
                     
 
                     <?php 
          if(isset($_POST['ShortA'])) 
        {
           include 'productWishListSort.php';
-          include 'productWishListDeactivate.php';
        }
        else               
        {
    
-        
-               
-                  
                       
             $querry = 'SELECT *
                FROM wishlist
                LEFT JOIN products
                ON wishlist.productName = products.productName
-               WHERE wishlist.wishListActive=1 AND products.email LIKE "' . $glasstype . '"  ';
+               WHERE wishlist.wishListActive=1 AND products.user_ID LIKE "' . $glasstype . '"  ';
               $response = @mysqli_query($dbconn, $querry);
               if($response) {  
                 $rowcount=mysqli_num_rows($response);
@@ -218,18 +214,19 @@
                 echo $row['QTY'] . '</td><td>';
                 
     
-                echo '
+                echo'
                   <form method="POST" action="#">
-                  <input type="hidden" name="idtest" value="" />
+                  <input type="hidden" name="idtest" value=""/>
                   <input class="btn btn-info" type="submit" value="Add to Cart">
                   </form>
-                  </td><td>
+                  </td><td>';
 
-                  <form method="POST" action="productWishListDeactivate.php"> '; ?>
-                  <input type="hidden" name="PNAME" value="<?php echo $row['productName']?>" />
-                <?php echo '
+                  echo'
+                  <form method="POST" action="productWishListDeactivate.php">
+                  <input type="hidden" name="PNAME" value="'.$row['productName'].'"/>
                   <input class="btn btn-warning" type="submit" value="X">
-                  </form></td><td> ';
+                  </form>
+                  </td><td>';
              }
             echo "</table>";
            } else {
