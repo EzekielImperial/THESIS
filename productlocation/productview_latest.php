@@ -161,7 +161,7 @@
             <div class="thumbnail">
                 <div class="caption">
 				<img src="../productImages/<?php echo $row["productImage"];?>" width="250px" height="250px"/>
-                    <h4 class="list-group-item-heading"><?php echo $row["productName"]; ?></h4>
+                    <h4 class="list-group-item-heading"><a href="../productPage1.php?pname=<?php echo $row['productName']?>"><?php echo $row["productName"]; ?></a></h4>
                     <p class="list-group-item-text"><?php echo $row["shortDes"]; ?></p>
                     <div class="row">
                         <div class="col-md-6">
