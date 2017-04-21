@@ -12,9 +12,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
     <!--CSS-->
     <link rel="stylesheet" href="css/design.css" />
-    
+    <link rel="stylesheet" href="css/profile.css" />
+    <link rel="stylesheet" href="css/productsPages.css" />
+    <link rel="stylesheet" href="css/hover.css" />
+
 
 </head>
 
@@ -23,18 +29,21 @@
     <?php
         session_start();
         require_once('connector.php');
+        if(!$_SESSION['email']){
+         header("need to be login", 404);
+                  exit;}
     ?>
 
 
         <nav id="navbar-main">
-          <!--Login System Embedded by Jung Start-->
+            <!--Login System Embedded by Jung Start-->
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			</button>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    </button>
                 </div>
                 <div class="collapse navbar-collapse row" id="myNavbar">
                     <ul class="pull-right">
@@ -78,17 +87,19 @@
                                                 <li class="profile-li"><a class="profile-links" href="logout.php">logout</a></li>
 
 
-                                <?php }else { ?>
-                                <li class="upper-links dropdown"><a class="links">My Account</a>
-                                    <ul class="dropdown-menu">
-                                        <li class="profile-li"><a class="profile-links" href="login.php">LOGIN</a></li>
-                                        <li class="profile-li"><a class="profile-links" href="signUp.php">REGISTER</a></li>
-                                        <?php } ?>
+                                                <?php }else { ?>
+                                                <li class="upper-links dropdown"><a class="links">My Account</a>
+                                                    <ul class="dropdown-menu">
+                                                        <li class="profile-li"><a class="profile-links" href="login.php">LOGIN</a></li>
+                                                        <li class="profile-li"><a class="profile-links" href="signUp.php">REGISTER</a></li>
+                                                        <?php } ?>
 
 
+                                                    </ul>
+                                                </li>
+                                            </ul>
                                     </ul>
-                                </li>
-                            </ul></ul></ul>
+                            </ul>
                     </ul>
                 </div>
             </div>
@@ -106,14 +117,12 @@
                 </div>
                 <div class="smallsearch col-sm-8 col-xs-11">
                     <div class="row">
-                      <form action="index_result.php" method="POST" role="search">
-                        <input class="navbar-input col-xs-11" type="text" name="search" placeholder="Search for Products, Brands and more" name="">
-                        <button class="navbar-button col-xs-1" type="submit">
-                        <svg width="15px" height="15px">
-                            <path d="M11.618 9.897l4.224 4.212c.092.09.1.23.02.312l-1.464 1.46c-.08.08-.222.072-.314-.02L9.868 11.66M6.486 10.9c-2.42 0-4.38-1.955-4.38-4.367 0-2.413 1.96-4.37 4.38-4.37s4.38 1.957 4.38 4.37c0 2.412-1.96 4.368-4.38 4.368m0-10.834C2.904.066 0 2.96 0 6.533 0 10.105 2.904 13 6.486 13s6.487-2.895 6.487-6.467c0-3.572-2.905-6.467-6.487-6.467 "></path>
-                        </svg>
-                    </button>
-                  </form>
+                        <input class="navbar-input col-xs-11" type="" placeholder="Search for Products, Brands and more" name="">
+                        <button class="navbar-button col-xs-1">
+                    <svg width="15px" height="15px">
+                        <path d="M11.618 9.897l4.224 4.212c.092.09.1.23.02.312l-1.464 1.46c-.08.08-.222.072-.314-.02L9.868 11.66M6.486 10.9c-2.42 0-4.38-1.955-4.38-4.367 0-2.413 1.96-4.37 4.38-4.37s4.38 1.957 4.38 4.37c0 2.412-1.96 4.368-4.38 4.368m0-10.834C2.904.066 0 2.96 0 6.533 0 10.105 2.904 13 6.486 13s6.487-2.895 6.487-6.467c0-3.572-2.905-6.467-6.487-6.467 "></path>
+                    </svg>
+                </button>
                     </div>
                 </div>
 
@@ -123,10 +132,10 @@
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mySecondbar">
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			</button>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    </button>
                 </div>
                 <!--Size-->
                 <div class="col-sm-2">
@@ -151,37 +160,81 @@
 
         <!--First-->
 
-        <div class="jumbotron text-center">
-            <h1>Slider here in this part</h1>
-            <p>with Sell Buy button</p>
-            <br><br><br>
-        </div>
-        <div class="col-md-12 text-center">
-            <br><br> Product list first line
-            <br><br><br><br><br><br><br>
-        </div>
-        <div class="col-md-12 text-center">
-            Product list second line
-            <br><br><br><br><br><br><br>
-        </div>
+        <div class="container">
+            <h2>My profile</h2><br/>
+            <div class="row">
+                <div class="col-md-3">
+                    <ul class="user-side-menu">
+                        <div class="user-side-menu_bg">
+                            <div class="user-side-menu_name">
+                                <?php
+                $email = $_SESSION['email'];
+                $query = $dbconn->query("SELECT * FROM users WHERE email='$email'");
+                if($query->num_rows > 0){
+                  while($row = $query->fetch_assoc()) {
+                    echo $row['firstName']. " " .$row['lastName'];
+                  }
+                }
+              ?>
+                            </div>
+                        </div>
+                        <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
+                            <a class="user-side-menu_link" href="accountSetting.php">
+                                <div class="user-side-menu_link-text">Account Settings</div>
+                            </a>
+                        </li>
+                        <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
+                            <a class="user-side-menu_link" href="#">
+                                <div class="user-side-menu_link-text">Notifications</div>
+                            </a>
+                        </li>
+                        <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
+                            <a class="user-side-menu_link" href="orderHistory.php">
+                                <div class="user-side-menu_link-text">My Orders</div>
+                            </a>
+                        </li>
+                        <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
+                            <a class="user-side-menu_link" href="productView.php">
+                                <div class="user-side-menu_link-text">My Products</div>
+                            </a>
+                        </li>
+                        <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
+                            <a class="user-side-menu_link" href="#">
+                                <div class="user-side-menu_link-text">My Sales</div>
+                            </a>
+                        </li>
+                        <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
+                            <a class="user-side-menu_link-selected" href="salesReport.php">
+                                <div class="user-side-menu_link-text">Sales Report</div>
+                            </a>
+                        </li>
+                        <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
+                            <a class="user-side-menu_link" href="productInventory.php">
+                                <div class="user-side-menu_link-text">Inventory System</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-9">
+                    <div class="page-wrapper">
 
-        <div class="row">
-            <div class="col-md-6 text-center">
-                <h3>Column 1</h3> Best prod or man prod
-                <br><br><br><br><br><br><br>
 
+                        <div class="divhehe">
+
+
+                        </div>
+
+
+
+                    </div>
+                </div>
             </div>
-            <div class="col-md-6 text-center">
-                <h3>Column 2</h3> woman prod
-                <br><br><br><br><br><br><br>
-
-            </div>
-
         </div>
-
-
         </div>
-    <?php include 'footer.php';?>
+        <br/>
+        <hr style="width:80%;"><br/>
+
+        <?php include 'footer.php';?>
 
 </body>
 

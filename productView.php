@@ -201,7 +201,7 @@
             </a>
           </li>
           <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
-            <a class="user-side-menu_link" href="#">
+            <a class="user-side-menu_link" href="salesReport.php">
               <div class="user-side-menu_link-text">Sales Report</div>
             </a>
           </li>
