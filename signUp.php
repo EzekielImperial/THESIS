@@ -244,6 +244,7 @@
                               <label>Course</label>
                                 <select class="form-control col-sm-2" name="course" id="course">
                                   <option value="SE">Software Engineering</option>
+                                  <option value="WD">Web Development</option>
                                   <option value="GD">Game Development</option>
                                   <option value="MMA">Multimedia Arts and Design</option>
                                   <option value="Animation">Animation</option>
@@ -270,7 +271,7 @@
                         </div>
                         </div>
 
-                        <input type="hidden" name="Status" value=1>
+                        <input type="hidden" name="Status" value=0>
 
                         <div class="form-group">
                             <div>

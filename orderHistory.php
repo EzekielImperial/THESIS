@@ -3,28 +3,34 @@
 <head>
     <title>:::iMARKET:::</title>
     <meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!--JQUERY-->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<!--CSS-->
+
+
+
+    <!--CSS-->
     <link rel="stylesheet" href="css/design.css" />
     <link rel="stylesheet" href="css/profile.css" />
     <link rel="stylesheet" href="css/productsPages.css" />
     <link rel="stylesheet" href="css/hover.css" />
 
 
-	</head>
+    </head>
 
 <body>
 
   <?php
         session_start();
         require_once('connector.php');
+        if(!$_SESSION['email']){
+         header("need to be login", 404);
+                  exit;}
     ?>
 
 
@@ -149,7 +155,7 @@
         </div>
     </nav>
 
-	<!--First-->
+    <!--First-->
 
   <div class="container">
     <h2>My profile</h2><br/>
@@ -180,12 +186,12 @@
             </a>
           </li>
           <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
-            <a class="user-side-menu_link" href="#">
+            <a class="user-side-menu_link-selected" href="orderHistory.php">
               <div class="user-side-menu_link-text">My Orders</div>
             </a>
           </li>
           <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
-            <a class="user-side-menu_link-selected" href="productView.php">
+            <a class="user-side-menu_link" href="productView.php">
               <div class="user-side-menu_link-text">My Products</div>
             </a>
           </li>
@@ -204,42 +210,61 @@
     <div class="col-md-9">
     <div class="page-wrapper">
 
-   
+
     <div class="divhehe">
 
+    <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Processing</a></li>
+    <li><a data-toggle="tab" href="#menu1">Shipped</a></li>
+    <li><a data-toggle="tab" href="#menu2">Complete</a></li>
+
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
 
 
-     <h2> Here are your available products </h2>
+     <h2> Order History </h2>
           <hr>
-
-
-        <a href='productAdd.php' class='btn btn-primary'>Add new product</a>
-         <form method="POST" action="" style="float:right;">
-                    <select name="ShortA" required>
-                      <option value="high">higest to low price</option>
-                      <option value="low">lowest to highest price</option>
-                      <option value="dateold">Old to New Product Posted</option>
-                      <option value="datenew">New to Old Product Posted</option>
-                      <option value="sold">Solout!</option>
-                      <option value="sale">For Sale!</option>
-
-                    </select>
-                    <input type="submit" value="Submit">
-                  </form> </br> </br>
-
       <!-- just testing will going to recode -->
       <?php $glasstype = $_SESSION['email'] ?>
 
-      <?php
 
+     <?php
+         if(isset($_POST['ShortA']))
+       {
+          include 'productSort1.php';
+       }
+       else
+       {
 
         $con=mysqli_connect('localhost','root','','imarketdatabase');
-        $results = mysqli_query ($con,'SELECT * FROM products WHERE productActive LIKE 1 AND email LIKE "' . $glasstype . '" LIMIT 5');
+        $results = mysqli_query ($con,'SELECT * FROM products WHERE productActive LIKE 1 AND email LIKE "' . $glasstype . '" ');
 
         if($results->num_rows > 0) {
-          
+
+        while($row = mysqli_fetch_array($results)){
+
+          }
+        } else {
+          echo "<p>You have no previous transactions.</p>";
+        }
+          mysqli_close($con);
+        }
+     ?>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <h2> Order History </h2>
+      <hr>
+      <?php
+
+        $con=mysqli_connect('localhost','root','','imarketdatabase');
+        $results = mysqli_query ($con,'SELECT * FROM products WHERE productStatus LIKE "onSale" AND productActive LIKE 1 AND email LIKE "' . $glasstype . '" ');
+
+        if($results->num_rows > 0) {
         while($row = mysqli_fetch_array($results)){
           echo'
+
             <div class ="proBox1">
 
             <div class="PHOTOHOVER">
@@ -264,24 +289,76 @@
             '.$row['shortDes'].' <br />
           ₱ '.$row['price'].'
             <br>
-            
+
             </div>
             ';
         }
       } else {
-        echo "<h3>No products listed.</h3><br/>";
-        echo "<a href='productAdd.php' class='btn btn-primary'>Add new product</a>";
+        echo "<p>You have no previous transactions.</p>";
       }
         mysqli_close($con);
-        ?>
-     </div>
 
-     </div>
+
+      ?>
+
+      </div>
+    <div id="menu2" class="tab-pane fade">
+      <h2> Order History </h2>
+      <hr>
+      <?php
+
+        $con=mysqli_connect('localhost','root','','imarketdatabase');
+        $results = mysqli_query ($con,'SELECT * FROM products WHERE productStatus LIKE "soldOut" AND email LIKE "' . $glasstype . '" ');
+
+        if($results->num_rows > 0) {
+        while($row = mysqli_fetch_array($results)){
+          echo'
+
+            <div class ="proBox1">
+
+            <div class="PHOTOHOVER">
+             <img src="productImages/' .$row['productImage']. '" class="image" height:80%">
+             <div class="middle">
+              <div class="text11">
+                      <form class="buttons1" method="POST" action="productEdit1.php">
+                        <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
+                        <input class="btn btn-warning" type="submit" value="Edit">
+                      </form>
+                    </br>
+                      <form class="buttons1" method="POST" action="productDelete.php">
+                          <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
+                          <input class="btn btn-danger" type="submit" value="Delete">
+                       </form>
+                      </div>
+             </div>
+            </div>
+
+            <br>
+            <b><a href="productPage1.php?pname='.$row['productName'].'" style="color:black; text-decoration:none;";>'.$row['productName'].'</a></b> <br>
+            '.$row['shortDes'].' <br />
+          ₱ '.$row['price'].'
+            <br>
+
+            </div>
+            ';
+        }
+      } else {
+        echo "<p>You have no previous transactions.</p>";
+      }
+        mysqli_close($con);
+      ?>
 
     </div>
+
   </div>
-</div>
-</div>
+
+
+
+   </div>
+   </div>
+   </div>
+   </div>
+    </div>
   <br/><hr style="width:80%;"><br/>
 
     <?php include 'footer.php';?>

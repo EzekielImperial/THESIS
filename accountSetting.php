@@ -22,6 +22,10 @@
   <?php
         session_start();
         require_once('connector.php');
+
+        if(!$_SESSION['email']){
+         header("Location: login.php", 404);
+                  exit;}
     ?>
 
 
@@ -176,7 +180,7 @@
             </a>
           </li>
           <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
-            <a class="user-side-menu_link" href="#">
+            <a class="user-side-menu_link" href="orderHistory.php">
               <div class="user-side-menu_link-text">My Orders</div>
             </a>
           </li>
@@ -204,7 +208,8 @@
           <h4>Personal Info</h4><hr/>
           <div class="control-group form-group">
             <div class="controls">
-              <input type="email" class="form-control" name="email" id="email" readonly value=<?php echo $email ?>>
+              <input type="hidden" name="emailorig" value=<?php echo $email ?>>
+              <input type="email" class="form-control" name="email" id="email" value=<?php echo $email ?>>
             </div>
           </div>
           <div class="row">
@@ -281,11 +286,12 @@
             }
           } else {
             echo "<p>No listed Address.</p>";
-            echo "<button id='address-btn' class='btn btn-info'>Add Address</button>";
+            echo "<button id='address-btn' class='btn btn-info'>Add Address</button><br/><br/>";
           }
            ?>
       <div id="address-form">
       <form method="post" action="updateAddress.php">
+        <input type="hidden" name="emailorig" value=<?php echo $email ?>>
         <fieldset><br/>
             <div class="control-group form-group">
               <div class="controls">
@@ -445,15 +451,15 @@
       var myDiv = document.getElementById("address-form");
 
       function show() {
-        myDiv.style.visibility = "visible";
+        myDiv.style.display = "block";
       }
 
       function hide() {
-        myDiv.style.visibility = "hidden";
+        myDiv.style.display = "none";
       }
 
       function toggle() {
-        if (myDiv.style.visibility === "hidden") {
+        if (myDiv.style.display === "none") {
             show();
         } else {
             hide();

@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-require_once('connector.php');
+
 
 
 
@@ -21,17 +21,89 @@ if(!$_SESSION['email']){
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+        <!--Script for rating-->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script>
+                        $(document).ready(function () {
+                            $("#demo1 .stars").click(function () {
+
+                                $.post('rating.php',{rate:$(this).val()},function(d){
+                                    if(d>0)
+                                    {
+                                        alert('You already rated');
+                                    }else{
+                                        alert('Thanks For Rating');
+                                    }
+                                });
+                                $(this).attr("checked");
+                            });
+                        });
+
+                        $(document).ready(function () {
+                            $("#demo2 .stars").click(function () {
+
+                                $.post('ratingproduct.php',{rate:$(this).val()},function(d){
+                                    if(d>0)
+                                    {
+                                        alert('You already rated');
+                                    }else{
+                                        alert('Thanks For Rating');
+                                    }
+                                });
+                                $(this).attr("checked");
+                            });
+                        });
+                    </script>
 
         <link rel="stylesheet" href="css/login.css" />
         <link rel="stylesheet" href="css/design.css" />
         <link rel="stylesheet" href="css/productsPages.css" />
+        <style>
+        @import url(http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+                    fieldset, label { margin: 0; padding: 0; }
+
+                    .rating {
+                        border: none;
+                        float: left;
+                    }
+
+                    .rating > input { display: none; }
+                    .rating > label:before {
+                        margin: 5px;
+                        font-size: 1.25em;
+                        font-family: FontAwesome;
+                        display: inline-block;
+                        content: "\f005";
+                    }
+
+                    .rating > .half:before {
+                        content: "\f089";
+                        position: absolute;
+                    }
+
+                    .rating > label {
+                        color: #ddd;
+                        float: right;
+                    }
+
+                    .rating > input:checked ~ label,
+                    .rating:not(:checked) > label:hover,
+                    .rating:not(:checked) > label:hover ~ label { color: #FFD700;  }
+
+                    .rating > input:checked + label:hover,
+                    .rating > input:checked ~ label:hover,
+                    .rating > label:hover ~ input:checked ~ label,
+                    .rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
+        </style>
+
 
     </head>
 
@@ -164,21 +236,166 @@ if(!$_SESSION['email']){
 
         <div class="container-fuild">
             <div class="row">
-                <div class="col-md-12 col-centered formProduct1">
+                <div class="col-md-12 col-centered">
                     <div class="row">
-                        <h2> <?php echo "(".$_SESSION['email'].")"; ?> <b> <?php echo $_GET['pname']; ?> </b> </h2>
+                        <h2> <b> <?php echo $_GET['pname']; ?> </b> </h2>
                         <!-- just testing will going to recode -->
                         <hr>
                     </div>
                     <div class="row">
 
-                   <?php echo $_GET['pname']; ?>
+                     <?php
+                             $email = $_SESSION['email'];
+                             $pNAME = $_GET['pname'];
+                             $con=mysqli_connect('localhost','root','','imarketdatabase');
+                             $results = mysqli_query ($con,'SELECT * FROM products WHERE productActive LIKE 1 AND productName LIKE "' . $pNAME . '"');
 
+                             while($row = mysqli_fetch_array($results)){
+
+                                 echo'
+                                   <div class="col-md-4">
+                                      <img id="prodImg" src="productImages/' .$row['productImage']. '" width="80%" height="80%"/>
+                                      ';?>
+                                   </div>
+                                   <div id="myModal" class="modal">
+                                    <span class="close">&times;</span>
+                                    <img class="modal-content" id="img01">
+                                   </div>
+                                   <div class="col-md-4">
+                                    <b><?php echo $row['productName'] ?></b> <br />
+                                    <b><?php echo $row['shortDes'] ?></b> <br />
+                                    ₱ <?php echo $row['price']?> <br />
+
+                                    <br/><br>
+                                    <ul class="nav nav-tabs">
+                                      <li class="active"><a data-toggle="tab" href="#home">Product Details</a></li>
+                                      <li><a data-toggle="tab" href="#menu1"> Reviews</a></li>
+                                      <li><a data-toggle="tab" href="#menu2"> Seller Details </a></li>
+
+                                    </ul>
+
+                                    <div class="tab-content">
+                                      <div id="home" class="tab-pane fade in active">
+                                        <h3>Description</h3>
+                                        <p><?php echo $row['shortDes']?></p>
+                                      </div>
+                                      <!--Review implements-->
+
+                                      <div id="menu1" class="tab-pane fade">
+                                        <div class="form-group">
+
+                                          <h3>Leave a Comment</h3>
+
+                                          <form action="#" method="post">
+
+                                            <label for="comment_author" class="required">Your email</label>
+                                            <?php echo $row['email']?>
+                                            <br>
+                                            <label for="comment" class="required">Your message</label>
+                                            <textarea class="form-control" rows="5" id="comment" required="required"></textarea>
+                                            <input name="submit" type="submit"  class="btn btn-info" value="Submit comment" />
+
+                                          </form>
+
+                                        </div>
+                                      </div>
+
+                                      <div id="menu2" class="tab-pane fade">
+                                        <h3>Seller Details</h3>
+                                        <p><?php echo $row['shortDes'] ?></p>
+
+
+
+                                        <div id='demo1' class="rating">
+                                          <p>RATE SELLER : </p>
+                                          <input class="stars" type="radio" id="star5" name="rating" value="5" />
+                                          <label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                                          <input class="stars" type="radio" id="star4" name="rating" value="4" />
+                                          <label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                                          <input class="stars" type="radio" id="star3" name="rating" value="3" />
+                                          <label class = "full" for="star3" title="Meh - 3 stars"></label>
+                                          <input class="stars" type="radio" id="star2" name="rating" value="2" />
+                                          <label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                                          <input class="stars" type="radio" id="star1" name="rating" value="1" />
+                                          <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                                        </div>
+
+                                        <div id='demo2' class="rating">
+                                          <p>RATE PRODUCT : </p>
+                                          <input class="stars" type="radio" id="star5" name="rating" value="5" />
+                                          <label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                                          <input class="stars" type="radio" id="star4" name="rating" value="4" />
+                                          <label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                                          <input class="stars" type="radio" id="star3" name="rating" value="3" />
+                                          <label class = "full" for="star3" title="Meh - 3 stars"></label>
+                                          <input class="stars" type="radio" id="star2" name="rating" value="2" />
+                                          <label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                                          <input class="stars" type="radio" id="star1" name="rating" value="1" />
+                                          <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                                        </div>
+                                     </div>
+
+                                    </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                     <form>
+                                       <div class="control-group form-group">
+                                         <div class="controls">
+                                           <h3>Size</h3>
+                                           <select class="form-control col-sm-2" style="width:50%;" name="size" required>
+                                             <option value="XS">XS</option>
+                                             <option value="S">S</option>
+                                             <option value="M">M</option>
+                                             <option value="L">L</option>
+                                             <option value="XL">XL</option>
+                                             <option value="XXL">XXL</option>
+                                           </select>
+                                         </div>
+                                       </div><br/><br/>
+                                         <p>Not sure? <a href="#" class="size">See size details</a></p>
+                                         <div class="control-group form-group">
+                                           <div class="controls">
+                                             <h3>Quantity</h3>
+                                             <input type="number" class="form-control" name="qty" required style="width:50%;" min="1" max="100">
+                                           </div>
+                                         </div>
+                                         <?php echo "<p>". $row['QTY']. " pieces available.</p>"; ?>
+                                         <input type="submit" value="ADD TO BAG" class="btn btn-info"><br/>
+                                         <a href="#"><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to Wishlist</a>
+                                     </form>
+                                   </div>
+                                   <?php
+
+
+
+                             }
+                             mysqli_close($con);
+
+                         ?>
+
+                      </div>
                     </div>
             </div>
         </div>
 
         <?php include 'footer.php';?>
+
+        <script>
+          var modal = document.getElementById('myModal');
+          var img = document.getElementById('prodImg');
+          var modalImg = document.getElementById('img01');
+
+          img.onclick = function() {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+          }
+
+          var span = document.getElementsByClassName("close")[0];
+          span.onclick = function() {
+            modal.style.display = "none";
+          }
+        </script>
+
 
     </body>
 

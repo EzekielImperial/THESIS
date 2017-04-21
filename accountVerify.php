@@ -23,7 +23,7 @@
 
     <?php
         session_start();
-        require_once('connector.php');
+
     ?>
 
 
@@ -150,21 +150,43 @@
                 </div>
             </div>
         </nav>
-
-
         <div class="container">
-	         <div class="row text-center">
+           <div class="row text-center">
              <div class="col-sm-6 col-sm-offset-3">
-               <br><br> <h2 style="color:#0fad00">Success</h2>
-               <img src="image/reg_true.jpg">
-               <h3>Dear, Sir/Maam</h3>
-                <p style="font-size:20px;color:#5C5C5C;">Thank you for registering in iMARKET Buy&Sell. A link will be sent to your email to activate your account.</p>
-                            <a href="login.php" class="btn btn-success">     Log-in      </a>
-                            <br><br>
-                          </div>
+        <?php
+        mysql_connect("localhost", "root", "") or die(mysql_error()); // Connect to database server(localhost) with username and password.
+        mysql_select_db("imarketdatabase") or die(mysql_error()); // Select registration database.
+        $marketEmail = $_GET['email'];
+          if(isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['hash']) && !empty($_GET['hash'])) {
+            $email = mysql_escape_string($_GET['email']);
+            $hash = mysql_escape_string($_GET['hash']);
 
-	                       </div>
-</div>
+            $search = mysql_query("SELECT email, hash, userStatus FROM users WHERE email='".$marketEmail."' AND hash='".$hash."' AND userStatus='0'") or die(mysql_error());
+            $match  = mysql_num_rows($search);
+
+            if($match > 0){
+              mysql_query("UPDATE users SET userStatus='1' WHERE email='".$marketEmail."' AND hash='".$hash."' AND userStatus='0'") or die(mysql_error());
+          ?>
+                 <br><br> <h2 style="color:#0fad00">Success</h2>
+                 <img src="image/reg_true.jpg">
+                 <h3>Dear, Sir/Maam</h3>
+                  <p style="font-size:20px;color:#5C5C5C;">Your account is now activated, you can now login to your account.</p>
+                              <a href="login.php" class="btn btn-success">     Log-in      </a>
+                              <br><br>
+
+          <?php
+        } else {
+        ?>
+          <p style="font-size:20px;color:#5C5C5C;">The url is either invalid or you already have activated your account.</p>
+        <?php
+        }
+      } else {
+        echo "<p style='font-size:20px;color:#5C5C5C;'>Invalid aproach, please use the link that has been sent to your email.</p>";
+      }
+         ?>
+             </div>
+           </div>
+       </div>
 
 
            <?php include 'footer.php';?>

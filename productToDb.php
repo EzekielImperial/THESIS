@@ -14,7 +14,7 @@ require_once('connector.php');
   $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);  // dont touch used to upload image property of khelly
 
   $ptitle = $_POST['title'];
-  $powner = $_POST['ownerEmail'];
+  $pownerID = $_POST['ownerID'];
   //$pcategory = $_POST['category'];
 
   $pcategory = $_POST['category'];
@@ -34,6 +34,8 @@ require_once('connector.php');
   $pdes = $_POST['description'];
   $pstats = 1;
   $pqty = $_POST['qty'];
+
+  $pOnsale = "OnSale";
 
   $photo=$_FILES['fileToUpload']['name'];    //dont touch used to upload image property of khelly
 
@@ -56,9 +58,9 @@ require_once('connector.php');
 	} else {
 		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 
-      $stmt = $dbconn->prepare("INSERT INTO products (productName, email, genderCategory, price, shortDes, productCategory, productImage, QTY, date_created, productActive) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+      $stmt = $dbconn->prepare("INSERT INTO products (productName, user_ID, genderCategory, price, shortDes, productCategory, productImage, QTY, date_created, productActive, productStatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-      $stmt->bind_param("sssdsssisi", $ptitle, $powner, $pgender, $pprice, $pdes, $pcategory, $photo, $pqty, $createdate, $pstats);
+      $stmt->bind_param("sssdsssisis", $ptitle, $pownerID, $pgender, $pprice, $pdes, $pcategory, $photo, $pqty, $createdate, $pstats, $pOnsale);
 
       $stmt->execute();
       $stmt->close();
