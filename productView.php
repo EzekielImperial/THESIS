@@ -249,7 +249,7 @@
                   </br> </br>
 
       <!-- just testing will going to recode -->
-      <?php $glasstype = $_SESSION['email'] ?>
+      <?php $glasstype = $_SESSION['user_ID'] ?>
 
 
      <?php
@@ -261,7 +261,7 @@
        {
 
         $con=mysqli_connect('localhost','root','','imarketdatabase');
-        $results = mysqli_query ($con,'SELECT * FROM products WHERE productActive LIKE 1 AND email LIKE "' . $glasstype . '" ');
+        $results = mysqli_query ($con,'SELECT * FROM products WHERE productActive LIKE 1 AND user_ID LIKE "' . $glasstype . '" ');
 
         if($results->num_rows > 0) {
 
@@ -270,7 +270,7 @@
             <div class ="proBox1">
 
             <div class="PHOTOHOVER">
-             <img src="productImages/' .$row['productImage']. '" class="image" height:80%">
+             <img src="productImages/' .$row['productImage']. '" class="image" width="70%" height="70%">
              <div class="middle">
               <div class="text11">
                       <form class="buttons1" method="POST" action="productEdit.php">
@@ -309,7 +309,7 @@
           echo " <h2> these product are available and on sale! </h2> <br>";
 
         $con=mysqli_connect('localhost','root','','imarketdatabase');
-        $results = mysqli_query ($con,'SELECT * FROM products WHERE productStatus LIKE "onSale" AND productActive LIKE 1 AND email LIKE "' . $glasstype . '" ');
+        $results = mysqli_query ($con,'SELECT * FROM products WHERE productStatus LIKE "onSale" AND productActive LIKE 1 AND user_ID LIKE "' . $glasstype . '" ');
 
         if($results->num_rows > 0) {
         while($row = mysqli_fetch_array($results)){
@@ -357,7 +357,7 @@
 
       <?php
 
-         echo " <h2> these product is soldout! </h2> <br>";
+        echo " <h2> these product is soldout! </h2> <br>";
 
         $con=mysqli_connect('localhost','root','','imarketdatabase');
         $results = mysqli_query ($con,'SELECT * FROM products WHERE productStatus LIKE "soldOut" AND email LIKE "' . $glasstype . '" ');
