@@ -1,44 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>:::iMARKET:::</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!--JQUERY-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!--CSS-->
-    <link rel="stylesheet" href="css/design.css" />
-	<script>
-    function updateCartItem(obj,id){
-        $.get("cartAction.php", {action:"updateCartItem", id:id, qty:obj.value}, function(data){
-            if(data == 'ok'){
-                location.reload();
-            }else{
-                alert('Cart update failed, please try again.');
-            }
-        });
-    }
-    </script>
-
-</head>
-
-<body>
-
-    <?php
-        require_once('connector.php');
-		// initializ shopping cart class
-		include 'Cart.php';
-		$cart = new Cart;
-    ?>
-
-
-        <nav id="navbar-main">
+<nav id="navbar-main">
           <!--Login System Embedded by Jung Start-->
             <div class="container">
                 <div class="navbar-header">
@@ -60,8 +20,7 @@
                             <ul class="dropdown-menu">
                                 <li class="profile-li"><a class="profile-links" href="#">My Order</a></li>
                                 <li class="profile-li"><a class="profile-links" href="accountSetting.php">Account Setting</a></li>
-                                <li class="profile-li"><a class="profile-links" href="#">Change Password </a></li>
-                                <li class="profile-li"><a class="profile-links" href="logout.php">logout</a></li>
+                                <li class="profile-li"><a class="profile-links" href="logout.php">Logout</a></li>
 
                                 <?php }elseif(isset($_SESSION['email'])&& $_SESSION['userType'] == 'student'){ ?>
                                 <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
@@ -73,8 +32,7 @@
                                     <ul class="dropdown-menu">
                                         <li class="profile-li"><a class="profile-links" href="#">My Order</a></li>
                                         <li class="profile-li"><a class="profile-links" href="accountSetting.php">Account Setting</a></li>
-                                        <li class="profile-li"><a class="profile-links" href="#">Change Password </a></li>
-                                        <li class="profile-li"><a class="profile-links" href="logout.php">logout</a></li>
+                                        <li class="profile-li"><a class="profile-links" href="logout.php">Logout</a></li>
 
                                         <?php }elseif(isset($_SESSION['email'])&& $_SESSION['userType'] == 'admin'){ ?>
                                         <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
@@ -85,9 +43,7 @@
                                         <li class="upper-links dropdown"><a class="links">My Account</a>
                                             <ul class="dropdown-menu">
                                                 <li class="profile-li"><a class="profile-links" href="adminPart/adminDashboard.php">Admin Dashboard</a></li>
-                                                <li class="profile-li"><a class="profile-links" href="accountSetting.php">Account Setting</a></li>
-                                                <li class="profile-li"><a class="profile-links" href="#">Change Password </a></li>
-                                                <li class="profile-li"><a class="profile-links" href="logout.php">logout</a></li>
+                                                <li class="profile-li"><a class="profile-links" href="accountSetting.php">Account Setting</a></li>                                                <li class="profile-li"><a class="profile-links" href="logout.php">Logout</a></li>
 
 
                                 <?php }else { ?>
@@ -160,61 +116,3 @@
                 </div>
             </div>
         </nav>
-
-        <!--First-->
-        <!--Code Starts Here (main)-->
-
-
-
-<div class="container">
-    <h1>Shopping Cart</h1>
-
-        <?php
-        if($cart->total_items() > 0){
-            //get cart items from session
-            $cartItems = $cart->contents();
-        ?>
-        <table class="table">
-        <thead>
-            <tr>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Subtotal</th>
-                <th>&nbsp;</th>
-            </tr>
-        </thead>
-        <tbody>
-
-        <?php
-            foreach($cartItems as $item){
-        ?>
-        <tr>
-            <td><?php echo $item["name"]; ?></td>
-            <td><?php echo '$'.$item["price"].' USD'; ?></td>
-            <td><input type="number" class="form-control text-center" value="<?php echo $item["qty"]; ?>" onchange="updateCartItem(this, '<?php echo $item["rowid"]; ?>')"></td>
-            <td><?php echo '$'.$item["subtotal"].' USD'; ?></td>
-            <td>
-                <a href="cartAction.php?action=removeCartItem&id=<?php echo $item["rowid"]; ?>" class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="glyphicon glyphicon-trash"></i></a>
-            </td>
-        </tr>
-        <?php }
-        }else{ ?>
-        <tr><td colspan="5"><p>Your cart is empty.....</p></td>
-        <?php } ?>
-    </tbody>
-    <tfoot>
-        <tr>
-            <td><a href="index.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Continue Shopping</a></td>
-            <td colspan="2"></td>
-            <?php if($cart->total_items() > 0){ ?>
-            <td class="text-center"><strong>Total <?php echo '$'.$cart->total().' USD'; ?></strong></td>
-            <td><a href="checkout.php" class="btn btn-success btn-block">Checkout <i class="glyphicon glyphicon-menu-right"></i></a></td>
-            <?php } ?>
-        </tr>
-    </tfoot>
-    </table>
-</div>
-    <?php include 'footer.php';?>
-</body>
-</html>

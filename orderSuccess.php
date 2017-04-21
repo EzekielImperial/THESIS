@@ -153,8 +153,41 @@ if(!isset($_REQUEST['id'])){
 
         <!--Code Starts Here (main)-->
 <div class="container">
-    <h1>Order Status</h1>
-    <p>Your order has submitted successfully. Order ID is #<?php echo $_GET['id']; ?></p>
+  <?php
+    $orderID = $_GET['id'];
+    $query = $dbconn->query('SELECT * FROM users WHERE email="'.$_SESSION['email'].'"');
+    if($query->num_rows > 0){
+      while($row = $query->fetch_assoc()) {
+    ?>
+    <h1>Order #<?php echo $orderID ?></h1><hr>
+    <div class="row">
+      <div class="col-md-5">
+        <h3>Order Details</h3>
+        <p><?php echo $row['firstName']. " " .$row['lastName'] ?></p>
+        <p><?php echo $row['email'] ?></p>
+        <p><?php echo $row['contactNum'] ?></p>
+      </div>
+      <div class="col-md-6">
+        <h3>Date Ordered</h3>
+        <?php
+          $stmt = $dbconn->query('SELECT * FROM orders WHERE id="'.$orderID.'"');
+          if($stmt->num_rows > 0) {
+            while($row = $stmt->fetch_assoc()) {
+              echo "<p>" .$row['created']. "</p>";
+              echo "<h3>Order Status</h3>";
+              $orderStatus = $row['status'];
+              if($orderStatus == 1) {
+                echo "<p>Processing</p>";
+              }
+            }
+          }
+         ?>
+      </div>
+    </div>
+  <?php
+    }
+  }
+  ?>
 </div>
     <?php include 'footer.php';?>
 </body>

@@ -201,7 +201,7 @@
             </a>
           </li>
           <li class="user-side-menu_link-wrapper user-side-menu_link-wrapper-selected">
-            <a class="user-side-menu_link" href="#">
+            <a class="user-side-menu_link" href="salesReport.php">
               <div class="user-side-menu_link-text">Sales Report</div>
             </a>
           </li>
@@ -275,17 +275,17 @@
             <div class ="proBox1">
 
             <div class="PHOTOHOVER">
-             <img src="productImages/' .$row['productImage']. '" class="image" width="70%" height="70%">
+             <img src="productImages/' .$row['productImage']. '" class="image" width="50%" height="50%">
              <div class="middle">
               <div class="text11">
                       <form class="buttons1" method="POST" action="productEdit.php">
                         <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-                        <input class="btn btn-warning" type="submit" value="Edit">
+                        <button class="btn btn-warning" type="submit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
                       </form>
-                    </br>
+                      <br>
                       <form class="buttons1" method="POST" action="productDelete.php">
                           <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-                          <input class="btn btn-danger" type="submit" value="Delete">
+                          <button class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                        </form>
                       </div>
              </div>
@@ -326,14 +326,14 @@
              <img src="productImages/' .$row['productImage']. '" class="image" height:80%">
              <div class="middle">
               <div class="text11">
-                      <form class="buttons1" method="POST" action="productEdit1.php">
+                       <form class="buttons1" method="POST" action="productEdit.php">
                         <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-                        <input class="btn btn-warning" type="submit" value="Edit">
+                        <button class="btn btn-warning" type="submit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
                       </form>
-                    </br>
+                      <br>
                       <form class="buttons1" method="POST" action="productDelete.php">
                           <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-                          <input class="btn btn-danger" type="submit" value="Delete">
+                          <button class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                        </form>
                       </div>
              </div>
@@ -377,14 +377,14 @@
              <img src="productImages/' .$row['productImage']. '" class="image" height:80%">
              <div class="middle">
               <div class="text11">
-                      <form class="buttons1" method="POST" action="productEdit1.php">
+                      <form class="buttons1" method="POST" action="productEdit.php">
                         <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-                        <input class="btn btn-warning" type="submit" value="Edit">
+                        <button class="btn btn-warning" type="submit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
                       </form>
-                    </br>
+                      <br>
                       <form class="buttons1" method="POST" action="productDelete.php">
                           <input type="hidden" name="PNAME" value="'.$row['productName'].'" />
-                          <input class="btn btn-danger" type="submit" value="Delete">
+                          <button class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                        </form>
                       </div>
              </div>
