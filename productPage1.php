@@ -1,11 +1,8 @@
 <?php
-
 session_start();
-
-
-
-
-
+if(!$_SESSION['email']){
+ header("need to be login", 404);
+          exit;}
 ?>
 
 
@@ -31,7 +28,6 @@ session_start();
         <script>
                         $(document).ready(function () {
                             $("#demo1 .stars").click(function () {
-
                                 $.post('rating.php',{rate:$(this).val()},function(d){
                                     if(d>0)
                                     {
@@ -43,10 +39,8 @@ session_start();
                                 $(this).attr("checked");
                             });
                         });
-
                         $(document).ready(function () {
                             $("#demo2 .stars").click(function () {
-
                                 $.post('ratingproduct.php',{rate:$(this).val()},function(d){
                                     if(d>0)
                                     {
@@ -65,14 +59,11 @@ session_start();
         <link rel="stylesheet" href="css/productsPages.css" />
         <style>
         @import url(http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
-
                     fieldset, label { margin: 0; padding: 0; }
-
                     .rating {
                         border: none;
                         float: left;
                     }
-
                     .rating > input { display: none; }
                     .rating > label:before {
                         margin: 5px;
@@ -81,21 +72,17 @@ session_start();
                         display: inline-block;
                         content: "\f005";
                     }
-
                     .rating > .half:before {
                         content: "\f089";
                         position: absolute;
                     }
-
                     .rating > label {
                         color: #ddd;
                         float: right;
                     }
-
                     .rating > input:checked ~ label,
                     .rating:not(:checked) > label:hover,
                     .rating:not(:checked) > label:hover ~ label { color: #FFD700;  }
-
                     .rating > input:checked + label:hover,
                     .rating > input:checked ~ label:hover,
                     .rating > label:hover ~ input:checked ~ label,
@@ -243,13 +230,11 @@ session_start();
                     <div class="row">
 
                      <?php
-                             $email = (isset($_SESSION['email']));
+                             $email = $_SESSION['email'];
                              $pNAME = $_GET['pname'];
                              $con=mysqli_connect('localhost','root','','imarketdatabase');
                              $results = mysqli_query ($con,'SELECT * FROM products WHERE productActive LIKE 1 AND productName LIKE "' . $pNAME . '"');
-
                              while($row = mysqli_fetch_array($results)){
-
                                  echo'
                                    <div class="col-md-4">
                                       <img id="prodImg" src="productImages/' .$row['productImage']. '" width="80%" height="80%"/>
@@ -267,8 +252,8 @@ session_start();
                                     <br/><br>
                                     <ul class="nav nav-tabs">
                                       <li class="active"><a data-toggle="tab" href="#home">Product Details</a></li>
-                                      <li><a data-toggle="tab" href="#menu1"> Seller Details</a></li>
-                                      <li><a data-toggle="tab" href="#menu2"> Reviews </a></li>
+                                      <li><a data-toggle="tab" href="#menu1"> Reviews</a></li>
+                                      <li><a data-toggle="tab" href="#menu2"> Seller Details </a></li>
 
                                     </ul>
 
@@ -277,12 +262,30 @@ session_start();
                                         <h3>Description</h3>
                                         <p><?php echo $row['shortDes']?></p>
                                       </div>
+                                      <!--Review implements-->
 
-                                      <!-- Start of  Review -->
                                       <div id="menu1" class="tab-pane fade">
-                                        <h3>Seller Details</h3>
-                                        <p>Seller Name : <?php echo $row['email'] ?></p>
+                                        <div class="form-group">
 
+                                          <h3>Leave a Comment</h3>
+
+                                          <form action="#" method="post">
+
+                                            <label for="comment_author" class="required">Your email</label>
+                                            <?php echo $row['email']?>
+                                            <br>
+                                            <label for="comment" class="required">Your message</label>
+                                            <textarea class="form-control" rows="5" id="comment" required="required"></textarea>
+                                            <input name="submit" type="submit"  class="btn btn-info" value="Submit comment" />
+
+                                          </form>
+
+                                        </div>
+                                      </div>
+
+                                      <div id="menu2" class="tab-pane fade">
+                                        <h3>Seller Details</h3>
+                                        <p><?php echo $row['shortDes'] ?></p>
 
 
 
@@ -314,60 +317,7 @@ session_start();
                                           <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
                                         </div>
                                      </div>
-                                     <!-- End of Review-->
 
-                                     <!--Review implements-->
-
-                                     <div id="menu2" class="tab-pane fade">
-                                       <div class="form-group">
-                                         <table>
-                                           <thead>
-                                             <tr>
-
-                                               <td>User</td>
-                                               <td>Comments</td>
-                                               <td>Date</td>
-                                             </tr>
-
-                                           </thead>
-                                               <tbody>
-                                         <?php
-                                              $sql = 'select * from rating order by id desc';
-                                              $result = $con->query($sql);
-                                              while($row = $result->fetch_assoc())
-                                              {
-                                                $datetime = explode(' ', $row['product_date']);
-                                                $date = $datetime[0];
-                                                $time = $datetime[1];
-                                                if($date == Date('Y-m-d'))
-                                                $row['product_date'] = $time;
-                                                else
-                                                $row['product_date'] = $date;
-                                                ?>
-
-                                                <tr>
-                                                  <td><?php echo $row['user_ID']?></td>
-                                                  <td><?php echo $row['product_comment']?></td>
-                                                  <td><?php echo $row['product_date']?></td>
-                                                </tr>
-                                                <?php
-                                              }
-                                              ?>
-                                            </tbody>
-                                          </table>
-                                         <form action="#" method="post">
-
-                                           <?php echo $row['email']?>
-                                           <br>
-                                           <label for="comment" class="required">Your Comments</label>
-                                           <textarea class="form-control" rows="5" id="comment" required="required"></textarea>
-                                           <input name="submit" type="submit"  class="btn btn-info" value="Submit comment" />
-
-                                         </form>
-
-                                       </div>
-                                     </div>
-                                     <!--End of review-->
                                     </div>
                                     </div>
                                     <div class="col-md-4">
@@ -394,16 +344,16 @@ session_start();
                                          </div>
                                          <?php echo "<p>". $row['QTY']. " pieces available.</p>"; ?>
                                          <input type="submit" value="ADD TO BAG" class="btn btn-info"><br/></br>
+                                         
 
-
-
+                                         
 
 
                                          <a href="productWishListToDB.php?pname= <?php echo $row['productName']?>" style="color:black; text-decoration:none;";><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist </a>
 
                                     <!--     <a href="#"><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist</a>  -->
                                      </form>
-
+                                     
                                      </br> </br>
 
                                      <form method="POST" action="productWishListToDB.php">
@@ -412,12 +362,8 @@ session_start();
                                           </form>
                                    </div>
                                    <?php
-
-
-
                              }
                              mysqli_close($con);
-
                          ?>
 
                       </div>
@@ -431,12 +377,10 @@ session_start();
           var modal = document.getElementById('myModal');
           var img = document.getElementById('prodImg');
           var modalImg = document.getElementById('img01');
-
           img.onclick = function() {
             modal.style.display = "block";
             modalImg.src = this.src;
           }
-
           var span = document.getElementsByClassName("close")[0];
           span.onclick = function() {
             modal.style.display = "none";
