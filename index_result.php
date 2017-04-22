@@ -193,7 +193,19 @@
                           </div>
                           <div class="col-md-6">
                               <a class="btn btn-success" href="../cartAction.php?action=addToCart&productCode=<?php echo $results["product_ID"]; ?>">Add to cart</a>
+                              <!---->
+                                    <?php
+                                    $ratetest='select * from rating where product_ID='.$results["product_ID"];
+                                    $query1 = $link->query($ratetest) or die($link->error);
+                                    $rowi = $query1->fetch_assoc();
+                                    ?>
+
+                                    <button type="button" class="btn btn-default btn-sm">
+                                      <span class="glyphicon glyphicon-star" aria-hidden="true"></span><?php echo $rowi["rate"]; ?>
+                                    </button>
+                                    <!---->
                           </div>
+
                       </div>
                   </div>
               </div>
