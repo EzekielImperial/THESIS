@@ -18,7 +18,7 @@
 
                         <li class="upper-links dropdown"><a class="links">My Account</a>
                             <ul class="dropdown-menu">
-                                <li class="profile-li"><a class="profile-links" href="#">My Order</a></li>
+                                <li class="profile-li"><a class="profile-links" href="orderHistory.php">My Order</a></li>
                                 <li class="profile-li"><a class="profile-links" href="accountSetting.php">Account Setting</a></li>
                                 <li class="profile-li"><a class="profile-links" href="logout.php">Logout</a></li>
 
@@ -30,7 +30,7 @@
 
                                 <li class="upper-links dropdown"><a class="links">My Account</a>
                                     <ul class="dropdown-menu">
-                                        <li class="profile-li"><a class="profile-links" href="#">My Order</a></li>
+                                        <li class="profile-li"><a class="profile-links" href="orderHistory.php">My Order</a></li>
                                         <li class="profile-li"><a class="profile-links" href="accountSetting.php">Account Setting</a></li>
                                         <li class="profile-li"><a class="profile-links" href="logout.php">Logout</a></li>
 
