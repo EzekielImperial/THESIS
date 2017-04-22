@@ -266,7 +266,7 @@
        {
 
         $con=mysqli_connect('localhost','root','','imarketdatabase');
-        $results = mysqli_query ($con,'SELECT * FROM products WHERE productActive LIKE 1 AND user_ID LIKE "' . $glasstype . '" ');
+        $results = mysqli_query ($con,'SELECT * FROM products WHERE productActive LIKE 1 AND user_ID="'.$glasstype.'"');
 
         if($results->num_rows > 0) {
 
