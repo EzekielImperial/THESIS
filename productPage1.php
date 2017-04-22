@@ -375,6 +375,16 @@ session_start();
                                     </div>
                                     <div class="col-md-4">
                                      <form>
+
+                                       <!--BEEP BEEP BEEP -->
+                                       <?php
+                                       $prodtest='select * from products where product_ID ='.$_GET['pname'];
+                                       $dbcon=mysqli_connect('localhost','root','','imarketdatabase');
+                                       $query = $dbcon->query($prodtest) or die($dbcon->error);
+                                       $row = $query->fetch_assoc();
+
+                                       if($row['productCategory'] == 'Clothing and Accessories'){
+                                       ?>
                                        <div class="control-group form-group">
                                          <div class="controls">
                                            <h3>Size</h3>
@@ -389,6 +399,27 @@ session_start();
                                          </div>
                                        </div><br/><br/>
                                          <p>Not sure? <a href="#" class="size">See size details</a></p>
+                                         <?php }elseif($row['productCategory'] == 'Bags and Accessories'){?>
+                                           <div class="control-group form-group">
+                                             <div class="controls">
+                                               <h3>Size</h3>
+                                               <select class="form-control col-sm-2" style="width:50%;" name="size" required>
+                                                 <option value="XS">XS</option>
+                                                 <option value="S">S</option>
+                                                 <option value="M">M</option>
+                                                 <option value="L">L</option>
+                                                 <option value="XL">XL</option>
+                                                 <option value="XXL">XXL</option>
+                                               </select>
+                                             </div>
+                                           </div><br/><br/>
+                                             <p>Not sure? <a href="#" class="size">See size details</a></p>
+
+                                         <?php }else{
+                                           echo " ";
+                                         } ?>
+                                         <!--beep beep beep-->
+
                                          <div class="control-group form-group">
                                            <div class="controls">
                                              <h3>Quantity</h3>
