@@ -258,7 +258,7 @@
                 <tr>
                   <td><?php echo "<a href='orderSuccess.php?id=".$id."'>" .$row['id']. "</a>" ?></td>
                   <td><?php echo $row['created'] ?></td>
-                  <td>X</td>
+                  <td><?php echo $row['order_process'] ?></td>
                   <td><?php echo $row['total_price'] ?></td>
                 </tr>
 

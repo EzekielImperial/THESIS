@@ -1,8 +1,5 @@
-  <?php
+<?php
 session_start();
-if(!$_SESSION['email']){
- header("need to be login", 404);
-          exit;}
 ?>
 
 
@@ -12,7 +9,7 @@ if(!$_SESSION['email']){
     <html lang="en">
 
     <head>
-        <title><?php echo $_GET['pname']; ?></title>
+        <title>:::iMARKET:::</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Latest compiled and minified CSS -->
@@ -219,21 +216,29 @@ if(!$_SESSION['email']){
 
       <!--Main code starts-->
 
+      <!--To get the Name of product-->
+      <?php
+      $prodtest='select * from products where product_ID ='.$_GET['pname'];
+      $dbcon=mysqli_connect('localhost','root','','imarketdatabase');
+      $query = $dbcon->query($prodtest) or die($dbcon->error);
+      $row = $query->fetch_assoc();
+
+      ?>
         <div class="container-fuild">
             <div class="row">
                 <div class="col-md-12 col-centered">
                     <div class="row">
-                        <h2> <b> <?php echo $_GET['pname']; ?> </b> </h2>
+                        <h2> <b> <?php echo $row['productName']; ?> </b> </h2>
                         <!-- just testing will going to recode -->
                         <hr>
                     </div>
                     <div class="row">
 
                      <?php
-                             $email = $_SESSION['email'];
+                             $email = (isset($_SESSION['email']));
                              $pNAME = $_GET['pname'];
                              $con=mysqli_connect('localhost','root','','imarketdatabase');
-                             $results = mysqli_query ($con,'SELECT * FROM products WHERE productActive LIKE 1 AND productName LIKE "' . $pNAME . '"');
+                             $results = mysqli_query ($con,'SELECT * FROM products WHERE productActive LIKE 1 AND product_ID LIKE "' . $pNAME . '"');
                              while($row = mysqli_fetch_array($results)){
                                  echo'
                                    <div class="col-md-4">
@@ -252,8 +257,8 @@ if(!$_SESSION['email']){
                                     <br/><br>
                                     <ul class="nav nav-tabs">
                                       <li class="active"><a data-toggle="tab" href="#home">Product Details</a></li>
-                                      <li><a data-toggle="tab" href="#menu1"> Reviews</a></li>
-                                      <li><a data-toggle="tab" href="#menu2"> Seller Details </a></li>
+                                      <li><a data-toggle="tab" href="#menu1"> Seller Details</a></li>
+                                      <li><a data-toggle="tab" href="#menu2"> Reviews </a></li>
 
                                     </ul>
 
@@ -262,30 +267,25 @@ if(!$_SESSION['email']){
                                         <h3>Description</h3>
                                         <p><?php echo $row['shortDes']?></p>
                                       </div>
-                                      <!--Review implements-->
+
+                                      <!-- Start of  Review -->
+
+                                      <!--To get the data of the User-->
+                                      <?php
+                                      $usertest='select * from users where user_ID ='.$row['user_ID'];
+                                      $query = $con->query($usertest) or die($con->error);
+                                      $row = $query->fetch_assoc();
+
+                                      ?>
+
+
+
 
                                       <div id="menu1" class="tab-pane fade">
-                                        <div class="form-group">
-
-                                          <h3>Leave a Comment</h3>
-
-                                          <form action="#" method="post">
-
-                                            <label for="comment_author" class="required">Your email</label>
-                                            <?php echo $row['email']?>
-                                            <br>
-                                            <label for="comment" class="required">Your message</label>
-                                            <textarea class="form-control" rows="5" id="comment" required="required"></textarea>
-                                            <input name="submit" type="submit"  class="btn btn-info" value="Submit comment" />
-
-                                          </form>
-
-                                        </div>
-                                      </div>
-
-                                      <div id="menu2" class="tab-pane fade">
                                         <h3>Seller Details</h3>
-                                        <p><?php echo $row['shortDes'] ?></p>
+                                        <p>Seller Email : <?php echo $row['email'] ?></p>
+                                        <p>Seller Name : <?php echo $row['lastName'] ?> <?php echo $row['firstName'] ?></p>
+                                        <p>Seller Contact : <?php echo $row['contactNum'] ?></p>
 
 
 
@@ -317,11 +317,74 @@ if(!$_SESSION['email']){
                                           <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
                                         </div>
                                      </div>
+                                     <!-- End of Review-->
 
+                                     <!--Review implements-->
+
+                                     <div id="menu2" class="tab-pane fade">
+                                       <div class="form-group">
+                                         <table>
+                                           <thead>
+                                             <tr>
+
+                                               <td>User</td>
+                                               <td>Comments</td>
+                                               <td>Date</td>
+                                             </tr>
+
+                                           </thead>
+                                               <tbody>
+                                         <?php
+                                              $sql = 'select * from rating order by product_date asc';
+                                              $result = $con->query($sql);
+                                              while($row = $result->fetch_assoc())
+                                              {
+                                                $datetime = explode(' ', $row['product_date']);
+                                                $date = $datetime[0];
+                                                $time = $datetime[1];
+                                                if($date == Date('Y-m-d'))
+                                                $row['product_date'] = $time;
+                                                else
+                                                $row['product_date'] = $date;
+                                                ?>
+
+                                                <tr>
+                                                  <td><?php echo $row['user_ID']?></td>
+                                                  <td><?php echo $row['product_comment']?></td>
+                                                  <td><?php echo $row['product_date']?></td>
+                                                </tr>
+                                                <?php
+                                              }
+                                              ?>
+                                            </tbody>
+                                          </table>
+                                         <form action="comment_update.php" method="post">
+                                           <input type="hidden" name="bno" value="<?php echo $pNAME?>">
+                                           <input type="hidden" name="coId" value="<?php echo $email?>">
+                                           <br>
+                                           <label for="comment" class="required">Your Comments</label>
+                                           <textarea class="form-control" rows="5" id="comment" required="required"></textarea>
+                                           <input name="submit" type="submit"  class="btn btn-info" value="Submit comment" />
+
+                                         </form>
+
+                                       </div>
+                                     </div>
+                                     <!--End of review-->
                                     </div>
                                     </div>
                                     <div class="col-md-4">
                                      <form>
+
+                                       <!--BEEP BEEP BEEP -->
+                                       <?php
+                                       $prodtest='select * from products where product_ID ='.$_GET['pname'];
+                                       $dbcon=mysqli_connect('localhost','root','','imarketdatabase');
+                                       $query = $dbcon->query($prodtest) or die($dbcon->error);
+                                       $row = $query->fetch_assoc();
+
+                                       if($row['productCategory'] == 'Clothing and Accessories'){
+                                       ?>
                                        <div class="control-group form-group">
                                          <div class="controls">
                                            <h3>Size</h3>
@@ -336,6 +399,27 @@ if(!$_SESSION['email']){
                                          </div>
                                        </div><br/><br/>
                                          <p>Not sure? <a href="#" class="size">See size details</a></p>
+                                         <?php }elseif($row['productCategory'] == 'Bags and Accessories'){?>
+                                           <div class="control-group form-group">
+                                             <div class="controls">
+                                               <h3>Size</h3>
+                                               <select class="form-control col-sm-2" style="width:50%;" name="size" required>
+                                                 <option value="XS">XS</option>
+                                                 <option value="S">S</option>
+                                                 <option value="M">M</option>
+                                                 <option value="L">L</option>
+                                                 <option value="XL">XL</option>
+                                                 <option value="XXL">XXL</option>
+                                               </select>
+                                             </div>
+                                           </div><br/><br/>
+                                             <p>Not sure? <a href="#" class="size">See size details</a></p>
+
+                                         <?php }else{
+                                           echo " ";
+                                         } ?>
+                                         <!--beep beep beep-->
+
                                          <div class="control-group form-group">
                                            <div class="controls">
                                              <h3>Quantity</h3>
@@ -344,12 +428,17 @@ if(!$_SESSION['email']){
                                          </div>
                                          <?php echo "<p>". $row['qty']. " pieces available.</p>"; ?>
                                          <input type="submit" value="ADD TO BAG" class="btn btn-info"><br/></br>
-<!--  
 
-                                         <a href="productWishListToDB.php?pname=<?php echo $row['productName']?>" style="color:black; text-decoration:none;";><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist </a>
 
-                                       <a href="#"><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist</a>  -->
+
+
+
+                                         <a href="productWishListToDB.php?pname= <?php echo $row['productName']?>" style="color:black; text-decoration:none;";><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist </a>
+
+                                    <!--     <a href="#"><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist</a>  -->
                                      </form>
+
+                                     </br> </br>
 
                                      <form method="POST" action="productWishListToDB.php">
                                             <input type="hidden" name="pname" value="<?php echo $row['productName']?>" />

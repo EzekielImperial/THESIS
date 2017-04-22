@@ -216,7 +216,7 @@
                         <div class="control-group form-group">
                             <label for="yearLvl">Year Level</label> <br>
                             <select class="form-control col-sm-2" name="yearLvl" id="yearLvl" required>
-                              <option value="SHS">Senior High School</option>
+                              <option value="NA">Senior High School</option>
                               <option value="1st Year">1st Year College</option>
                               <option value="2nd Year">2nd Year College</option>
                               <option value="3rd Year">3rd Year College</option>
@@ -230,6 +230,7 @@
                             <div class="controls">
                               <label>Strand</label>
                                 <select class="form-control col-sm-2" name="strand" id="strand">
+                                  <option value="NA">Choose your Strand</option>
                                   <option value="Humanities ans Social Sciences">Humanities ans Social Sciences</option>
                                   <option value="Accountancy and Business Management">Accountancy, Business And Management</option>
                                   <option value="Computer Programming">Computer Programming</option>
@@ -243,6 +244,7 @@
                             <div class="controls">
                               <label>Course</label>
                                 <select class="form-control col-sm-2" name="course" id="course">
+                                  <option value="NA">Choose your Course</option>
                                   <option value="SE">Software Engineering</option>
                                   <option value="WD">Web Development</option>
                                   <option value="GD">Game Development</option>

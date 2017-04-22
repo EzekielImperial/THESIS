@@ -106,7 +106,7 @@ if(!isset($_REQUEST['id'])){
                 </div>
                 <!--Size-->
                 <div class="col-sm-1">
-                    <a href="../index.php"><img src="../image/logo.png" width="70px" height="70px"></a>
+                    <a href="../index.php"><img src="image/logo.png" width="70px" height="70px"></a>
                 </div>
                 <div class="smallsearch col-sm-8 col-xs-11">
                     <div class="row">
