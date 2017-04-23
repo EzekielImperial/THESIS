@@ -235,14 +235,11 @@
 
 
          <form method="POST" action="" style="float:right;">
-                    <select name="ShortA" onchange="javascript: submit()">
-                      <option value="" disabled selected>Filter by:</option>
-                      <option value="high">higest to low price</option>
-                      <option value="low">lowest to highest price</option>
-                      <option value="dateold">Old to New Product Posted</option>
-                      <option value="datenew">New to Old Product Posted</option>
-                      <option value="sold">Solout!</option>
-                      <option value="sale">For Sale!</option>
+                    <select class="form-control col-sm-2" name="ShortA" onchange="javascript: submit()">
+                      <option value="" disabled selected>Sort by:</option>
+                      <option value="high">Higest to Lowest price</option>
+                      <option value="low">Lowest to Highest price</option>
+                      <option value="datenew">Most Recent</option>
               </select>
 
 
