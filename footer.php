@@ -47,12 +47,7 @@ echo '<!--Footer-->
                                 <ul>
                                     <li><a href="announcement.php"><i class="fa fa-angle-double-right"></i> Announcement</a></li>
                                     <li><a href="termsnpolicy.php"><i class="fa fa-angle-double-right"></i> Terms & Policy</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Developers</a></li>
                                     <li><a href="#"><i class="fa fa-angle-double-right"></i> Advertisement</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Smart Book</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Test Centres</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Announcement</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-double-right"></i> Computer Live</a></li>
 
                                 </ul>
                             </li>
@@ -114,6 +109,3 @@ echo '<!--Footer-->
             </div>
         </div>';
 ?>
-
-
-

@@ -13,6 +13,7 @@ if(isset($_REQUEST['action']) && !empty($_REQUEST['action'])){
         $row = $query->fetch_assoc();
         $itemData = array(
             'id' => $row['product_ID'],
+            'email' => $row['email'],
             'name' => $row['productName'],
             'price' => $row['price'],
             'qty' => 1
@@ -41,7 +42,7 @@ if(isset($_REQUEST['action']) && !empty($_REQUEST['action'])){
             // get cart items
             $cartItems = $cart->contents();
             foreach($cartItems as $item){
-                $sql .= "INSERT INTO order_items (order_id, product_ID, qty) VALUES ('".$orderID."', '".$item['id']."', '".$item['qty']."');";
+                $sql .= "INSERT INTO order_items (order_id, Seller_ID, product_ID, qty) VALUES ('".$orderID."','".$item['email']."', '".$item['id']."', '".$item['qty']."');";
             }
             // insert order items into database
             $insertOrderItems = $dbconn->multi_query($sql);
