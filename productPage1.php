@@ -22,36 +22,7 @@ session_start();
 
         <!--Script for rating-->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script>
-                        $(document).ready(function () {
-                            $("#demo1 .stars").click(function () {
-                                $.post('rating.php',{rate:$(this).val()},function(d){
-                                    if(d>0)
-                                    {
-                                        alert('You already rated');
-                                    }else{
-                                        alert('Thanks For Rating');
-                                    }
-                                });
-                                $(this).attr("checked");
-                            });
-                        });
-                        $(document).ready(function () {
-                            $("#demo2 .stars").click(function () {
-                                $.post('ratingproduct.php',{rate:$(this).val()},function(d){
-                                    if(d>0)
-                                    {
-                                        alert('You already rated');
-                                    }else{
-                                        alert('Thanks For Rating');
-                                    }
-                                });
-                                $(this).attr("checked");
-                            });
-                        });
-                    </script>
-
-        <link rel="stylesheet" href="css/login.css" />
+                <link rel="stylesheet" href="css/login.css" />
         <link rel="stylesheet" href="css/design.css" />
         <link rel="stylesheet" href="css/productsPages.css" />
         <style>
@@ -107,7 +78,7 @@ session_start();
                       <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                       <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
                       <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                      <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                      <li class="upper-links"><a class="links" href="viewCart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                       <li class="upper-links dropdown"><a class="links">My Account</a>
                           <ul class="dropdown-menu">
@@ -120,7 +91,7 @@ session_start();
                               <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                               <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
                               <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                              <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                              <li class="upper-links"><a class="links" href="viewCart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                               <li class="upper-links dropdown"><a class="links">My Account</a>
                                   <ul class="dropdown-menu">
@@ -133,7 +104,7 @@ session_start();
                                       <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                                       <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
                                       <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                                      <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                                      <li class="upper-links"><a class="links" href="viewCart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                                       <li class="upper-links dropdown"><a class="links">My Account</a>
                                           <ul class="dropdown-menu">
@@ -289,33 +260,7 @@ session_start();
 
 
 
-                                        <div id='demo1' class="rating">
-                                          <p>RATE SELLER : </p>
-                                          <input class="stars" type="radio" id="star5" name="rating" value="5" />
-                                          <label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                          <input class="stars" type="radio" id="star4" name="rating" value="4" />
-                                          <label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                          <input class="stars" type="radio" id="star3" name="rating" value="3" />
-                                          <label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                          <input class="stars" type="radio" id="star2" name="rating" value="2" />
-                                          <label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                          <input class="stars" type="radio" id="star1" name="rating" value="1" />
-                                          <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                                        </div>
 
-                                        <div id='demo2' class="rating">
-                                          <p>RATE PRODUCT : </p>
-                                          <input class="stars" type="radio" id="star5" name="rating" value="5" />
-                                          <label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                          <input class="stars" type="radio" id="star4" name="rating" value="4" />
-                                          <label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                          <input class="stars" type="radio" id="star3" name="rating" value="3" />
-                                          <label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                          <input class="stars" type="radio" id="star2" name="rating" value="2" />
-                                          <label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                          <input class="stars" type="radio" id="star1" name="rating" value="1" />
-                                          <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                                        </div>
                                      </div>
                                      <!-- End of Review-->
 
@@ -323,50 +268,6 @@ session_start();
 
                                      <div id="menu2" class="tab-pane fade">
                                        <div class="form-group">
-                                         <table>
-                                           <thead>
-                                             <tr>
-
-                                               <td>User</td>
-                                               <td>Comments</td>
-                                               <td>Date</td>
-                                             </tr>
-
-                                           </thead>
-                                               <tbody>
-                                         <?php
-                                              $sql = 'select * from rating order by product_date asc';
-                                              $result = $con->query($sql);
-                                              while($row = $result->fetch_assoc())
-                                              {
-                                                $datetime = explode(' ', $row['product_date']);
-                                                $date = $datetime[0];
-                                                $time = $datetime[1];
-                                                if($date == Date('Y-m-d'))
-                                                $row['product_date'] = $time;
-                                                else
-                                                $row['product_date'] = $date;
-                                                ?>
-
-                                                <tr>
-                                                  <td><?php echo $row['user_ID']?></td>
-                                                  <td><?php echo $row['product_comment']?></td>
-                                                  <td><?php echo $row['product_date']?></td>
-                                                </tr>
-                                                <?php
-                                              }
-                                              ?>
-                                            </tbody>
-                                          </table>
-                                         <form action="comment_update.php" method="post">
-                                           <input type="hidden" name="bno" value="<?php echo $pNAME?>">
-                                           <input type="hidden" name="coId" value="<?php echo $email?>">
-                                           <br>
-                                           <label for="comment" class="required">Your Comments</label>
-                                           <textarea class="form-control" rows="5" id="comment" required="required"></textarea>
-                                           <input name="submit" type="submit"  class="btn btn-info" value="Submit comment" />
-
-                                         </form>
 
                                        </div>
                                      </div>
@@ -445,6 +346,15 @@ session_start();
                                             <input type="submit" value="Add to My Wishlist">
                                           </form>
                                    </div>
+
+
+
+                                   <!--====================Review (comment with rate) box will do here=======================-->
+                                   <div id="boardComment">
+                                   			<?php require_once('product_comment.php') ?>
+                                   </div>
+
+
                                    <?php
                              }
                              mysqli_close($con);
