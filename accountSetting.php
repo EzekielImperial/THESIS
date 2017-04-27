@@ -462,7 +462,7 @@
                                                 <input type="reset" value="Clear" class="btn">
                                             </fieldset>
                                         </form>
-                                    </div>
+                                    </div><br/>
                                     <a href="deactivatePage.php" class="btn btn-danger deactivate">Deactivate Account</a>
                         </div>
                     </div>

@@ -192,13 +192,16 @@ if(!$_SESSION['email']){
                                    <option value="Toys Stuffs">Toys Stuffs</option>
                                 </select>
 
-
-                              <select class="form-control" id="gender" name="gender">
-                                <option value="0" selected>Choose One</option>
-                                <option value="man">Man</option>
-                                <option value="woman">Woman</option>
-                              </select>
-
+                                <select class="form-control" id="gender" name="gender">
+                                  <option value="0" selected>Choose One</option>
+                                  <option value="man">Man</option>
+                                  <option value="woman">Woman</option>
+                                </select><br/>
+                              <div id="sizeChart">
+                                <label>Size Chart</label>
+                                <input type="file" multiple="multiple" name="sizeChart">
+                                <p class="help-block">Example "Recomended Image Size in pixel 400 X 300"</p>
+                              </div>
                             </div>
 
                     <div class="form-group">
