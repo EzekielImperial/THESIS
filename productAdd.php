@@ -217,11 +217,11 @@ if(!$_SESSION['email']){
                     <label for="inputname">Upload Your Product Image:</label>
 
                 </div>  need to put code to upload pictures here lol -->
-                  
+
 
                     <div class="form-group">
                         <label>product image</label>
-                        <input type="file" name="fileToUpload">
+                        <input type="file" multiple="multiple" name="fileToUpload" id="fileToUpload">
                         <p class="help-block">Example "Recomended Image Size in pixel 400 X 300"</p>
                     </div>
 

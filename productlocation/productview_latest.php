@@ -161,7 +161,7 @@
             <div class="thumbnail">
                 <div class="caption">
 				<img src="../productImages/<?php echo $row["productImage"];?>" width="150px" height="150px"/>
-                    <h4 class="list-group-item-heading"><a href="../productPage1.php?pname=<?php echo $row['productName']?>"><?php echo $row["productName"]; ?></a></h4>
+                    <h4 class="list-group-item-heading"><a href="../productPage1.php?pname=<?php echo $row['product_ID']?>"><?php echo $row["productName"]; ?></a></h4>
                     <p class="list-group-item-text"><?php echo $row["shortDes"]; ?></p>
                     <div class="row">
                         <div class="col-md-6">
@@ -169,7 +169,21 @@
                         </div>
                         <div class="col-md-6">
                             <a class="btn btn-success" href="../cartAction.php?action=addToCart&id=<?php echo $row["product_ID"]; ?>">Add to cart</a>
+
+                            <!---->
+                                  <?php
+                                  $ratetest='select * from rating where product_ID='.$row["product_ID"];
+                                  $query1 = $dbconn->query($ratetest) or die($dbconn->error);
+                                  $rowi = $query1->fetch_assoc();
+                                  ?>
+
+                                  <button type="button" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span><?php echo $rowi["rate"]; ?>
+                                  </button>
+                                  <!---->
                         </div>
+
+
                     </div>
                 </div>
             </div>

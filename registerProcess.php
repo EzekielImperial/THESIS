@@ -10,6 +10,10 @@
 		$marketBirthDate=$_POST['birthDate'];
     $marketContactNum=$_POST['contactNum'];
     $marketStats=$_POST['Status'];
+		$yearlevel=$_POST['yearLvl'];
+		$strand=$_POST['strand'];
+		$course=$_POST['course'];
+		$department=$_POST['dept'];
 		$hash = md5( rand(0,1000) );
 		date_default_timezone_set('Asia/Manila');  // creating date_created
         $createdate =date('F j, Y g:i:a  ');          // date_created format
@@ -40,15 +44,15 @@
 		exit;
 	} else {
 		if ($userType == "student") {
-			$stmt2 = $dbconn->prepare('INSERT INTO users (email, password, firstName, lastName, userType, birthDate, contactNum, userStatus, hash, date_created) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-			$stmt2->bind_param('sssssssdss', $marketEmail, $marketPassword, $marketFirstName, $marketLastName, $userType, $marketBirthDate, $marketContactNum, $marketStats, $hash, $createdate);
+			$stmt2 = $dbconn->prepare('INSERT INTO users (email, password, firstName, lastName, userType, birthDate, contactNum, userStatus, hash, date_created, year_level, course, strand) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+			$stmt2->bind_param('sssssssdsssss', $marketEmail, $marketPassword, $marketFirstName, $marketLastName, $userType, $marketBirthDate, $marketContactNum, $marketStats, $hash, $createdate, $yearlevel, $course, $strand);
 			$stmt2->execute();
 
 				header('Location: registerWelcome.php');
 		}
 		else if ($userType == "employee") {
-			$query = $dbconn->prepare('INSERT INTO users (email, password, firstName, lastName, userType, birthDate, contactNum, userStatus, hash, date_created) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-			$query->bind_param('sssssssdss', $marketEmail, $marketPassword, $marketFirstName, $marketLastName, $userType, $marketBirthDate, $marketContactNum, $marketStats, $hash, $createdate);
+			$query = $dbconn->prepare('INSERT INTO users (email, password, firstName, lastName, userType, birthDate, contactNum, userStatus, hash, date_created, department) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+			$query->bind_param('sssssssdssss', $marketEmail, $marketPassword, $marketFirstName, $marketLastName, $userType, $marketBirthDate, $marketContactNum, $marketStats, $hash, $createdate, $department);
 			$query->execute();
 
 			if(@mysqli_query($dbconn, $query)){

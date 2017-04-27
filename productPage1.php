@@ -1,8 +1,5 @@
-  <?php
+<?php
 session_start();
-if(!$_SESSION['email']){
- header("need to be login", 404);
-          exit;}
 ?>
 
 
@@ -12,7 +9,7 @@ if(!$_SESSION['email']){
     <html lang="en">
 
     <head>
-        <title><?php echo $_GET['pname']; ?></title>
+        <title>:::iMARKET:::</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Latest compiled and minified CSS -->
@@ -25,36 +22,7 @@ if(!$_SESSION['email']){
 
         <!--Script for rating-->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script>
-                        $(document).ready(function () {
-                            $("#demo1 .stars").click(function () {
-                                $.post('rating.php',{rate:$(this).val()},function(d){
-                                    if(d>0)
-                                    {
-                                        alert('You already rated');
-                                    }else{
-                                        alert('Thanks For Rating');
-                                    }
-                                });
-                                $(this).attr("checked");
-                            });
-                        });
-                        $(document).ready(function () {
-                            $("#demo2 .stars").click(function () {
-                                $.post('ratingproduct.php',{rate:$(this).val()},function(d){
-                                    if(d>0)
-                                    {
-                                        alert('You already rated');
-                                    }else{
-                                        alert('Thanks For Rating');
-                                    }
-                                });
-                                $(this).attr("checked");
-                            });
-                        });
-                    </script>
-
-        <link rel="stylesheet" href="css/login.css" />
+                <link rel="stylesheet" href="css/login.css" />
         <link rel="stylesheet" href="css/design.css" />
         <link rel="stylesheet" href="css/productsPages.css" />
         <style>
@@ -110,7 +78,7 @@ if(!$_SESSION['email']){
                       <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                       <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
                       <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                      <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                      <li class="upper-links"><a class="links" href="viewCart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                       <li class="upper-links dropdown"><a class="links">My Account</a>
                           <ul class="dropdown-menu">
@@ -123,7 +91,7 @@ if(!$_SESSION['email']){
                               <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                               <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
                               <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                              <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                              <li class="upper-links"><a class="links" href="viewCart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                               <li class="upper-links dropdown"><a class="links">My Account</a>
                                   <ul class="dropdown-menu">
@@ -136,7 +104,7 @@ if(!$_SESSION['email']){
                                       <li class="upper-links"><a class="links" href="productAdd.php"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> SELL</a></li>
                                       <li class="upper-links"><a class="links" href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> NOTIFICATIONS</a></li>
                                       <li class="upper-links"><a class="links" href="index_wishlist.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> WISHLIST</a></li>
-                                      <li class="upper-links"><a class="links" href="index_shopcart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
+                                      <li class="upper-links"><a class="links" href="viewCart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> CART</a></li>
 
                                       <li class="upper-links dropdown"><a class="links">My Account</a>
                                           <ul class="dropdown-menu">
@@ -219,21 +187,29 @@ if(!$_SESSION['email']){
 
       <!--Main code starts-->
 
+      <!--To get the Name of product-->
+      <?php
+      $prodtest='select * from products where product_ID ='.$_GET['pname'];
+      $dbcon=mysqli_connect('localhost','root','','imarketdatabase');
+      $query = $dbcon->query($prodtest) or die($dbcon->error);
+      $row = $query->fetch_assoc();
+
+      ?>
         <div class="container-fuild">
             <div class="row">
                 <div class="col-md-12 col-centered">
                     <div class="row">
-                        <h2> <b> <?php echo $_GET['pname']; ?> </b> </h2>
+                        <h2> <b> <?php echo $row['productName']; ?> </b> </h2>
                         <!-- just testing will going to recode -->
                         <hr>
                     </div>
                     <div class="row">
 
                      <?php
-                             $email = $_SESSION['email'];
+                             $email = (isset($_SESSION['email']));
                              $pNAME = $_GET['pname'];
                              $con=mysqli_connect('localhost','root','','imarketdatabase');
-                             $results = mysqli_query ($con,'SELECT * FROM products WHERE productActive LIKE 1 AND productName LIKE "' . $pNAME . '"');
+                             $results = mysqli_query ($con,'SELECT * FROM products WHERE productActive LIKE 1 AND product_ID LIKE "' . $pNAME . '"');
                              while($row = mysqli_fetch_array($results)){
                                  echo'
                                    <div class="col-md-4">
@@ -252,8 +228,8 @@ if(!$_SESSION['email']){
                                     <br/><br>
                                     <ul class="nav nav-tabs">
                                       <li class="active"><a data-toggle="tab" href="#home">Product Details</a></li>
-                                      <li><a data-toggle="tab" href="#menu1"> Reviews</a></li>
-                                      <li><a data-toggle="tab" href="#menu2"> Seller Details </a></li>
+                                      <li><a data-toggle="tab" href="#menu1"> Seller Details</a></li>
+                                      <li><a data-toggle="tab" href="#menu2"> Reviews </a></li>
 
                                     </ul>
 
@@ -262,66 +238,54 @@ if(!$_SESSION['email']){
                                         <h3>Description</h3>
                                         <p><?php echo $row['shortDes']?></p>
                                       </div>
-                                      <!--Review implements-->
+
+                                      <!-- Start of  Review -->
+
+                                      <!--To get the data of the User-->
+                                      <?php
+                                      $usertest='select * from users where user_ID ='.$row['user_ID'];
+                                      $query = $con->query($usertest) or die($con->error);
+                                      $row = $query->fetch_assoc();
+
+                                      ?>
+
+
+
 
                                       <div id="menu1" class="tab-pane fade">
-                                        <div class="form-group">
-
-                                          <h3>Leave a Comment</h3>
-
-                                          <form action="#" method="post">
-
-                                            <label for="comment_author" class="required">Your email</label>
-                                            <?php echo $row['email']?>
-                                            <br>
-                                            <label for="comment" class="required">Your message</label>
-                                            <textarea class="form-control" rows="5" id="comment" required="required"></textarea>
-                                            <input name="submit" type="submit"  class="btn btn-info" value="Submit comment" />
-
-                                          </form>
-
-                                        </div>
-                                      </div>
-
-                                      <div id="menu2" class="tab-pane fade">
                                         <h3>Seller Details</h3>
-                                        <p><?php echo $row['shortDes'] ?></p>
+                                        <p>Seller Email : <?php echo $row['email'] ?></p>
+                                        <p>Seller Name : <?php echo $row['lastName'] ?> <?php echo $row['firstName'] ?></p>
+                                        <p>Seller Contact : <?php echo $row['contactNum'] ?></p>
 
 
 
-                                        <div id='demo1' class="rating">
-                                          <p>RATE SELLER : </p>
-                                          <input class="stars" type="radio" id="star5" name="rating" value="5" />
-                                          <label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                          <input class="stars" type="radio" id="star4" name="rating" value="4" />
-                                          <label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                          <input class="stars" type="radio" id="star3" name="rating" value="3" />
-                                          <label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                          <input class="stars" type="radio" id="star2" name="rating" value="2" />
-                                          <label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                          <input class="stars" type="radio" id="star1" name="rating" value="1" />
-                                          <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                                        </div>
 
-                                        <div id='demo2' class="rating">
-                                          <p>RATE PRODUCT : </p>
-                                          <input class="stars" type="radio" id="star5" name="rating" value="5" />
-                                          <label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                                          <input class="stars" type="radio" id="star4" name="rating" value="4" />
-                                          <label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                                          <input class="stars" type="radio" id="star3" name="rating" value="3" />
-                                          <label class = "full" for="star3" title="Meh - 3 stars"></label>
-                                          <input class="stars" type="radio" id="star2" name="rating" value="2" />
-                                          <label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                                          <input class="stars" type="radio" id="star1" name="rating" value="1" />
-                                          <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                                        </div>
                                      </div>
+                                     <!-- End of Review-->
 
+                                     <!--Review implements-->
+
+                                     <div id="menu2" class="tab-pane fade">
+                                       <div class="form-group">
+
+                                       </div>
+                                     </div>
+                                     <!--End of review-->
                                     </div>
                                     </div>
                                     <div class="col-md-4">
                                      <form>
+
+                                       <!--BEEP BEEP BEEP -->
+                                       <?php
+                                       $prodtest='select * from products where product_ID ='.$_GET['pname'];
+                                       $dbcon=mysqli_connect('localhost','root','','imarketdatabase');
+                                       $query = $dbcon->query($prodtest) or die($dbcon->error);
+                                       $row = $query->fetch_assoc();
+
+                                       if($row['productCategory'] == 'Clothing and Accessories'){
+                                       ?>
                                        <div class="control-group form-group">
                                          <div class="controls">
                                            <h3>Size</h3>
@@ -336,6 +300,27 @@ if(!$_SESSION['email']){
                                          </div>
                                        </div><br/><br/>
                                          <p>Not sure? <a href="#" class="size">See size details</a></p>
+                                         <?php }elseif($row['productCategory'] == 'Bags and Accessories'){?>
+                                           <div class="control-group form-group">
+                                             <div class="controls">
+                                               <h3>Size</h3>
+                                               <select class="form-control col-sm-2" style="width:50%;" name="size" required>
+                                                 <option value="XS">XS</option>
+                                                 <option value="S">S</option>
+                                                 <option value="M">M</option>
+                                                 <option value="L">L</option>
+                                                 <option value="XL">XL</option>
+                                                 <option value="XXL">XXL</option>
+                                               </select>
+                                             </div>
+                                           </div><br/><br/>
+                                             <p>Not sure? <a href="#" class="size">See size details</a></p>
+
+                                         <?php }else{
+                                           echo " ";
+                                         } ?>
+                                         <!--beep beep beep-->
+
                                          <div class="control-group form-group">
                                            <div class="controls">
                                              <h3>Quantity</h3>
@@ -344,18 +329,32 @@ if(!$_SESSION['email']){
                                          </div>
                                          <?php echo "<p>". $row['qty']. " pieces available.</p>"; ?>
                                          <input type="submit" value="ADD TO BAG" class="btn btn-info"><br/></br>
-<!--  
 
-                                         <a href="productWishListToDB.php?pname=<?php echo $row['productName']?>" style="color:black; text-decoration:none;";><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist </a>
 
-                                       <a href="#"><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist</a>  -->
+
+
+
+                                         <a href="productWishListToDB.php?pname= <?php echo $row['productName']?>" style="color:black; text-decoration:none;";><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist </a>
+
+                                    <!--     <a href="#"><span class="glyphicon glyphicon-heart-empty heart" aria-hidden="true"></span> Add to My Wishlist</a>  -->
                                      </form>
+
+                                     </br> </br>
 
                                      <form method="POST" action="productWishListToDB.php">
                                             <input type="hidden" name="pname" value="<?php echo $row['productName']?>" />
                                             <input type="submit" value="Add to My Wishlist">
                                           </form>
                                    </div>
+
+
+
+                                   <!--====================Review (comment with rate) box will do here=======================-->
+                                   <div id="boardComment">
+                                   			<?php require_once('product_comment.php') ?>
+                                   </div>
+
+
                                    <?php
                              }
                              mysqli_close($con);

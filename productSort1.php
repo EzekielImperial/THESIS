@@ -1,8 +1,8 @@
 <link rel="stylesheet" href="css/design.css" />
 <link rel="stylesheet" href="css/profile.css" />
-<link rel="stylesheet" href="css/productsPages.css" /> 
+<link rel="stylesheet" href="css/productsPages.css" />
 <link rel="stylesheet" href="css/hover.css" />
-
+<?php $glasstype = $_SESSION['user_ID'] ?>
 <?php
 
 $short = $_POST['ShortA'];
@@ -10,9 +10,9 @@ $short = $_POST['ShortA'];
 
 switch ($short) {
     case "high":
-        
+
         $con=mysqli_connect('localhost','root','','imarketdatabase');
-        $results = mysqli_query ($con,'SELECT * FROM products order by price DESC');
+        $results = mysqli_query ($con,'SELECT * FROM products WHERE user_ID= "'.$glasstype.'" order by price DESC');
         if($results->num_rows > 0) {
         while($row = mysqli_fetch_array($results)){
           echo'
@@ -40,7 +40,7 @@ switch ($short) {
             '.$row['shortDes'].' <br />
           ₱ '.$row['price'].'
             <br>
-            
+
             </div>';
         }
       } else {
@@ -49,11 +49,11 @@ switch ($short) {
       }
         mysqli_close($con);
         break;
-        
+
     case "low":
-        
+
         $con=mysqli_connect('localhost','root','','imarketdatabase');
-        $results = mysqli_query ($con,'SELECT * FROM products order by price ASC');
+        $results = mysqli_query ($con,'SELECT * FROM products WHERE user_ID= "'.$glasstype.'" order by price ASC');
         if($results->num_rows > 0) {
         while($row = mysqli_fetch_array($results)){
           echo'
@@ -82,7 +82,7 @@ switch ($short) {
             '.$row['shortDes'].' <br />
           ₱ '.$row['price'].'
             <br>
-            
+
             </div>
             ';
         }
@@ -91,12 +91,12 @@ switch ($short) {
         echo "<a href='productAdd.php' class='btn btn-primary'>Add new product</a>";
       }
         mysqli_close($con);
-   
+
 
         break;
     case "dateold":
         $con=mysqli_connect('localhost','root','','imarketdatabase');
-        $results = mysqli_query ($con,'SELECT * FROM products order by date_created ASC');
+        $results = mysqli_query ($con,'SELECT * FROM products WHERE user_ID= "'.$glasstype.'" order by date_created ASC');
         if($results->num_rows > 0) {
         while($row = mysqli_fetch_array($results)){
           echo'
@@ -125,7 +125,7 @@ switch ($short) {
             '.$row['shortDes'].' <br />
           ₱ '.$row['price'].'
             <br>
-            
+
             </div>
             ';
         }
@@ -135,10 +135,10 @@ switch ($short) {
       }
         mysqli_close($con);
         break;
-    
+
     case "datenew":
     	 $con=mysqli_connect('localhost','root','','imarketdatabase');
-        $results = mysqli_query ($con,'SELECT * FROM products order by date_created DESC');
+        $results = mysqli_query ($con,'SELECT * FROM products WHERE user_ID= "'.$glasstype.'" order by date_created DESC');
         if($results->num_rows > 0) {
         while($row = mysqli_fetch_array($results)){
           echo'
@@ -167,7 +167,7 @@ switch ($short) {
             '.$row['shortDes'].' <br />
           ₱ '.$row['price'].'
             <br>
-            
+
             </div>
             ';
         }
@@ -177,7 +177,7 @@ switch ($short) {
       }
         mysqli_close($con);
         break;
-        
+
         case "sold":
 
         echo " <h2> these product is soldout! </h2> <br>";
@@ -212,7 +212,7 @@ switch ($short) {
             '.$row['shortDes'].' <br />
           ₱ '.$row['price'].'
             <br>
-            
+
             </div>
             ';
         }
@@ -222,13 +222,13 @@ switch ($short) {
       }
         mysqli_close($con);
         	break;
-        
+
         case "sale":
 
         echo " <h2> these product are available and on sale! </h2> <br>";
 
         $con=mysqli_connect('localhost','root','','imarketdatabase');
-        $results = mysqli_query ($con,'SELECT * FROM products WHERE productStatus LIKE "onSale"');
+        $results = mysqli_query ($con,'SELECT * FROM products WHERE productStatus LIKE "onSale" AND user_ID= "'.$glasstype.'"');
         if($results->num_rows > 0) {
         while($row = mysqli_fetch_array($results)){
           echo'
@@ -257,7 +257,7 @@ switch ($short) {
             '.$row['shortDes'].' <br />
           ₱ '.$row['price'].'
             <br>
-            
+
             </div>
             ';
         }
@@ -269,6 +269,6 @@ switch ($short) {
         	break;
 
     default:
-       
+
 }
 ?>
